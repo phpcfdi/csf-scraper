@@ -17,8 +17,8 @@ class ScrapCsfTest extends TestCase
         $mock = new MockHandler([
             new Response(200, [], $this->fileContents('scrap.html')),
         ]);
-        $rfc = 'FRU190221728';
-        $idcif = '19040141078';
+        $rfc = 'AAA010101AAA';
+        $idcif = '1904014102123';
         $client = new Client([
             'handler' => $mock,
             'curl' => [CURLOPT_SSL_CIPHER_LIST => 'DEFAULT@SECLEVEL=1'],
