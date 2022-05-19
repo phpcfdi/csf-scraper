@@ -12,18 +12,22 @@ use PhpCfdi\CsfScraper\Tests\TestCase;
 
 class ScrapCsfTest extends TestCase
 {
-    public function test_scrap_from_idcif_and_rfc_by_moral(): void
+    private function prepareScraper(string $htmlResponse): Scraper
     {
         $mock = new MockHandler([
-            new Response(200, [], $this->fileContents('scrap_moral.html')),
+            new Response(200, [], $this->fileContents($htmlResponse)),
         ]);
-        $rfc = 'AAA010101AAA';
-        $idcif = '1904014102123';
         $client = new Client([
             'handler' => $mock,
             'curl' => [CURLOPT_SSL_CIPHER_LIST => 'DEFAULT@SECLEVEL=1'],
         ]);
-        $csfScrap = new Scraper($client);
+        return new Scraper($client);
+    }
+    public function test_scrap_from_idcif_and_rfc_by_moral(): void
+    {
+        $csfScrap = $this->prepareScraper('scrap_moral.html');
+        $rfc = 'AAA010101AAA';
+        $idcif = '1904014102123';
         $expectedData = [
             'razon_social' => 'Mi razón social',
             'regimen_de_capital' => 'SA DE CV',
@@ -56,16 +60,9 @@ class ScrapCsfTest extends TestCase
 
     public function test_scrap_from_idcif_and_rfc_by_fisica(): void
     {
-        $mock = new MockHandler([
-            new Response(200, [], $this->fileContents('scrap_fisica.html')),
-        ]);
+        $csfScrap = $this->prepareScraper('scrap_fisica.html');
         $rfc = 'AAA010101AAAA';
-        $idcif = '21030201234';
-        $client = new Client([
-            'handler' => $mock,
-            'curl' => [CURLOPT_SSL_CIPHER_LIST => 'DEFAULT@SECLEVEL=1'],
-        ]);
-        $csfScrap = new Scraper($client);
+        $idcif = '1904014102123';
         $expectedData = [
             'curp' => 'CURP',
             'nombre' => 'JUAN',
@@ -100,16 +97,9 @@ class ScrapCsfTest extends TestCase
 
     public function test_scrap_from_idcif_and_rfc_multiple_regimen(): void
     {
-        $mock = new MockHandler([
-            new Response(200, [], $this->fileContents('scrap_regimenes.html')),
-        ]);
+        $csfScrap = $this->prepareScraper('scrap_regimenes.html');
         $rfc = 'AAA010101AAAA';
-        $idcif = '18080516917';
-        $client = new Client([
-            'handler' => $mock,
-            'curl' => [CURLOPT_SSL_CIPHER_LIST => 'DEFAULT@SECLEVEL=1'],
-        ]);
-        $csfScrap = new Scraper($client);
+        $idcif = '1904014102123';
         $expectedData = [
             'curp' => 'CURP',
             'nombre' => 'JUAN',
@@ -148,17 +138,10 @@ class ScrapCsfTest extends TestCase
 
     public function test_return_empty_when_not_found(): void
     {
-        $mock = new MockHandler([
-            new Response(200, [], $this->fileContents('error.html')),
-        ]);
-        $rfc = 'AAA010101AAA';
+        $csfScrap = $this->prepareScraper('error.html');
+        $rfc = 'AAA010101AAAA';
         $idcif = '1904014102123';
-        $client = new Client([
-            'handler' => $mock,
-            'curl' => [CURLOPT_SSL_CIPHER_LIST => 'DEFAULT@SECLEVEL=1'],
-        ]);
         $expectedData = [];
-        $csfScrap = new Scraper($client);
 
         $data = $csfScrap->data($rfc, $idcif);
 
