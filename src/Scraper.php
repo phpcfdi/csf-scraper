@@ -7,6 +7,7 @@ namespace PhpCfdi\CsfScraper;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use PhpCfdi\CsfScraper\Interfaces\ScraperInterface;
+use PhpCfdi\Rfc\Rfc;
 use RuntimeException;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -26,12 +27,12 @@ class Scraper implements ScraperInterface
      *
      * @throws RuntimeException
      */
-    public function data(string $rfc, string $idCIF): array
+    public function data(string|Rfc $rfc, string $idCIF): array
     {
-        $isFisica = (13 === mb_strlen($rfc));
+        $rfc = $this->parseRfc($rfc);
+        $isFisica = $rfc->isFisica();
         try {
-            $uri = urlencode(sprintf(self::$url, $idCIF, $rfc));
-
+            $uri = urlencode(sprintf(self::$url, $idCIF, $rfc->getRfc()));
             $html = $this->client->request('GET', $uri)
                 ->getBody()
                 ->getContents();
@@ -39,6 +40,14 @@ class Scraper implements ScraperInterface
         } catch (GuzzleException $exception) {
             throw new \RuntimeException('The request has failed', 0, $exception);
         }
+    }
+
+    private function parseRfc(string|Rfc $rfc): Rfc
+    {
+        if (is_string($rfc)) {
+            $rfc = Rfc::parse($rfc);
+        }
+        return $rfc;
     }
 
     /**

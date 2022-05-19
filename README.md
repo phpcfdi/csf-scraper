@@ -22,6 +22,7 @@ $scraper = new Scraper(
     new Client()
 );
 
-$data = $scraper->data('YOUR_RFC', 'ID_CIF');
+// opcionalmente puedes enviar un objeto de la clase PhpCfdi\Rfc\Rfc para el parámetro rfc
+$data = $scraper->data(rfc: 'YOUR_RFC', idCIF: 'ID_CIF');
 echo print_r($data, true);
 ```

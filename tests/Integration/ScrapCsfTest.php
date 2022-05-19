@@ -9,6 +9,8 @@ use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 use PhpCfdi\CsfScraper\Scraper;
 use PhpCfdi\CsfScraper\Tests\TestCase;
+use PhpCfdi\Rfc\Exceptions\InvalidExpressionToParseException;
+use PhpCfdi\Rfc\Rfc;
 
 class ScrapCsfTest extends TestCase
 {
@@ -26,7 +28,7 @@ class ScrapCsfTest extends TestCase
     public function test_scrap_from_idcif_and_rfc_by_moral(): void
     {
         $csfScrap = $this->prepareScraper('scrap_moral.html');
-        $rfc = 'AAA010101AAA';
+        $rfc = 'DIM8701081LA';
         $idcif = '1904014102123';
         $expectedData = [
             'razon_social' => 'Mi razón social',
@@ -53,7 +55,7 @@ class ScrapCsfTest extends TestCase
             ],
         ];
 
-        $data = $csfScrap->data($rfc, $idcif);
+        $data = $csfScrap->data(Rfc::parse($rfc), $idcif);
 
         $this->assertSame($expectedData, $data);
     }
@@ -61,7 +63,7 @@ class ScrapCsfTest extends TestCase
     public function test_scrap_from_idcif_and_rfc_by_fisica(): void
     {
         $csfScrap = $this->prepareScraper('scrap_fisica.html');
-        $rfc = 'AAA010101AAAA';
+        $rfc = 'COSC8001137NA';
         $idcif = '1904014102123';
         $expectedData = [
             'curp' => 'CURP',
@@ -98,7 +100,7 @@ class ScrapCsfTest extends TestCase
     public function test_scrap_from_idcif_and_rfc_multiple_regimen(): void
     {
         $csfScrap = $this->prepareScraper('scrap_regimenes.html');
-        $rfc = 'AAA010101AAAA';
+        $rfc = 'COSC8001137NA';
         $idcif = '1904014102123';
         $expectedData = [
             'curp' => 'CURP',
@@ -139,12 +141,22 @@ class ScrapCsfTest extends TestCase
     public function test_return_empty_when_not_found(): void
     {
         $csfScrap = $this->prepareScraper('error.html');
-        $rfc = 'AAA010101AAAA';
+        $rfc = 'COSC8001137NA';
         $idcif = '1904014102123';
         $expectedData = [];
 
         $data = $csfScrap->data($rfc, $idcif);
 
         $this->assertSame($expectedData, $data);
+    }
+
+    public function test_send_invalid_rfc(): void
+    {
+        $csfScrap = $this->prepareScraper('error.html');
+        $rfc = 'bad-rfc';
+        $idcif = '1904014102123';
+
+        $this->expectException(InvalidExpressionToParseException::class);
+        $csfScrap->data($rfc, $idcif);
     }
 }
