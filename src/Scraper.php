@@ -6,10 +6,11 @@ namespace PhpCfdi\CsfScraper;
 
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
+use PhpCfdi\CsfScraper\Interfaces\ScraperInterface;
 use RuntimeException;
 use Symfony\Component\DomCrawler\Crawler;
 
-class Scraper
+class Scraper implements ScraperInterface
 {
     private ClientInterface $client;
     public static string $url = 'https://siat.sat.gob.mx/app/qr/faces/pages/mobile/validadorqr.jsf?D1=10&D2=1&D3=%s_%s';
@@ -27,9 +28,9 @@ class Scraper
      */
     public function data(string $rfc, string $idCIF): array
     {
-        $isFisica = 13 === strlen($rfc);
+        $isFisica = (13 === mb_strlen($rfc));
         try {
-            $uri = sprintf(self::$url, $idCIF, $rfc);
+            $uri = urlencode(sprintf(self::$url, $idCIF, $rfc));
 
             $html = $this->client->request('GET', $uri)
                 ->getBody()
@@ -87,20 +88,20 @@ class Scraper
     private function getRegimenes(Crawler $crawler): array
     {
         $tbodies = $crawler->filter('tbody[class="ui-datatable-data ui-widget-content"]');
-        $regimenAndDate = [];
+        $valuesCount = 0;
         /** @var array<string, string> */
         $regimenes = [];
-        $tbodies->each(function (Crawler $elem, int $index) use (&$regimenAndDate, &$regimenes): void {
+        $tbodies->each(function (Crawler $elem, int $index) use (&$valuesCount, &$regimenes): void {
             if (4 === $index) {
                 $elements = $elem->filter('td[role="gridcell"]');
-                $elements->each(function (Crawler $childElem) use (&$regimenAndDate, &$regimenes): void {
+                $elements->each(function (Crawler $childElem) use (&$valuesCount, &$regimenes): void {
                     if (0 === $childElem->filter('span')->count()) {
                         $value = trim($childElem->text());
-                        $regimenAndDate[] = $value;
-                        $count = count($regimenAndDate) - 1;
+                        $count = $valuesCount;
                         $localIndex = (int) ($count / 2);
                         $localKey = 0 === $count % 2 ? 'regimen' : 'fecha_alta';
                         $regimenes[$localIndex][$localKey] = $value;
+                        $valuesCount++;
                     }
                 });
             }
