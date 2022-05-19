@@ -30,18 +30,20 @@ class Scraper implements ScraperInterface
     public function data(string|Rfc $rfc, string $idCIF): array
     {
         $rfc = $this->parseRfc($rfc);
-        $isFisica = $rfc->isFisica();
         try {
             $uri = urlencode(sprintf(self::$url, $idCIF, $rfc->getRfc()));
             $html = $this->client->request('GET', $uri)
                 ->getBody()
                 ->getContents();
-            return $this->extractData($html, $isFisica);
+            return $this->extractData($html, $rfc->isFisica());
         } catch (GuzzleException $exception) {
             throw new \RuntimeException('The request has failed', 0, $exception);
         }
     }
 
+    /**
+     * @throws \PhpCfdi\Rfc\Exceptions\InvalidExpressionToParseException
+     */
     private function parseRfc(string|Rfc $rfc): Rfc
     {
         if (is_string($rfc)) {
