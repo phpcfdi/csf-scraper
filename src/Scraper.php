@@ -21,7 +21,8 @@ class Scraper
 
     /**
      *
-     * @return array <int|string, string>
+     * @return array<int|string, array<int|string, mixed>|string>
+     *
      * @throws RuntimeException
      */
     public function data(string $rfc, string $idCIF): array
@@ -41,7 +42,7 @@ class Scraper
 
     /**
      *
-     * @return array<int|string, string>
+     * @return array<int|string, array<int|string, mixed>|string>
      * @throws RuntimeException
      */
     private function extractData(string $html, bool $isFisica): array
@@ -51,10 +52,12 @@ class Scraper
 
         $crawler = new Crawler($html);
         $elements = $crawler->filter('td[role="gridcell"]');
-
         $values = [];
 
         $elements->each(function (Crawler $elem, int $index) use (&$values, $getKeyNameByIndex): void {
+            if ($index >= 40) {
+                return;
+            }
             if (0 === $elem->filter('span')->count()) {
                 $keyName = $this->$getKeyNameByIndex($index);
 
@@ -63,7 +66,10 @@ class Scraper
                 }
             }
         });
-
+        $regimenes = $this->getRegimenes($crawler);
+        if (! empty($regimenes)) {
+            $values['regimenes'] = $regimenes;
+        }
         return $values;
     }
 
@@ -71,6 +77,35 @@ class Scraper
     {
         $html = str_replace('<?xml version="1.0" encoding="UTF-8" ?>', '', $html);
         return str_replace('<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />', '', $html);
+    }
+
+    /**
+     *
+     * @return array<int|string, string|mixed>
+     * @throws RuntimeException
+     */
+    private function getRegimenes(Crawler $crawler): array
+    {
+        $tbodies = $crawler->filter('tbody[class="ui-datatable-data ui-widget-content"]');
+        $regimenAndDate = [];
+        /** @var array<string, string> */
+        $regimenes = [];
+        $tbodies->each(function (Crawler $elem, int $index) use (&$regimenAndDate, &$regimenes): void {
+            if (4 === $index) {
+                $elements = $elem->filter('td[role="gridcell"]');
+                $elements->each(function (Crawler $childElem) use (&$regimenAndDate, &$regimenes): void {
+                    if (0 === $childElem->filter('span')->count()) {
+                        $value = trim($childElem->text());
+                        $regimenAndDate[] = $value;
+                        $count = count($regimenAndDate) - 1;
+                        $localIndex = (int) ($count / 2);
+                        $localKey = 0 === $count % 2 ? 'regimen' : 'fecha_alta';
+                        $regimenes[$localIndex][$localKey] = $value;
+                    }
+                });
+            }
+        });
+        return $regimenes;
     }
 
     private function getKeyNameByIndexMoral(int $index): ?string
@@ -92,8 +127,6 @@ class Scraper
             31 => 'codigo_postal',
             33 => 'correo_electronico',
             35 => 'al',
-            40 => 'regimen',
-            42 => 'fecha_alta',
             default => null
         };
     }
@@ -119,8 +152,6 @@ class Scraper
             35 => 'codigo_postal',
             37 => 'correo_electronico',
             39 => 'al',
-            44 => 'regimen',
-            46 => 'fecha_alta',
             default => null
         };
     }

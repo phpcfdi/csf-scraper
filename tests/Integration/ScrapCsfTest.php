@@ -41,8 +41,12 @@ class ScrapCsfTest extends TestCase
             'codigo_postal' => '72055',
             'correo_electronico' => 'example@example.com',
             'al' => 'CIUDAD DE MEXICO 2',
-            'regimen' => 'Régimen General de Ley Personas Morales',
-            'fecha_alta' => '21-02-2019',
+            'regimenes' => [
+                [
+                    'regimen' => 'Régimen General de Ley Personas Morales',
+                    'fecha_alta' => '21-02-2019',
+                ],
+            ],
         ];
 
         $data = $csfScrap->data($rfc, $idcif);
@@ -50,7 +54,7 @@ class ScrapCsfTest extends TestCase
         $this->assertSame($expectedData, $data);
     }
 
-    public function test_scrap_from_idcif_and_rfc_bi_fisica(): void
+    public function test_scrap_from_idcif_and_rfc_by_fisica(): void
     {
         $mock = new MockHandler([
             new Response(200, [], $this->fileContents('scrap_fisica.html')),
@@ -81,9 +85,80 @@ class ScrapCsfTest extends TestCase
             'codigo_postal' => '72000',
             'correo_electronico' => '',
             'al' => 'CIUDAD DE MEXICO 3',
-            'regimen' => 'Régimen de Incorporación Fiscal',
-            'fecha_alta' => '01-01-2014',
+            'regimenes' => [
+                [
+                    'regimen' => 'Régimen de Incorporación Fiscal',
+                    'fecha_alta' => '01-01-2014',
+                ],
+            ],
         ];
+
+        $data = $csfScrap->data($rfc, $idcif);
+
+        $this->assertSame($expectedData, $data);
+    }
+
+    public function test_scrap_from_idcif_and_rfc_multiple_regimen(): void
+    {
+        $mock = new MockHandler([
+            new Response(200, [], $this->fileContents('scrap_regimenes.html')),
+        ]);
+        $rfc = 'AAA010101AAAA';
+        $idcif = '18080516917';
+        $client = new Client([
+            'handler' => $mock,
+            'curl' => [CURLOPT_SSL_CIPHER_LIST => 'DEFAULT@SECLEVEL=1'],
+        ]);
+        $csfScrap = new Scraper($client);
+        $expectedData = [
+            'curp' => 'CURP',
+            'nombre' => 'JUAN',
+            'apellido_paterno' => 'PEREZ',
+            'apellido_materno' => 'PEREZ',
+            'fecha_nacimiento' => '21-07-1995',
+            'fecha_inicio_operaciones' => '01-01-2018',
+            'situacion_contribuyente' => 'ACTIVO',
+            'fecha_ultimo_cambio_situacion' => '16-08-2018',
+            'entidad_federativa' => 'QUERETARO',
+            'municipio_delegacion' => 'MUNICIPIO',
+            'colonia' => 'MI COLONIA',
+            'tipo_vialidad' => 'CALZADA (CALZ.)',
+            'nombre_vialidad' => 'DEL BOSQUE',
+            'numero_exterior' => '19',
+            'numero_interior' => '',
+            'codigo_postal' => '72000',
+            'correo_electronico' => 'example@example.com',
+            'al' => 'QUERETARO 1',
+            'regimenes' => [
+                [
+                    'regimen' => 'Régimen de Sueldos y Salarios e Ingresos Asimilados a Salarios',
+                    'fecha_alta' => '01-01-2018',
+                ],
+                [
+                    'regimen' => 'Régimen Simplificado de Confianza',
+                    'fecha_alta' => '09-02-2022',
+                ],
+            ],
+        ];
+
+        $data = $csfScrap->data($rfc, $idcif);
+
+        $this->assertSame($expectedData, $data);
+    }
+
+    public function test_return_empty_when_not_found(): void
+    {
+        $mock = new MockHandler([
+            new Response(200, [], $this->fileContents('error.html')),
+        ]);
+        $rfc = 'AAA010101AAA';
+        $idcif = '1904014102123';
+        $client = new Client([
+            'handler' => $mock,
+            'curl' => [CURLOPT_SSL_CIPHER_LIST => 'DEFAULT@SECLEVEL=1'],
+        ]);
+        $expectedData = [];
+        $csfScrap = new Scraper($client);
 
         $data = $csfScrap->data($rfc, $idcif);
 
