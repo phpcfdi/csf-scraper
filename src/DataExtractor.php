@@ -4,11 +4,12 @@ declare(strict_types=1);
 
 namespace PhpCfdi\CsfScraper;
 
+use PhpCfdi\CsfScraper\Exceptions\CifNotFoundException;
 use PhpCfdi\CsfScraper\Interfaces\DataExtractorInterface;
 use RuntimeException;
 use Symfony\Component\DomCrawler\Crawler;
 
-class DataExtractor implements DataExtractorInterface
+final class DataExtractor implements DataExtractorInterface
 {
     private string $html;
 
@@ -17,36 +18,34 @@ class DataExtractor implements DataExtractorInterface
         $this->html = $html;
     }
 
-    /**
-     * @return array<int|string, array<int|string, mixed>|string>
-     */
-    public function extract(bool $isFisica): array
+    public function extract(bool $isFisica): PersonaMoral|PersonaFisica
     {
         $html = $this->clearHtml($this->html);
-        $getKeyNameByIndex = $isFisica ? 'getKeyNameByIndexFisica' : 'getKeyNameByIndexMoral';
+        $person = $isFisica ? new PersonaFisica() : new PersonaMoral();
 
         $crawler = new Crawler($html);
+        $errorElement = $crawler->filter('span[class=ui-messages-info-detail]');
+        if (1 === $errorElement->count()) {
+            throw new CifNotFoundException('Failed to found CIF info.', 500);
+        }
         $elements = $crawler->filter('td[role="gridcell"]');
-        $values = [];
 
-        $elements->each(function (Crawler $elem, int $index) use (&$values, $getKeyNameByIndex): void {
+        $elements->each(function (Crawler $elem, int $index) use ($person): void {
             if ($index >= 40) {
                 return;
             }
             if (0 === $elem->filter('span')->count()) {
-                $keyName = $this->$getKeyNameByIndex($index);
-
-                if (null !== $keyName) {
-                    $values[$keyName] = trim($elem->text());
+                $property = $person->getKeyNameByIndex($index);
+                if (null !== $property) {
+                    $person->$property = trim($elem->text());
                 }
             }
         });
-
         $regimenes = $this->getRegimenes($crawler);
         if (count($regimenes) > 0) {
-            $values['regimenes'] = $regimenes;
+            $person->addRegimenes(...$regimenes);
         }
-        return $values;
+        return $person;
     }
 
     private function clearHtml(string $html): string
@@ -56,14 +55,14 @@ class DataExtractor implements DataExtractorInterface
 
     /**
      *
-     * @return array<int|string, string|mixed>
+     * @return Regimen[]
      * @throws RuntimeException
      */
     private function getRegimenes(Crawler $crawler): array
     {
         $tbodies = $crawler->filter('tbody[class="ui-datatable-data ui-widget-content"]');
         $valuesCount = 0;
-        /** @var array<string, string> */
+        /** @var Regimen[]*/
         $regimenes = [];
         $tbodies->each(function (Crawler $elem, int $index) use (&$valuesCount, &$regimenes): void {
             if (4 === $index) {
@@ -71,63 +70,18 @@ class DataExtractor implements DataExtractorInterface
                 $elements->each(function (Crawler $childElem) use (&$valuesCount, &$regimenes): void {
                     if (0 === $childElem->filter('span')->count()) {
                         $value = trim($childElem->text());
-                        $count = $valuesCount;
-                        $localIndex = (int) ($count / 2);
-                        $localKey = 0 === $count % 2 ? 'regimen' : 'fecha_alta';
-                        $regimenes[$localIndex][$localKey] = $value;
+                        $localIndex = (int) ($valuesCount / 2);
+                        if (0 === $valuesCount % 2) {
+                            $regimenes[$localIndex] = new Regimen();
+                            $regimenes[$localIndex]->setRegimen($value);
+                        } else {
+                            $regimenes[$localIndex]->setFechaAlta($value);
+                        }
                         $valuesCount++;
                     }
                 });
             }
         });
         return $regimenes;
-    }
-
-    private function getKeyNameByIndexMoral(int $index): ?string
-    {
-        return match ($index) {
-            2 => 'razon_social',
-            4 => 'regimen_de_capital',
-            6 => 'fecha_constitucion',
-            8 => 'fecha_inicio_operaciones',
-            10 => 'situacion_contribuyente',
-            12 => 'fecha_ultimo_cambio_situacion',
-            17 => 'entidad_federativa',
-            19 => 'municipio_delegacion',
-            21 => 'colonia',
-            23 => 'tipo_vialidad',
-            25 => 'nombre_vialidad',
-            27 => 'numero_exterior',
-            29 => 'numero_interior',
-            31 => 'codigo_postal',
-            33 => 'correo_electronico',
-            35 => 'al',
-            default => null
-        };
-    }
-
-    private function getKeyNameByIndexFisica(int $index): ?string
-    {
-        return match ($index) {
-            2 => 'curp',
-            4 => 'nombre',
-            6 => 'apellido_paterno',
-            8 => 'apellido_materno',
-            10 => 'fecha_nacimiento',
-            12 => 'fecha_inicio_operaciones',
-            14 => 'situacion_contribuyente',
-            16 => 'fecha_ultimo_cambio_situacion',
-            21 => 'entidad_federativa',
-            23 => 'municipio_delegacion',
-            25 => 'colonia',
-            27 => 'tipo_vialidad',
-            29 => 'nombre_vialidad',
-            31 => 'numero_exterior',
-            33 => 'numero_interior',
-            35 => 'codigo_postal',
-            37 => 'correo_electronico',
-            39 => 'al',
-            default => null
-        };
     }
 }

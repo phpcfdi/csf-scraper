@@ -23,6 +23,11 @@ $scraper = new Scraper(
 );
 
 // opcionalmente puedes enviar un objeto de la clase PhpCfdi\Rfc\Rfc para el parámetro rfc
-$data = $scraper->data(rfc: 'YOUR_RFC', idCIF: 'ID_CIF');
-echo print_r($data, true);
+$person = $scraper->data(rfc: 'YOUR_RFC', idCIF: 'ID_CIF');
+
+// puedes acceder a los datos de la persona (moral o física) usando los métodos incluidos:
+echo $person->getCurp();
+
+// o puedes obtener el array de datos usado
+echo print_r($person->toArray(), true);
 ```

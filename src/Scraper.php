@@ -20,17 +20,15 @@ class Scraper implements ScraperInterface
         $this->client = $client;
     }
     /**
-     *
-     * @return array<int|string, array<int|string, mixed>|string>
-     *
      * @throws RuntimeException
      */
-    public function data(string|Rfc $rfc, string $idCIF): array
+    public function data(string|Rfc $rfc, string $idCIF): PersonaMoral|PersonaFisica
     {
         $rfc = $this->parseRfc($rfc);
         try {
-            $uri = urlencode(sprintf(self::$url, $idCIF, $rfc->getRfc()));
-            $html = (string) $this->client->request('GET', $uri)->getBody();
+            $uri = sprintf(self::$url, $idCIF, $rfc->getRfc());
+            $request = $this->client->request('GET', $uri);
+            $html = (string) $request->getBody();
             return (new DataExtractor($html))->extract($rfc->isFisica());
         } catch (GuzzleException $exception) {
             throw new \RuntimeException('The request has failed', 0, $exception);

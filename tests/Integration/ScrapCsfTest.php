@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace PhpCfdi\CsfScraper\Tests\Integration;
 
+use DateTimeImmutable;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
+use PhpCfdi\CsfScraper\Exceptions\CifNotFoundException;
 use PhpCfdi\CsfScraper\Scraper;
 use PhpCfdi\CsfScraper\Tests\TestCase;
 use PhpCfdi\Rfc\Exceptions\InvalidExpressionToParseException;
@@ -33,10 +35,10 @@ class ScrapCsfTest extends TestCase
         $expectedData = [
             'razon_social' => 'Mi razón social',
             'regimen_de_capital' => 'SA DE CV',
-            'fecha_constitucion' => '21-02-2019',
-            'fecha_inicio_operaciones' => '21-02-2019',
+            'fecha_constitucion' => DateTimeImmutable::createFromFormat('d-m-Y', '21-02-2019'),
+            'fecha_inicio_operaciones' => DateTimeImmutable::createFromFormat('d-m-Y', '21-02-2019'),
             'situacion_contribuyente' => 'ACTIVO',
-            'fecha_ultimo_cambio_situacion' => '21-02-2019',
+            'fecha_ultimo_cambio_situacion' => DateTimeImmutable::createFromFormat('d-m-Y', '21-02-2019'),
             'entidad_federativa' => 'CIUDAD DE MEXICO',
             'municipio_delegacion' => 'CUAUHTEMOC',
             'colonia' => 'CUAUHTEMOC',
@@ -50,14 +52,14 @@ class ScrapCsfTest extends TestCase
             'regimenes' => [
                 [
                     'regimen' => 'Régimen General de Ley Personas Morales',
-                    'fecha_alta' => '21-02-2019',
+                    'fecha_alta' => DateTimeImmutable::createFromFormat('d-m-Y', '21-02-2019'),
                 ],
             ],
         ];
 
-        $data = $csfScrap->data(Rfc::parse($rfc), $idcif);
+        $data = $csfScrap->data(Rfc::parse($rfc), $idcif)->toArray();
 
-        $this->assertSame($expectedData, $data);
+        $this->assertEquals($expectedData, $data);
     }
 
     public function test_scrap_from_idcif_and_rfc_by_fisica(): void
@@ -70,10 +72,10 @@ class ScrapCsfTest extends TestCase
             'nombre' => 'JUAN',
             'apellido_paterno' => 'PEREZ',
             'apellido_materno' => 'RODRIGUEZ',
-            'fecha_nacimiento' => '01-05-1973',
-            'fecha_inicio_operaciones' => '03-11-2004',
+            'fecha_nacimiento' => DateTimeImmutable::createFromFormat('d-m-Y', '01-05-1973'),
+            'fecha_inicio_operaciones' => DateTimeImmutable::createFromFormat('d-m-Y', '03-11-2004'),
             'situacion_contribuyente' => 'ACTIVO',
-            'fecha_ultimo_cambio_situacion' => '03-11-2004',
+            'fecha_ultimo_cambio_situacion' => DateTimeImmutable::createFromFormat('d-m-Y', '03-11-2004'),
             'entidad_federativa' => 'CIUDAD DE MEXICO',
             'municipio_delegacion' => 'IZTAPALAPA',
             'colonia' => 'MI COLONIA',
@@ -87,14 +89,14 @@ class ScrapCsfTest extends TestCase
             'regimenes' => [
                 [
                     'regimen' => 'Régimen de Incorporación Fiscal',
-                    'fecha_alta' => '01-01-2014',
+                    'fecha_alta' => DateTimeImmutable::createFromFormat('d-m-Y', '01-01-2014'),
                 ],
             ],
         ];
 
-        $data = $csfScrap->data($rfc, $idcif);
+        $data = $csfScrap->data($rfc, $idcif)->toArray();
 
-        $this->assertSame($expectedData, $data);
+        $this->assertEquals($expectedData, $data);
     }
 
     public function test_scrap_from_idcif_and_rfc_multiple_regimen(): void
@@ -107,10 +109,10 @@ class ScrapCsfTest extends TestCase
             'nombre' => 'JUAN',
             'apellido_paterno' => 'PEREZ',
             'apellido_materno' => 'RODRIGUEZ',
-            'fecha_nacimiento' => '21-07-1995',
-            'fecha_inicio_operaciones' => '01-01-2018',
+            'fecha_nacimiento' => DateTimeImmutable::createFromFormat('d-m-Y', '21-07-1995'),
+            'fecha_inicio_operaciones' => DateTimeImmutable::createFromFormat('d-m-Y', '01-01-2018'),
             'situacion_contribuyente' => 'ACTIVO',
-            'fecha_ultimo_cambio_situacion' => '16-08-2018',
+            'fecha_ultimo_cambio_situacion' => DateTimeImmutable::createFromFormat('d-m-Y', '16-08-2018'),
             'entidad_federativa' => 'QUERETARO',
             'municipio_delegacion' => 'MUNICIPIO',
             'colonia' => 'MI COLONIA',
@@ -124,18 +126,18 @@ class ScrapCsfTest extends TestCase
             'regimenes' => [
                 [
                     'regimen' => 'Régimen de Sueldos y Salarios e Ingresos Asimilados a Salarios',
-                    'fecha_alta' => '01-01-2018',
+                    'fecha_alta' => DateTimeImmutable::createFromFormat('d-m-Y', '01-01-2018'),
                 ],
                 [
                     'regimen' => 'Régimen Simplificado de Confianza',
-                    'fecha_alta' => '09-02-2022',
+                    'fecha_alta' => DateTimeImmutable::createFromFormat('d-m-Y', '09-02-2022'),
                 ],
             ],
         ];
 
-        $data = $csfScrap->data($rfc, $idcif);
+        $data = $csfScrap->data($rfc, $idcif)->toArray();
 
-        $this->assertSame($expectedData, $data);
+        $this->assertEquals($expectedData, $data);
     }
 
     public function test_return_empty_when_not_found(): void
@@ -144,6 +146,7 @@ class ScrapCsfTest extends TestCase
         $rfc = 'COSC8001137NA';
         $idcif = '1904014102123';
         $expectedData = [];
+        $this->expectException(CifNotFoundException::class);
 
         $data = $csfScrap->data($rfc, $idcif);
 
