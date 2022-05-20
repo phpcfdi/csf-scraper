@@ -24,7 +24,7 @@ class PersonaPropertiesTest extends TestCase
      *
      * @return array<int, array<int, string>>
      */
-    private function datePropertiesProvider(): array
+    public function datePropertiesProvider(): array
     {
         return [
             ['FechaInicioOperaciones', '12-01-2017'],
@@ -35,7 +35,7 @@ class PersonaPropertiesTest extends TestCase
      *
      * @return array<int, array<int, string>>
      */
-    private function stringPropertiesProvider(): array
+    public function stringPropertiesProvider(): array
     {
         return [
             ['SituacionContribuyente', 'ACTIVO'],

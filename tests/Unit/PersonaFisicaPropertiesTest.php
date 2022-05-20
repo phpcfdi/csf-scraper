@@ -25,7 +25,7 @@ class PersonaFisicaPropertiesTest extends TestCase
      *
      * @return array<int, array<int, string>>
      */
-    private function datePropertiesProvider(): array
+    public function datePropertiesProvider(): array
     {
         return [
             ['FechaNacimiento', '16-05-1996'],
@@ -35,7 +35,7 @@ class PersonaFisicaPropertiesTest extends TestCase
      *
      * @return array<int, array<int, string>>
      */
-    private function stringPropertiesProvider(): array
+    public function stringPropertiesProvider(): array
     {
         return [
             ['Curp', 'MI CURP'],

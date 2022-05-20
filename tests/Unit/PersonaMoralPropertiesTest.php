@@ -24,7 +24,7 @@ class PersonaMoralPropertiesTest extends TestCase
      *
      * @return array<int, array<int, string>>
      */
-    private function datePropertiesProvider(): array
+    public function datePropertiesProvider(): array
     {
         return [
             ['fechaConstitucion', '16-05-1996'],
@@ -34,7 +34,7 @@ class PersonaMoralPropertiesTest extends TestCase
      *
      * @return array<int, array<int, string>>
      */
-    private function stringPropertiesProvider(): array
+    public function stringPropertiesProvider(): array
     {
         return [
             ['RazonSocial', 'MI TIENDITA'],
