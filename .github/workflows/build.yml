@@ -79,7 +79,7 @@ jobs:
     runs-on: ${{ matrix.operating-systems }}
     strategy:
       matrix:
-        operating-systems: [ "ubuntu-latest"]
+        operating-systems: ["windows-latest", "ubuntu-latest"]
         php-versions: ['8.0', '8.1']
     steps:
       - name: Checkout
