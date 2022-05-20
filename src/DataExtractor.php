@@ -62,20 +62,20 @@ class DataExtractor implements DataExtractorInterface
     private function getRegimenes(Crawler $crawler): array
     {
         $tbodies = $crawler->filter('tbody[class="ui-datatable-data ui-widget-content"]');
-        $regimenAndDate = [];
+        $valuesCount = 0;
         /** @var array<string, string> */
         $regimenes = [];
-        $tbodies->each(function (Crawler $elem, int $index) use (&$regimenAndDate, &$regimenes): void {
+        $tbodies->each(function (Crawler $elem, int $index) use (&$valuesCount, &$regimenes): void {
             if (4 === $index) {
                 $elements = $elem->filter('td[role="gridcell"]');
-                $elements->each(function (Crawler $childElem) use (&$regimenAndDate, &$regimenes): void {
+                $elements->each(function (Crawler $childElem) use (&$valuesCount, &$regimenes): void {
                     if (0 === $childElem->filter('span')->count()) {
                         $value = trim($childElem->text());
-                        $regimenAndDate[] = $value;
-                        $count = count($regimenAndDate) - 1;
+                        $count = $valuesCount;
                         $localIndex = (int) ($count / 2);
                         $localKey = 0 === $count % 2 ? 'regimen' : 'fecha_alta';
                         $regimenes[$localIndex][$localKey] = $value;
+                        $valuesCount++;
                     }
                 });
             }
