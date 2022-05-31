@@ -14,7 +14,7 @@ use PhpCfdi\CsfScraper\Tests\TestCase;
 use PhpCfdi\Rfc\Exceptions\InvalidExpressionToParseException;
 use PhpCfdi\Rfc\Rfc;
 
-class ScrapCsfTest extends TestCase
+class ScrapCsfFromRfcAndCifTest extends TestCase
 {
     private function prepareScraper(string $htmlResponse): Scraper
     {

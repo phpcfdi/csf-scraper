@@ -1,0 +1,73 @@
+Página [1] de [3]
+CÉDULA DE IDENTIFICACIÓN FISCAL
+DIM8701081LA
+Registro Federal de Contribuyentes
+MI EMPRESA
+Nombre, denominación o razón
+social
+idCIF: 12345678
+VALIDA TU INFORMACIÓN
+FISCAL
+CONSTANCIA DE SITUACIÓN FISCAL
+Lugar y Fecha de Emisión
+BENITO JUAREZ , CIUDAD DE MEXICO A 10 DE
+FEBRERO DE 2022
+DIM8701081LA
+Datos de Identificación del Contribuyente:
+RFC: DIM8701081LA
+Denominación/Razón Social: MI EMPRESA
+Régimen Capital: SOCIEDAD ANONIMA DE CAPITAL VARIABLE
+Nombre Comercial:
+Fecha inicio de operaciones: 28 DE SEPTIEMBRE DE 2005
+Estatus en el padrón: REACTIVADO
+Fecha de último cambio de estado: 05 DE JUNIO DE 2008
+Datos del domicilio registrado
+Código Postal:72030 Tipo de Vialidad: CALLE
+Nombre de Vialidad: CALLE MI CALLE Número Exterior: 50
+Número Interior:12 Y 13 Nombre de la Colonia: MI COLONIA
+Nombre de la Localidad: Nombre del Municipio o Demarcación Territorial: SAN JUAN
+Nombre de la Entidad Federativa: CIUDAD DE MEXICO Entre Calle: AVENIDA MI AVENIDA
+Y Calle: CALLE DAKOTA Correo Electrónico: correo@example.com
+Tel. Fijo Lada: 55 Número: 123456
+Página [2] de [3]
+Estado del domicilio: LOCALIZADO - Domicilio Localizado
+Estado del contribuyente en el domicilio: LOCALIZADO -
+Contribuyente Localizado
+Actividades Económicas:
+Orden Actividad Económica Porcentaje Fecha Inicio Fecha Fin
+1 Comercio al por mayor agua purificada y hielo 100 01/03/2011
+Regímenes:
+Régimen Fecha Inicio Fecha Fin
+Régimen General de Ley Personas Morales 05/06/2008
+Obligaciones:
+Descripción de la Obligación Descripción Vencimiento Fecha Inicio Fecha Fin
+Declaración informativa de IVA con la anual de ISR Conjuntamente con la declaración anual del
+ejercicio.
+05/06/2008
+Pago provisional mensual de ISR personas morales régimen
+general
+A más tardar el día 17 del mes inmediato
+posterior al periodo que corresponda.
+05/06/2008
+Pago definitivo mensual de IVA. A más tardar el día 17 del mes inmediato
+posterior al periodo que corresponda.
+05/06/2008
+Declaración de proveedores de IVA A más tardar el último día del mes inmediato
+posterior al periodo que corresponda.
+05/06/2008
+Declaración anual de ISR del ejercicio Personas morales. Dentro de los tres meses siguientes al cierre del
+ejercicio.
+05/06/2008
+Sus datos personales son incorporados y protegidos en los sistemas del SAT, de conformidad con los Lineamientos de Protección de Datos
+Personales y con diversas disposiciones fiscales y legales sobre confidencialidad y protección de datos, a fin de ejercer las facultades
+conferidas a la autoridad fiscal.
+Si desea modificar o corregir sus datos personales, puede acudir a cualquier Módulo de Servicios Tributarios y/o a través de la dirección
+http://sat.gob.mx
+"La corrupción tiene consecuencias ¡denúnciala! Si conoces algún posible acto de corrupción o delito presenta una queja o denuncia a través
+de: www.sat.gob.mx, denuncias@sat.gob.mx, desde México: (55) 8852 2222, desde el extranjero: + 55 8852 2222, SAT móvil o www.gob.mx/sfp".
+Cadena Original Sello: ||2022/02/10|CLA050928LK4|CONSTANCIA DE SITUACIÓN FISCAL|200001088888800000031||
+Sello Digital: U+SXWUH47fVYxf6QgT0i2XPQl8o3xWqfn8SmDnCOSM6vUVhk1vhvsl3YZhHQSXsYySNbfHeaeJvgX7sYrCjF6
+06385uj4ymat9bYV/7bChVZqEp6EH/yEK55gIGLigbcZs70eg8xTqbLBaGic+pRD2pI/zo8da3IjmmqDsqyZgA=
+Página [3] de [3]
+
+"""

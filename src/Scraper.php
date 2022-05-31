@@ -42,8 +42,7 @@ class Scraper implements ScraperInterface
      */
     public function obtainFromPdfPath(string $path): PersonaMoral|PersonaFisica
     {
-        $pdfToText = new PdfToText();
-        $contents = $pdfToText->extract($path);
+        $contents = $this->pdfToTextContent($path);
 
         $csfExtractor = new CsfExtractor($contents);
         $rfc = $csfExtractor->getRfc();
@@ -51,7 +50,14 @@ class Scraper implements ScraperInterface
         if (null === $rfc || null === $cif) {
             throw new RuntimeException('Cannot obtain rfc or cif', 0);
         }
+        print_r($rfc);
         return $this->data($rfc, $cif);
+    }
+
+    protected function pdfToTextContent(string $path): string
+    {
+        $pdfToText = new PdfToText();
+        return $pdfToText->extract($path);
     }
 
     /**
