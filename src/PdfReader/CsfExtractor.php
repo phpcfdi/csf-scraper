@@ -15,7 +15,7 @@ final class CsfExtractor
     /**
      * @var string[]
      */
-    private readonly array $lines;
+    private array $lines;
 
     public function __construct(string $contents)
     {

@@ -15,10 +15,10 @@ namespace PhpCfdi\CsfScraper\PdfReader;
 final class ShellExecResult
 {
     public function __construct(
-        private readonly string $commandLine,
-        private readonly int $exitStatus,
-        private readonly string $output,
-        private readonly string $errors
+        private string $commandLine,
+        private int $exitStatus,
+        private string $output,
+        private string $errors
     ) {
     }
 

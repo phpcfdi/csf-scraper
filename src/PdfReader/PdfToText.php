@@ -11,7 +11,7 @@ use RuntimeException;
  */
 final class PdfToText
 {
-    private readonly string $pdftotext;
+    private string $pdftotext;
 
     public function __construct(string $pathPdfToText = '')
     {

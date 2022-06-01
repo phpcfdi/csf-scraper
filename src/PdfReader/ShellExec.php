@@ -17,10 +17,10 @@ use Throwable;
 final class ShellExec
 {
     /** @var array<mixed> */
-    private readonly array $command;
+    private array $command;
 
     /** @var array<mixed> */
-    private readonly array $environment;
+    private array $environment;
 
     /**
      * @param array<mixed> $command
