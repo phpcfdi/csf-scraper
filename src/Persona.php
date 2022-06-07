@@ -192,6 +192,16 @@ class Persona
         return $this->data[$name];
     }
 
+    public function __isset(string $name): bool
+    {
+        return isset($this->data[$name]);
+    }
+
+    public function __unset(string $name): void
+    {
+        unset($this->data[$name]);
+    }
+
     /**
      *
      * @return array<string, mixed>
@@ -213,6 +223,7 @@ class Persona
             'correo_electronico' => $this->getCorreoElectronico(),
             'al' => $this->getAl(),
             'regimenes' => $this->regimenes->toArray(),
+            'extra_data' => $this->data,
         ];
     }
 }

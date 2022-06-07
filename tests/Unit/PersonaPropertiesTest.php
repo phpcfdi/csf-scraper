@@ -75,9 +75,29 @@ class PersonaPropertiesTest extends TestCase
      * */
     public function test_assign_dynamic_property(): void
     {
-        $persona = new Persona();
         /** @phpstan-ignore-next-line */
-        $persona->dynamic = 'dynamic';
-        $this->assertSame('dynamic', $persona->dynamic);
+        $this->person->dynamic = 'dynamic';
+        $this->assertSame('dynamic', $this->person->dynamic);
+    }
+
+    public function test_isset_property_method(): void
+    {
+        /** @phpstan-ignore-next-line */
+        $this->person->dynamic = 'dynamic';
+
+        // check if isset
+        $this->assertTrue(isset($this->person->dynamic));
+        $this->assertFalse(isset($this->person->dynamic2));
+    }
+
+    public function test_unset_method(): void
+    {
+        /** @phpstan-ignore-next-line */
+        $this->person->dynamic = 'dynamic';
+
+        $this->assertTrue(isset($this->person->dynamic));
+
+        unset($this->person->dynamic);
+        $this->assertFalse(isset($this->person->dynamic));
     }
 }

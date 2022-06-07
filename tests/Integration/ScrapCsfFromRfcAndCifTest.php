@@ -55,6 +55,7 @@ class ScrapCsfFromRfcAndCifTest extends TestCase
                     'fecha_alta' => DateTimeImmutable::createFromFormat('d-m-Y', '21-02-2019'),
                 ],
             ],
+            'extra_data' => [],
         ];
 
         $data = $csfScrap->obtainFromRfcAndCif(Rfc::parse($rfc), $idcif)->toArray();
@@ -92,6 +93,7 @@ class ScrapCsfFromRfcAndCifTest extends TestCase
                     'fecha_alta' => DateTimeImmutable::createFromFormat('d-m-Y', '01-01-2014'),
                 ],
             ],
+            'extra_data' => [],
         ];
 
         $data = $csfScrap->obtainFromRfcAndCif(Rfc::parse($rfc), $idcif)->toArray();
@@ -133,6 +135,7 @@ class ScrapCsfFromRfcAndCifTest extends TestCase
                     'fecha_alta' => DateTimeImmutable::createFromFormat('d-m-Y', '09-02-2022'),
                 ],
             ],
+            'extra_data' => [],
         ];
 
         $data = $csfScrap->obtainFromRfcAndCif(Rfc::parse($rfc), $idcif)->toArray();
