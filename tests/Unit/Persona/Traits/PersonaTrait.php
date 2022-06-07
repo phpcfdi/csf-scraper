@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace PhpCfdi\CsfScraper\Tests\Unit\Traits;
+namespace PhpCfdi\CsfScraper\Tests\Unit\Persona\Traits;
 
 trait PersonaTrait
 {

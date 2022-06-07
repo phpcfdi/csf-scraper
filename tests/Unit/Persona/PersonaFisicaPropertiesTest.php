@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace PhpCfdi\CsfScraper\Tests\Unit;
+namespace PhpCfdi\CsfScraper\Tests\Unit\Persona;
 
 use DateTimeImmutable;
 use PhpCfdi\CsfScraper\PersonaFisica;
 use PhpCfdi\CsfScraper\Tests\TestCase;
-use PhpCfdi\CsfScraper\Tests\Unit\Traits\PersonaTrait;
+use PhpCfdi\CsfScraper\Tests\Unit\Persona\Traits\PersonaTrait;
 
 class PersonaFisicaPropertiesTest extends TestCase
 {
