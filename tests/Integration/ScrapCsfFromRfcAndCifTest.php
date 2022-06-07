@@ -53,6 +53,7 @@ class ScrapCsfFromRfcAndCifTest extends TestCase
                 [
                     'regimen' => 'Régimen General de Ley Personas Morales',
                     'fecha_alta' => DateTimeImmutable::createFromFormat('d-m-Y', '21-02-2019'),
+                    'regimen_id' => '601',
                 ],
             ],
             'extra_data' => [],
@@ -91,6 +92,7 @@ class ScrapCsfFromRfcAndCifTest extends TestCase
                 [
                     'regimen' => 'Régimen de Incorporación Fiscal',
                     'fecha_alta' => DateTimeImmutable::createFromFormat('d-m-Y', '01-01-2014'),
+                    'regimen_id' => '621',
                 ],
             ],
             'extra_data' => [],
@@ -129,10 +131,12 @@ class ScrapCsfFromRfcAndCifTest extends TestCase
                 [
                     'regimen' => 'Régimen de Sueldos y Salarios e Ingresos Asimilados a Salarios',
                     'fecha_alta' => DateTimeImmutable::createFromFormat('d-m-Y', '01-01-2018'),
+                    'regimen_id' => '605',
                 ],
                 [
                     'regimen' => 'Régimen Simplificado de Confianza',
                     'fecha_alta' => DateTimeImmutable::createFromFormat('d-m-Y', '09-02-2022'),
+                    'regimen_id' => '626',
                 ],
             ],
             'extra_data' => [],

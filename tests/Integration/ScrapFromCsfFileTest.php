@@ -49,6 +49,7 @@ class ScrapFromCsfFileTest extends TestCase
             'regimenes' => [
                 [
                     'regimen' => 'Régimen General de Ley Personas Morales',
+                    'regimen_id' => '601',
                     'fecha_alta' => DateTimeImmutable::createFromFormat('d-m-Y', '21-02-2019'),
                 ],
             ],

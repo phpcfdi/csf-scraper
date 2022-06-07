@@ -44,6 +44,7 @@ class Regimenes
         $regimenesArray = [];
         foreach ($this->getRegimenes() as $regimen) {
             $regimenArray['regimen'] = $regimen->getRegimen();
+            $regimenArray['regimen_id'] = $regimen->getRegimenId();
             $regimenArray['fecha_alta'] = $regimen->getFechaAlta();
             $regimenesArray[] = $regimenArray;
         }
