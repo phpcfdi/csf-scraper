@@ -50,7 +50,6 @@ class Scraper implements ScraperInterface
         if (null === $rfc || null === $cif) {
             throw new RuntimeException('Cannot obtain rfc or cif', 0);
         }
-        print_r($rfc);
         return $this->data($rfc, $cif);
     }
 
