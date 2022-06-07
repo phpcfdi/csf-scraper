@@ -57,7 +57,7 @@ class ScrapCsfFromRfcAndCifTest extends TestCase
             ],
         ];
 
-        $data = $csfScrap->data(Rfc::parse($rfc), $idcif)->toArray();
+        $data = $csfScrap->obtainFromRfcAndCif(Rfc::parse($rfc), $idcif)->toArray();
 
         $this->assertEquals($expectedData, $data);
     }
@@ -94,7 +94,7 @@ class ScrapCsfFromRfcAndCifTest extends TestCase
             ],
         ];
 
-        $data = $csfScrap->data($rfc, $idcif)->toArray();
+        $data = $csfScrap->obtainFromRfcAndCif(Rfc::parse($rfc), $idcif)->toArray();
 
         $this->assertEquals($expectedData, $data);
     }
@@ -135,7 +135,7 @@ class ScrapCsfFromRfcAndCifTest extends TestCase
             ],
         ];
 
-        $data = $csfScrap->data($rfc, $idcif)->toArray();
+        $data = $csfScrap->obtainFromRfcAndCif(Rfc::parse($rfc), $idcif)->toArray();
 
         $this->assertEquals($expectedData, $data);
     }
@@ -148,7 +148,7 @@ class ScrapCsfFromRfcAndCifTest extends TestCase
         $expectedData = [];
         $this->expectException(CifNotFoundException::class);
 
-        $data = $csfScrap->data($rfc, $idcif);
+        $data = $csfScrap->obtainFromRfcAndCif(Rfc::parse($rfc), $idcif);
 
         $this->assertSame($expectedData, $data);
     }
@@ -160,6 +160,6 @@ class ScrapCsfFromRfcAndCifTest extends TestCase
         $idcif = '1904014102123';
 
         $this->expectException(InvalidExpressionToParseException::class);
-        $csfScrap->data($rfc, $idcif);
+        $csfScrap->obtainFromRfcAndCif(Rfc::parse($rfc), $idcif);
     }
 }

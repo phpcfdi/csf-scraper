@@ -24,9 +24,8 @@ class Scraper implements ScraperInterface
     /**
      * @throws RuntimeException
      */
-    public function data(string|Rfc $rfc, string $idCIF): PersonaMoral|PersonaFisica
+    public function obtainFromRfcAndCif(Rfc $rfc, string $idCIF): PersonaMoral|PersonaFisica
     {
-        $rfc = $this->parseRfc($rfc);
         try {
             $uri = sprintf(self::$url, $idCIF, $rfc->getRfc());
             $request = $this->client->request('GET', $uri);
@@ -50,23 +49,12 @@ class Scraper implements ScraperInterface
         if (null === $rfc || null === $cif) {
             throw new RuntimeException('Cannot obtain rfc or cif', 0);
         }
-        return $this->data($rfc, $cif);
+        return $this->obtainFromRfcAndCif(Rfc::parse($rfc), $cif);
     }
 
     protected function pdfToTextContent(string $path): string
     {
         $pdfToText = new PdfToText();
         return $pdfToText->extract($path);
-    }
-
-    /**
-     * @throws \PhpCfdi\Rfc\Exceptions\InvalidExpressionToParseException
-     */
-    private function parseRfc(string|Rfc $rfc): Rfc
-    {
-        if (is_string($rfc)) {
-            $rfc = Rfc::parse($rfc);
-        }
-        return $rfc;
     }
 }
