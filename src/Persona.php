@@ -21,10 +21,14 @@ class Persona
     private string $codigoPostal = '';
     private string $correoElectronico = '';
     private string $al = '';
-    /** @var Regimen[] */
-    private array $regimenes = [];
+    private Regimenes $regimenes;
     /** @var array<string, mixed> */
     private array $data = [];
+
+    public function __construct()
+    {
+        $this->regimenes = new Regimenes();
+    }
 
     public function getFechaInicioOperaciones(): ?DateTimeImmutable
     {
@@ -91,11 +95,7 @@ class Persona
         return $this->al;
     }
 
-    /**
-     *
-     * @return Regimen[]
-     */
-    public function getRegimenes(): array
+    public function getRegimenes(): Regimenes
     {
         return $this->regimenes;
     }
@@ -169,9 +169,7 @@ class Persona
 
     public function addRegimenes(Regimen ...$regimenes): void
     {
-        foreach ($regimenes as $regimen) {
-            $this->regimenes[] = $regimen;
-        }
+        $this->regimenes->addMultiRegimen(...$regimenes);
     }
 
     public function __set(string $name, string $value): void
@@ -200,13 +198,6 @@ class Persona
      */
     public function toArray(): array
     {
-        $regimenes = $this->getRegimenes();
-        $regimenesArray = [];
-        foreach ($regimenes as $regimen) {
-            $regimenArray['regimen'] = $regimen->getRegimen();
-            $regimenArray['fecha_alta'] = $regimen->getFechaAlta();
-            $regimenesArray[] = $regimenArray;
-        }
         return [
             'fecha_inicio_operaciones' => $this->getFechaInicioOperaciones(),
             'situacion_contribuyente' => $this->getSituacionContribuyente(),
@@ -221,7 +212,7 @@ class Persona
             'codigo_postal' => $this->getCodigoPostal(),
             'correo_electronico' => $this->getCorreoElectronico(),
             'al' => $this->getAl(),
-            'regimenes' => $regimenesArray,
+            'regimenes' => $this->regimenes->toArray(),
         ];
     }
 }
