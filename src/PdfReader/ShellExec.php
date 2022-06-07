@@ -16,15 +16,15 @@ use Throwable;
  */
 final class ShellExec
 {
-    /** @var array<mixed> */
+    /** @var string[] */
     private array $command;
 
-    /** @var array<mixed> */
+    /** @var array<string, string> */
     private array $environment;
 
     /**
-     * @param array<mixed> $command
-     * @param array<mixed> $environment
+     * @param string[] $command
+     * @param array<string, string> $environment
      */
     public function __construct(array $command, array $environment = [])
     {
@@ -50,7 +50,7 @@ final class ShellExec
 
     /**
      *
-     * @param array<int, mixed> $input
+     * @param string[] $input
      */
     private function checkArrayStrings(array $input, bool $allowEmpty, string $exceptionMessage): void
     {
@@ -78,7 +78,7 @@ final class ShellExec
 
     /**
      *
-     * @return array<mixed>
+     * @return string[]
      */
     public function getCommand(): array
     {
@@ -87,7 +87,7 @@ final class ShellExec
 
     /**
      *
-     * @return array<mixed>
+     * @return array<string, string>
      */
     public function getEnvironment(): array
     {

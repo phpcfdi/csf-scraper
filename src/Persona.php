@@ -180,7 +180,7 @@ class Persona
         if (method_exists($this, $method)) {
             /** @var callable:mixed $callable */
             $callable = [$this, $method];
-            call_user_func($callable, ...[$value]);
+            call_user_func($callable, $value);
         } else {
             $this->data[$name] = $value;
         }
