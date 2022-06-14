@@ -28,8 +28,7 @@ class Scraper implements ScraperInterface
     {
         try {
             $uri = sprintf(self::$url, $idCIF, $rfc->getRfc());
-            $request = $this->client->request('GET', $uri);
-            $html = (string) $request->getBody();
+            $html = $this->obtainHtml($uri);
             return (new DataExtractor($html))->extract($rfc->isFisica());
         } catch (GuzzleException $exception) {
             throw new \RuntimeException('The request has failed', 0, $exception);
@@ -56,5 +55,11 @@ class Scraper implements ScraperInterface
     {
         $pdfToText = new PdfToText();
         return $pdfToText->extract($path);
+    }
+
+    protected function obtainHtml(string $uri): string
+    {
+        $request = $this->client->request('GET', $uri);
+        return (string) $request->getBody();
     }
 }
