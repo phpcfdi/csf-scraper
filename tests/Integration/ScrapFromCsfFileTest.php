@@ -58,7 +58,6 @@ class ScrapFromCsfFileTest extends TestCase
         ];
 
         $data = $csfScrap->obtainFromPdfPath('my-path')->toArray();
-        print_r($data);
 
         $this->assertEquals($expectedData, $data);
     }
