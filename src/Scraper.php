@@ -6,6 +6,8 @@ namespace PhpCfdi\CsfScraper;
 
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
+use PhpCfdi\CsfScraper\Exceptions\PdfReader\CifFromPdfNotFoundException;
+use PhpCfdi\CsfScraper\Exceptions\PdfReader\RfcFromPdfNotFoundException;
 use PhpCfdi\CsfScraper\Interfaces\ScraperInterface;
 use PhpCfdi\CsfScraper\PdfReader\CsfExtractor;
 use PhpCfdi\CsfScraper\PdfReader\PdfToText;
@@ -26,8 +28,8 @@ class Scraper implements ScraperInterface
      */
     public function obtainFromRfcAndCif(Rfc $rfc, string $idCIF): PersonaMoral|PersonaFisica
     {
+        $uri = sprintf(self::$url, $idCIF, $rfc->getRfc());
         try {
-            $uri = sprintf(self::$url, $idCIF, $rfc->getRfc());
             $html = $this->obtainHtml($uri);
             return (new DataExtractor($html))->extract($rfc->isFisica());
         } catch (GuzzleException $exception) {
@@ -35,9 +37,6 @@ class Scraper implements ScraperInterface
         }
     }
 
-    /**
-     * @throws RuntimeException
-     */
     public function obtainFromPdfPath(string $path): PersonaMoral|PersonaFisica
     {
         $contents = $this->pdfToTextContent($path);
@@ -45,8 +44,11 @@ class Scraper implements ScraperInterface
         $csfExtractor = new CsfExtractor($contents);
         $rfc = $csfExtractor->getRfc();
         $cif = $csfExtractor->getCifId();
-        if (null === $rfc || null === $cif) {
-            throw new RuntimeException('Cannot obtain rfc or cif', 0);
+        if (null === $rfc) {
+            throw new RfcFromPdfNotFoundException('Cannot obtain rfc from given PDF');
+        }
+        if (null === $cif) {
+            throw new CifFromPdfNotFoundException('Cannot obtain cif from given PDF');
         }
         return $this->obtainFromRfcAndCif(Rfc::parse($rfc), $cif);
     }

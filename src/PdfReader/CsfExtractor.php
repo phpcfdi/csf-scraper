@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace PhpCfdi\CsfScraper\PdfReader;
 
-use RuntimeException;
+use PhpCfdi\CsfScraper\Exceptions\PdfReader\EmptyPdfContentException;
 
 /**
  *
@@ -20,7 +20,7 @@ final class CsfExtractor
     public function __construct(string $contents)
     {
         if ('' == $contents) {
-            throw new RuntimeException('Cannot read pdf contents.');
+            throw new EmptyPdfContentException('Cannot read pdf contents.');
         }
         $this->lines = explode("\n", $contents);
     }

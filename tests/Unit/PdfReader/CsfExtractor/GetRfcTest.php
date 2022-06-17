@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace PhpCfdi\CsfScraper\Tests\Unit\PdfReader\CsfExtractor;
 
+use PhpCfdi\CsfScraper\Exceptions\PdfReader\EmptyPdfContentException;
 use PhpCfdi\CsfScraper\PdfReader\CsfExtractor;
 use PhpCfdi\CsfScraper\Tests\TestCase;
-use RuntimeException;
 
 class GetRfcTest extends TestCase
 {
@@ -25,7 +25,7 @@ class GetRfcTest extends TestCase
 
     public function test_cannot_read_content(): void
     {
-        $this->expectException(RuntimeException::class);
+        $this->expectException(EmptyPdfContentException::class);
         new CsfExtractor('');
     }
 }

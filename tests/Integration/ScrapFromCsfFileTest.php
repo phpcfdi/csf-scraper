@@ -8,6 +8,7 @@ use DateTimeImmutable;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
+use PhpCfdi\CsfScraper\Exceptions\PdfReader\RfcFromPdfNotFoundException;
 use PhpCfdi\CsfScraper\Scraper;
 use PhpCfdi\CsfScraper\Tests\Integration\Helpers\ScraperHelper;
 use PhpCfdi\CsfScraper\Tests\TestCase;
@@ -59,5 +60,14 @@ class ScrapFromCsfFileTest extends TestCase
         $data = $csfScrap->obtainFromPdfPath('my-path')->toArray();
 
         $this->assertEquals($expectedData, $data);
+    }
+
+    public function test_scrap_from_bad_pdf(): void
+    {
+        $csfScrap = new Scraper(new Client());
+
+        $this->expectException(RfcFromPdfNotFoundException::class);
+
+        $csfScrap->obtainFromPdfPath($this->filePath('hello-world.pdf'))->toArray();
     }
 }

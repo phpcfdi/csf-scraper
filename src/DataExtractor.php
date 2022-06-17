@@ -26,7 +26,7 @@ final class DataExtractor implements DataExtractorInterface
         $crawler = new Crawler($html);
         $errorElement = $crawler->filter('span[class=ui-messages-info-detail]');
         if (1 === $errorElement->count()) {
-            throw new CifNotFoundException('Failed to found CIF info.', 500);
+            throw new CifNotFoundException('Failed to found CIF info.');
         }
         $elements = $crawler->filter('td[role="gridcell"]');
 
