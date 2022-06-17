@@ -172,7 +172,7 @@ y recuerda revisar el archivo de tareas pendientes [TODO][] y el archivo [CHANGE
 
 ## Copyright and License
 
-The `phpcfdi/cfdi-expresiones` library is copyright © [PhpCfdi](https://www.phpcfdi.com/)
+The `phpcfdi/csf-scraper` library is copyright © [PhpCfdi](https://www.phpcfdi.com/)
 and licensed for use under the MIT License (MIT). Please see [LICENSE][] for more information.
 
 [contributing]: https://github.com/phpcfdi/csf-scraper/blob/main/CONTRIBUTING.md
