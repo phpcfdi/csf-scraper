@@ -1,6 +1,8 @@
 {
     "name": "phpcfdi/csf-scraper",
     "description": "Librería para obtener la información de constancia de situación fiscal",
+    "keywords": ["phpcfdi", "sat", "csf"],
+    "homepage": "https://github.com/phpcfdi/csf-scraper",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -17,6 +19,17 @@
             "email": "fernando.isidro@ocelotlstudio.com"
         }
     ],
+    "support": {
+        "source": "https://github.com/phpcfdi/csf-scraper",
+        "issues": "https://github.com/phpcfdi/csf-scraper/issues"
+    },
+    "prefer-stable": true,
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": {
+            "*": "dist"
+        }
+    },
     "require": {
         "php": ">=8.0",
         "guzzlehttp/guzzle": "^7.4",
