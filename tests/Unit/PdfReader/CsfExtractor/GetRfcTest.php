@@ -23,6 +23,9 @@ class GetRfcTest extends TestCase
         $this->assertNull($rfc);
     }
 
+    /**
+     * @requires OSFAMILY Linux
+     */
     public function test_cannot_read_content(): void
     {
         $this->expectException(EmptyPdfContentException::class);

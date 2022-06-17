@@ -10,12 +10,11 @@ use RuntimeException;
 
 class PdfToTextConstructorTest extends TestCase
 {
+    /**
+     * @requires OSFAMILY Linux
+     */
     public function test_pdftotext_is_installed_default_path(): void
     {
-        $pathPdfToText = trim(strval(shell_exec('which pdftotext')));
-        if ('' === $pathPdfToText) {
-            $this->markTestSkipped();
-        }
         $csfExtractor = new PdfToText();
         $this->assertInstanceOf(PdfToText::class, $csfExtractor);
     }
