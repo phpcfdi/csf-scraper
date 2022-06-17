@@ -106,6 +106,9 @@ jobs:
       - name: Update APT on nektos/act
         if: matrix.operating-systems == 'ubuntu-latest' && github.actor == 'nektos/act'
         run: sudo apt-get update -y -qq
+      - name: Install pdftotext
+        if: matrix.operating-systems == 'ubuntu-latest'
+        run: sudo apt install poppler-utils
       - name: Get composer cache directory
         id: composer-cache
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
@@ -117,9 +120,5 @@ jobs:
           restore-keys: ${{ runner.os }}-composer-
       - name: Install project dependencies
         run: composer upgrade --no-interaction --no-progress --prefer-dist
-      - name: Tests (phpunit) on Linux
-        if: matrix.operating-systems == 'ubuntu-latest'
-        run: vendor/bin/phpunit --testdox --verbose
-      - name: Tests (phpunit) on Windows
-        if: matrix.operating-systems == 'windows-latest'
+      - name: Tests (phpunit)
         run: vendor/bin/phpunit --testdox --verbose
