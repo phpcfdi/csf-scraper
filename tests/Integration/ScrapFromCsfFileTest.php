@@ -58,10 +58,14 @@ class ScrapFromCsfFileTest extends TestCase
         ];
 
         $data = $csfScrap->obtainFromPdfPath('my-path')->toArray();
+        print_r($data);
 
         $this->assertEquals($expectedData, $data);
     }
 
+    /**
+     * @requires OSFAMILY Linux
+     */
     public function test_scrap_from_bad_pdf(): void
     {
         $csfScrap = new Scraper(new Client());
