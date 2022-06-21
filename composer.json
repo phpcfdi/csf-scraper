@@ -1,6 +1,6 @@
 {
     "name": "phpcfdi/csf-scraper",
-    "description": "Librería para obtener la información de constancia de situación fiscal",
+    "description": "Obtiene los datos fiscales actuales de una persona moral o física dado su RFC y CIFID",
     "keywords": ["phpcfdi", "sat", "csf"],
     "homepage": "https://github.com/phpcfdi/csf-scraper",
     "type": "library",
@@ -64,7 +64,8 @@
         "dev:test": [
             "@dev:check-style",
             "@php vendor/bin/phpunit --testdox --verbose --stop-on-failure",
-            "@php tools/phpstan analyse --no-interaction --no-progress"
+            "@php tools/phpstan analyse --no-interaction --no-progress",
+            "@php tools/composer-require-checker"
         ],
         "dev:coverage": [
             "@php -dzend_extension=xdebug.so -dxdebug.mode=coverage vendor/bin/phpunit --coverage-html build/coverage/html/"
