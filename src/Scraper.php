@@ -23,6 +23,7 @@ class Scraper implements ScraperInterface
     {
         $this->client = $client;
     }
+
     /**
      * @throws RuntimeException
      */
@@ -33,7 +34,7 @@ class Scraper implements ScraperInterface
             $html = $this->obtainHtml($uri);
             return (new DataExtractor($html))->extract($rfc->isFisica());
         } catch (GuzzleException $exception) {
-            throw new \RuntimeException('The request has failed', 0, $exception);
+            throw new \RuntimeException('The request has failed', previous: $exception);
         }
     }
 
@@ -53,6 +54,11 @@ class Scraper implements ScraperInterface
         return $this->obtainFromRfcAndCif(Rfc::parse($rfc), $cif);
     }
 
+    /**
+     * @param string $path
+     * @return string
+     * @throws \PhpCfdi\CsfScraper\Exceptions\PdfReader\ShellExecException when call to pdftotext fail
+     */
     protected function pdfToTextContent(string $path): string
     {
         $pdfToText = new PdfToText();

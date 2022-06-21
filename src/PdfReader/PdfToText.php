@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpCfdi\CsfScraper\PdfReader;
 
+use PhpCfdi\CsfScraper\Exceptions\PdfReader\ShellExecException;
 use RuntimeException;
 
 /**
@@ -26,14 +27,20 @@ final class PdfToText
 
     /**
      * @return string file contents
+     * @throws ShellExecException when call to pdftotext fail
      */
     public function extract(string $path): string
     {
-        $shellExec = (new ShellExec($this->buildCommand($path)))->run();
-        if (0 !== $shellExec->exitStatus()) {
-            throw new RuntimeException("Running pdftotext exit with error (exit status: {$shellExec->exitStatus()})");
+        $command = $this->buildCommand($path);
+        $result = (new ShellExec($command))->run();
+        if (0 !== $result->exitStatus()) {
+            throw new ShellExecException(
+                "Running pdftotext exit with error (exit status: {$result->exitStatus()})",
+                $command,
+                $result
+            );
         }
-        return $shellExec->output();
+        return $result->output();
     }
 
     /**
