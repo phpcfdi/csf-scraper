@@ -5,7 +5,7 @@
 [![Software License][badge-license]][license]
 [![Build Status][badge-build]][build]
 
-> Obtiene los datos fiscales actuales de una persona moral/fisica dado su RFC y CIFID.
+> Obtiene los datos fiscales actuales de una persona moral o física dado su RFC y CIFID.
 
 :us: The documentation of this project is in spanish as this is the natural language for intended audience.
 
@@ -101,7 +101,7 @@ Ejemplo de salida de `json_encode($person->toArray())` para persona moral:
 }
 ```
 
-Ejemplo de salida de `json_encode($person->toArray())` para persona fisica:
+Ejemplo de salida de `json_encode($person)` para persona física:
 
 ```json
 {
