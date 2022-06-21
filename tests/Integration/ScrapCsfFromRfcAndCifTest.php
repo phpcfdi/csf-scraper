@@ -100,8 +100,6 @@ class ScrapCsfFromRfcAndCifTest extends TestCase
 
         $data = $csfScrap->obtainFromRfcAndCif(Rfc::parse($rfc), $idcif)->toArray();
 
-        print_r($data);
-
         $this->assertEquals($expectedData, $data);
     }
 
