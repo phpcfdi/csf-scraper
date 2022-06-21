@@ -54,7 +54,7 @@ if($rfc->isMoral()) {
 echo print_r($person->toArray(), true);
 ```
 
-Ejemplo de salida de `json_encode($person->toArray())` para persona moral:
+Ejemplo de salida de `json_encode($person)` para persona moral:
 
 ```json
 {

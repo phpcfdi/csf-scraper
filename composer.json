@@ -33,6 +33,7 @@
     "require": {
         "php": ">=8.0",
         "ext-mbstring": "*",
+        "ext-json": "*",
         "guzzlehttp/guzzle": "^7.4",
         "phpcfdi/rfc": "^1.1",
         "symfony/css-selector": ">=6.0",

@@ -5,8 +5,9 @@ declare(strict_types=1);
 namespace PhpCfdi\CsfScraper;
 
 use DateTimeImmutable;
+use JsonSerializable;
 
-class Persona
+class Persona implements JsonSerializable
 {
     private ?DateTimeImmutable $fechaInicioOperaciones = null;
     private string $situacionContribuyente = '';
@@ -224,5 +225,14 @@ class Persona
             'regimenes' => $this->regimenes->toArray(),
             'extra_data' => $this->data,
         ];
+    }
+
+    /**
+     *
+     * @return array<string, mixed>
+     */
+    public function jsonSerialize(): mixed
+    {
+        return $this->toArray();
     }
 }
