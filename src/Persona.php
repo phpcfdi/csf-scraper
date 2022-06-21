@@ -22,7 +22,7 @@ class Persona
     private string $correoElectronico = '';
     private string $al = '';
     private Regimenes $regimenes;
-    /** @var array<string, mixed> */
+    /** @var string[] */
     private array $data = [];
 
     public function __construct()
@@ -203,7 +203,6 @@ class Persona
     }
 
     /**
-     *
      * @return array<string, mixed>
      */
     public function toArray(): array
