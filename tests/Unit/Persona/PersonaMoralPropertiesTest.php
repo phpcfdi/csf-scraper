@@ -56,6 +56,6 @@ class PersonaMoralPropertiesTest extends TestCase
     public function test_set_and_get_date_properties(string $complementFunction, string $value): void
     {
         $result = $this->setAndGetProperty($complementFunction, $value);
-        $this->assertEquals(DateTimeImmutable::createFromFormat('d-m-Y', $value), $result);
+        $this->assertEquals(DateTimeImmutable::createFromFormat('!d-m-Y', $value), $result);
     }
 }

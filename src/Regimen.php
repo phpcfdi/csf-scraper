@@ -119,7 +119,7 @@ class Regimen implements JsonSerializable
 
     public function setFechaAlta(string $fechaAlta): void
     {
-        $date = DateTimeImmutable::createFromFormat('d-m-Y', $fechaAlta);
+        $date = DateTimeImmutable::createFromFormat('!d-m-Y', $fechaAlta);
         $this->fechaAlta = false !== $date ? $date : null;
     }
 

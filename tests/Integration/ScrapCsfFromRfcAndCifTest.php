@@ -35,10 +35,10 @@ class ScrapCsfFromRfcAndCifTest extends TestCase
         $expectedData = [
             'razon_social' => 'Mi razón social',
             'regimen_de_capital' => 'SA DE CV',
-            'fecha_constitucion' => DateTimeImmutable::createFromFormat('d-m-Y', '21-02-2019'),
-            'fecha_inicio_operaciones' => DateTimeImmutable::createFromFormat('d-m-Y', '21-02-2019'),
+            'fecha_constitucion' => DateTimeImmutable::createFromFormat('!d-m-Y', '21-02-2019'),
+            'fecha_inicio_operaciones' => DateTimeImmutable::createFromFormat('!d-m-Y', '21-02-2019'),
             'situacion_contribuyente' => 'ACTIVO',
-            'fecha_ultimo_cambio_situacion' => DateTimeImmutable::createFromFormat('d-m-Y', '21-02-2019'),
+            'fecha_ultimo_cambio_situacion' => DateTimeImmutable::createFromFormat('!d-m-Y', '21-02-2019'),
             'entidad_federativa' => 'CIUDAD DE MEXICO',
             'municipio_delegacion' => 'CUAUHTEMOC',
             'colonia' => 'CUAUHTEMOC',
@@ -52,7 +52,7 @@ class ScrapCsfFromRfcAndCifTest extends TestCase
             'regimenes' => [
                 [
                     'regimen' => 'Régimen General de Ley Personas Morales',
-                    'fecha_alta' => DateTimeImmutable::createFromFormat('d-m-Y', '21-02-2019'),
+                    'fecha_alta' => DateTimeImmutable::createFromFormat('!d-m-Y', '21-02-2019'),
                     'regimen_id' => '601',
                 ],
             ],
@@ -74,10 +74,10 @@ class ScrapCsfFromRfcAndCifTest extends TestCase
             'nombre' => 'JUAN',
             'apellido_paterno' => 'PEREZ',
             'apellido_materno' => 'RODRIGUEZ',
-            'fecha_nacimiento' => DateTimeImmutable::createFromFormat('d-m-Y', '01-05-1973'),
-            'fecha_inicio_operaciones' => DateTimeImmutable::createFromFormat('d-m-Y', '03-11-2004'),
+            'fecha_nacimiento' => DateTimeImmutable::createFromFormat('!d-m-Y', '01-05-1973'),
+            'fecha_inicio_operaciones' => DateTimeImmutable::createFromFormat('!d-m-Y', '03-11-2004'),
             'situacion_contribuyente' => 'ACTIVO',
-            'fecha_ultimo_cambio_situacion' => DateTimeImmutable::createFromFormat('d-m-Y', '03-11-2004'),
+            'fecha_ultimo_cambio_situacion' => DateTimeImmutable::createFromFormat('!d-m-Y', '03-11-2004'),
             'entidad_federativa' => 'CIUDAD DE MEXICO',
             'municipio_delegacion' => 'IZTAPALAPA',
             'colonia' => 'MI COLONIA',
@@ -91,7 +91,7 @@ class ScrapCsfFromRfcAndCifTest extends TestCase
             'regimenes' => [
                 [
                     'regimen' => 'Régimen de Incorporación Fiscal',
-                    'fecha_alta' => DateTimeImmutable::createFromFormat('d-m-Y', '01-01-2014'),
+                    'fecha_alta' => DateTimeImmutable::createFromFormat('!d-m-Y', '01-01-2014'),
                     'regimen_id' => '621',
                 ],
             ],
@@ -99,6 +99,8 @@ class ScrapCsfFromRfcAndCifTest extends TestCase
         ];
 
         $data = $csfScrap->obtainFromRfcAndCif(Rfc::parse($rfc), $idcif)->toArray();
+
+        print_r($data);
 
         $this->assertEquals($expectedData, $data);
     }
@@ -113,10 +115,10 @@ class ScrapCsfFromRfcAndCifTest extends TestCase
             'nombre' => 'JUAN',
             'apellido_paterno' => 'PEREZ',
             'apellido_materno' => 'RODRIGUEZ',
-            'fecha_nacimiento' => DateTimeImmutable::createFromFormat('d-m-Y', '21-07-1995'),
-            'fecha_inicio_operaciones' => DateTimeImmutable::createFromFormat('d-m-Y', '01-01-2018'),
+            'fecha_nacimiento' => DateTimeImmutable::createFromFormat('!d-m-Y', '21-07-1995'),
+            'fecha_inicio_operaciones' => DateTimeImmutable::createFromFormat('!d-m-Y', '01-01-2018'),
             'situacion_contribuyente' => 'ACTIVO',
-            'fecha_ultimo_cambio_situacion' => DateTimeImmutable::createFromFormat('d-m-Y', '16-08-2018'),
+            'fecha_ultimo_cambio_situacion' => DateTimeImmutable::createFromFormat('!d-m-Y', '16-08-2018'),
             'entidad_federativa' => 'QUERETARO',
             'municipio_delegacion' => 'MUNICIPIO',
             'colonia' => 'MI COLONIA',
@@ -130,12 +132,12 @@ class ScrapCsfFromRfcAndCifTest extends TestCase
             'regimenes' => [
                 [
                     'regimen' => 'Régimen de Sueldos y Salarios e Ingresos Asimilados a Salarios',
-                    'fecha_alta' => DateTimeImmutable::createFromFormat('d-m-Y', '01-01-2018'),
+                    'fecha_alta' => DateTimeImmutable::createFromFormat('!d-m-Y', '01-01-2018'),
                     'regimen_id' => '605',
                 ],
                 [
                     'regimen' => 'Régimen Simplificado de Confianza',
-                    'fecha_alta' => DateTimeImmutable::createFromFormat('d-m-Y', '09-02-2022'),
+                    'fecha_alta' => DateTimeImmutable::createFromFormat('!d-m-Y', '09-02-2022'),
                     'regimen_id' => '626',
                 ],
             ],

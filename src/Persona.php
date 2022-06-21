@@ -103,7 +103,7 @@ class Persona implements JsonSerializable
 
     public function setFechaInicioOperaciones(string $fechaInicioOperaciones): void
     {
-        $date = DateTimeImmutable::createFromFormat('d-m-Y', $fechaInicioOperaciones);
+        $date = DateTimeImmutable::createFromFormat('!d-m-Y', $fechaInicioOperaciones);
         $this->fechaInicioOperaciones = false !== $date ? $date : null;
     }
 
@@ -114,7 +114,7 @@ class Persona implements JsonSerializable
 
     public function setfechaUltimoCambioSituacion(string $fechaUltimoCambioSituacion): void
     {
-        $date = DateTimeImmutable::createFromFormat('d-m-Y', $fechaUltimoCambioSituacion);
+        $date = DateTimeImmutable::createFromFormat('!d-m-Y', $fechaUltimoCambioSituacion);
         $this->fechaUltimoCambioSituacion = false !== $date ? $date : null;
     }
 

@@ -33,10 +33,10 @@ class ScrapFromCsfFileTest extends TestCase
         $expectedData = [
             'razon_social' => 'Mi razón social',
             'regimen_de_capital' => 'SA DE CV',
-            'fecha_constitucion' => DateTimeImmutable::createFromFormat('d-m-Y', '21-02-2019'),
-            'fecha_inicio_operaciones' => DateTimeImmutable::createFromFormat('d-m-Y', '21-02-2019'),
+            'fecha_constitucion' => DateTimeImmutable::createFromFormat('!d-m-Y', '21-02-2019'),
+            'fecha_inicio_operaciones' => DateTimeImmutable::createFromFormat('!d-m-Y', '21-02-2019'),
             'situacion_contribuyente' => 'ACTIVO',
-            'fecha_ultimo_cambio_situacion' => DateTimeImmutable::createFromFormat('d-m-Y', '21-02-2019'),
+            'fecha_ultimo_cambio_situacion' => DateTimeImmutable::createFromFormat('!d-m-Y', '21-02-2019'),
             'entidad_federativa' => 'CIUDAD DE MEXICO',
             'municipio_delegacion' => 'CUAUHTEMOC',
             'colonia' => 'CUAUHTEMOC',
@@ -51,7 +51,7 @@ class ScrapFromCsfFileTest extends TestCase
                 [
                     'regimen' => 'Régimen General de Ley Personas Morales',
                     'regimen_id' => '601',
-                    'fecha_alta' => DateTimeImmutable::createFromFormat('d-m-Y', '21-02-2019'),
+                    'fecha_alta' => DateTimeImmutable::createFromFormat('!d-m-Y', '21-02-2019'),
                 ],
             ],
             'extra_data' => [],

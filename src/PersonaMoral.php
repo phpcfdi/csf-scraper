@@ -39,7 +39,7 @@ class PersonaMoral extends Persona
 
     public function setFechaConstitucion(string $fechaConstitucion): void
     {
-        $date = DateTimeImmutable::createFromFormat('d-m-Y', $fechaConstitucion);
+        $date = DateTimeImmutable::createFromFormat('!d-m-Y', $fechaConstitucion);
         $this->fechaConstitucion = false !== $date ? $date : null;
     }
 

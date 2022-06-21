@@ -61,7 +61,7 @@ class PersonaFisica extends Persona
 
     public function setFechaNacimiento(string $fechaNacimiento): void
     {
-        $date = DateTimeImmutable::createFromFormat('d-m-Y', $fechaNacimiento);
+        $date = DateTimeImmutable::createFromFormat('!d-m-Y', $fechaNacimiento);
         $this->fechaNacimiento = false !== $date ? $date : null;
     }
 
