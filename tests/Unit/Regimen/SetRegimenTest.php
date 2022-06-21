@@ -49,6 +49,14 @@ class SetRegimenTest extends TestCase
         $this->assertSame($regimenIdExpected, $regimen->getRegimenId());
     }
 
+    public function test_detect_correct_regimen_case_insensitive(): void
+    {
+        $regimen = new Regimen();
+        $regimen->setRegimen('DEMÁS INGRESOS');
+
+        $this->assertSame('608', $regimen->getRegimenId());
+    }
+
     public function test_returns_empty_when_not_found(): void
     {
         $regimen = new Regimen();
