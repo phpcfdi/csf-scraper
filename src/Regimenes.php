@@ -35,19 +35,13 @@ class Regimenes
     }
 
     /**
-     *
-     * @return array<int, array<string, string|DateTimeImmutable|null>>
+     * @return array<int, array{regimen: string, regimen_id: string, fecha_alta: ?DateTimeImmutable}>
      */
     public function toArray(): array
     {
-        $regimenArray = [];
-        $regimenesArray = [];
-        foreach ($this->getRegimenes() as $regimen) {
-            $regimenArray['regimen'] = $regimen->getRegimen();
-            $regimenArray['regimen_id'] = $regimen->getRegimenId();
-            $regimenArray['fecha_alta'] = $regimen->getFechaAlta();
-            $regimenesArray[] = $regimenArray;
-        }
-        return $regimenesArray;
+        return array_map(
+            fn (Regimen $regimen): array => $regimen->toArray(),
+            $this->regimenes
+        );
     }
 }

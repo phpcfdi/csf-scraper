@@ -125,10 +125,22 @@ class Regimen
     private function searchRegimenIdByText(string $text): string
     {
         foreach ($this->regimenes as $regimen) {
-            if (0 === strcasecmp($text, $regimen['texto'])) {
+            if (0 === strcmp(mb_strtoupper($text), mb_strtoupper($regimen['texto']))) {
                 return $regimen['id'];
             }
         }
         return '';
+    }
+
+    /**
+     * @return array{regimen: string, regimen_id: string, fecha_alta: ?DateTimeImmutable}
+     */
+    public function toArray(): array
+    {
+        return [
+            'regimen' => $this->regimen,
+            'regimen_id' => $this->regimenId,
+            'fecha_alta' => $this->fechaAlta,
+        ];
     }
 }
