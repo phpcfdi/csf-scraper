@@ -22,15 +22,11 @@ class Regimenes implements JsonSerializable
         return $this->regimenes;
     }
 
-    public function addRegimen(Regimen $regimen): void
+    public function addRegimen(Regimen $regimen, Regimen ...$regimenes): void
     {
         $this->regimenes[] = $regimen;
-    }
-
-    public function addMultiRegimen(Regimen ...$regimenes): void
-    {
-        foreach ($regimenes as $regimen) {
-            $this->addRegimen($regimen);
+        foreach ($regimenes as $reg) {
+            $this->regimenes[] = $reg;
         }
     }
 

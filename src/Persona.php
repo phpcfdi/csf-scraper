@@ -170,7 +170,7 @@ class Persona implements JsonSerializable
 
     public function addRegimenes(Regimen ...$regimenes): void
     {
-        $this->regimenes->addMultiRegimen(...$regimenes);
+        $this->regimenes->addRegimen(...$regimenes);
     }
 
     public function __set(string $name, string $value): void

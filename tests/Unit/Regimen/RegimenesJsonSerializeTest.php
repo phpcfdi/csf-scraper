@@ -12,15 +12,19 @@ class RegimenesJsonSerializeTest extends TestCase
 {
     public function test_serialize_default_regimenes(): void
     {
-        $regimen = new Regimen();
         $regimenes = new Regimenes();
 
-        $regimenes->addRegimen($regimen);
+        $regimenes->addRegimen(new Regimen(), new Regimen());
 
         /** @var string $json */
         $json = json_encode($regimenes);
 
         $this->assertSame([
+            [
+                'regimen' => '',
+                'regimen_id' => '',
+                'fecha_alta' => null,
+            ],
             [
                 'regimen' => '',
                 'regimen_id' => '',
