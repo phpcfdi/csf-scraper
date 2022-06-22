@@ -1,6 +1,7 @@
 # phpcfdi/csf-scraper
 
 [![Source Code][badge-source]][source]
+[![Packagist PHP Version Support][badge-php-version]][php-version]
 [![Latest Version][badge-release]][release]
 [![Software License][badge-license]][license]
 [![Build Status][badge-build]][build]
@@ -179,10 +180,12 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [changelog]: https://github.com/phpcfdi/csf-scraper/blob/main/docs/CHANGELOG.md
 [todo]: https://github.com/phpcfdi/csf-scraper/blob/main/docs/TODO.md
 [source]: https://github.com/phpcfdi/csf-scraper
+[php-version]: https://packagist.org/packages/phpcfdi/csf-scraper
 [release]: https://github.com/phpcfdi/csf-scraper/releases
 [license]: https://github.com/phpcfdi/csf-scraper/blob/main/LICENSE
 [build]: https://github.com/phpcfdi/csf-scraper/actions/workflows/build.yml?query=branch:main
 [badge-source]: https://img.shields.io/badge/source-phpcfdi/csf--scraper-blue.svg?style=flat-square
+[badge-php-version]: https://img.shields.io/packagist/php-v/phpcfdi/csf-scraper?style=flat-square
 [badge-release]: https://img.shields.io/github/release/phpcfdi/csf-scraper.svg?style=flat-square
 [badge-license]: https://img.shields.io/github/license/phpcfdi/csf-scraper.svg?style=flat-square
 [badge-build]: https://img.shields.io/github/workflow/status/phpcfdi/csf-scraper/build/main?style=flat-square

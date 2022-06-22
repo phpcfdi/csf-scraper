@@ -10,3 +10,7 @@ Pueden aparecer cambios no liberados que se integran a la rama principal, pero n
 versión, aunque sí su incorporación en la rama principal de trabajo, generalmente se tratan de cambios en el desarrollo.
 
 ## Listado de cambios
+
+### Versión 0.1.0 2022-06-21
+
+Primera versión pública disponible.
