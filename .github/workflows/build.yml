@@ -102,13 +102,11 @@ jobs:
           tools: composer:v2
         env:
           fail-fast: true
-      # only for local testing in nektos
-      - name: Update APT on nektos/act
-        if: matrix.operating-systems == 'ubuntu-latest' && github.actor == 'nektos/act'
-        run: sudo apt-get update -y -qq
-      - name: Install pdftotext
+      - name: Install poppler-utils
         if: matrix.operating-systems == 'ubuntu-latest'
-        run: sudo apt install poppler-utils
+        run: |
+          sudo apt-get update -y -qq
+          sudo apt install poppler-utils
       - name: Get composer cache directory
         id: composer-cache
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"
