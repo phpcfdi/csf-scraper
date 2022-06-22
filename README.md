@@ -5,6 +5,7 @@
 [![Latest Version][badge-release]][release]
 [![Software License][badge-license]][license]
 [![Build Status][badge-build]][build]
+[![Total Downloads][badge-downloads]][downloads]
 
 > Obtiene los datos fiscales actuales de una persona moral o física dado su RFC y CIFID.
 
@@ -184,6 +185,7 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [release]: https://github.com/phpcfdi/csf-scraper/releases
 [license]: https://github.com/phpcfdi/csf-scraper/blob/main/LICENSE
 [build]: https://github.com/phpcfdi/csf-scraper/actions/workflows/build.yml?query=branch:main
+[downloads]: https://packagist.org/packages/phpcfdi/csf-scraper
 [badge-source]: https://img.shields.io/badge/source-phpcfdi/csf--scraper-blue.svg?style=flat-square
 [badge-php-version]: https://img.shields.io/packagist/php-v/phpcfdi/csf-scraper?style=flat-square
 [badge-release]: https://img.shields.io/github/release/phpcfdi/csf-scraper.svg?style=flat-square
