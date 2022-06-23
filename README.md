@@ -5,6 +5,10 @@
 [![Latest Version][badge-release]][release]
 [![Software License][badge-license]][license]
 [![Build Status][badge-build]][build]
+[![Reliability][badge-reliability]][reliability]
+[![Maintainability][badge-maintainability]][maintainability]
+[![Code Coverage][badge-coverage]][coverage]
+[![Violations][badge-violations]][violations]
 [![Total Downloads][badge-downloads]][downloads]
 
 > Obtiene los datos fiscales actuales de una persona moral o física dado su RFC y CIFID.
@@ -180,15 +184,25 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [contributing]: https://github.com/phpcfdi/csf-scraper/blob/main/CONTRIBUTING.md
 [changelog]: https://github.com/phpcfdi/csf-scraper/blob/main/docs/CHANGELOG.md
 [todo]: https://github.com/phpcfdi/csf-scraper/blob/main/docs/TODO.md
+
 [source]: https://github.com/phpcfdi/csf-scraper
 [php-version]: https://packagist.org/packages/phpcfdi/csf-scraper
 [release]: https://github.com/phpcfdi/csf-scraper/releases
 [license]: https://github.com/phpcfdi/csf-scraper/blob/main/LICENSE
 [build]: https://github.com/phpcfdi/csf-scraper/actions/workflows/build.yml?query=branch:main
+[reliability]:https://sonarcloud.io/component_measures?id=phpcfdi_csf-scraper&metric=Reliability
+[maintainability]: https://sonarcloud.io/component_measures?id=phpcfdi_csf-scraper&metric=Maintainability
+[coverage]: https://sonarcloud.io/component_measures?id=phpcfdi_csf-scraper&metric=Coverage
+[violations]: https://sonarcloud.io/project/issues?id=phpcfdi_csf-scraper&resolved=false
 [downloads]: https://packagist.org/packages/phpcfdi/csf-scraper
+
 [badge-source]: https://img.shields.io/badge/source-phpcfdi/csf--scraper-blue.svg?style=flat-square
 [badge-php-version]: https://img.shields.io/packagist/php-v/phpcfdi/csf-scraper?style=flat-square
 [badge-release]: https://img.shields.io/github/release/phpcfdi/csf-scraper.svg?style=flat-square
 [badge-license]: https://img.shields.io/github/license/phpcfdi/csf-scraper.svg?style=flat-square
 [badge-build]: https://img.shields.io/github/workflow/status/phpcfdi/csf-scraper/build/main?style=flat-square
+[badge-reliability]: https://sonarcloud.io/api/project_badges/measure?project=phpcfdi_csf-scraper&metric=reliability_rating
+[badge-maintainability]: https://sonarcloud.io/api/project_badges/measure?project=phpcfdi_csf-scraper&metric=sqale_rating
+[badge-coverage]: https://img.shields.io/sonar/coverage/phpcfdi_csf-scraper/main?logo=sonarcloud&server=https%3A%2F%2Fsonarcloud.io
+[badge-violations]: https://img.shields.io/sonar/violations/phpcfdi_csf-scraper/main?format=long&logo=sonarcloud&server=https%3A%2F%2Fsonarcloud.io
 [badge-downloads]: https://img.shields.io/packagist/dt/phpcfdi/csf-scraper.svg?style=flat-square
