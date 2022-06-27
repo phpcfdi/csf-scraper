@@ -10,6 +10,8 @@ use JsonSerializable;
 class Persona implements JsonSerializable
 {
     private ?DateTimeImmutable $fechaInicioOperaciones = null;
+    private string $rfc = '';
+    private string $idCif = '';
     private string $situacionContribuyente = '';
     private ?DateTimeImmutable $fechaUltimoCambioSituacion = null;
     private string $entidadFederativa = '';
@@ -29,6 +31,16 @@ class Persona implements JsonSerializable
     public function __construct()
     {
         $this->regimenes = new Regimenes();
+    }
+
+    public function getRfc(): string
+    {
+        return $this->rfc;
+    }
+
+    public function getIdCif(): string
+    {
+        return $this->idCif;
     }
 
     public function getFechaInicioOperaciones(): ?DateTimeImmutable
@@ -99,6 +111,16 @@ class Persona implements JsonSerializable
     public function getRegimenes(): Regimenes
     {
         return $this->regimenes;
+    }
+
+    public function setRfc(string $rfc): void
+    {
+        $this->rfc = $rfc;
+    }
+
+    public function setIdCif(string $idCif): void
+    {
+        $this->idCif = $idCif;
     }
 
     public function setFechaInicioOperaciones(string $fechaInicioOperaciones): void
@@ -209,6 +231,8 @@ class Persona implements JsonSerializable
     public function toArray(): array
     {
         return [
+            'rfc' => $this->getRfc(),
+            'id_cif' => $this->getIdCif(),
             'fecha_inicio_operaciones' => $this->getFechaInicioOperaciones(),
             'situacion_contribuyente' => $this->getSituacionContribuyente(),
             'fecha_ultimo_cambio_situacion' => $this->getfechaUltimoCambioSituacion(),

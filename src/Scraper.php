@@ -32,7 +32,10 @@ class Scraper implements ScraperInterface
         $uri = sprintf(self::$url, $idCIF, $rfc->getRfc());
         try {
             $html = $this->obtainHtml($uri);
-            return (new DataExtractor($html))->extract($rfc->isFisica());
+            $person = (new DataExtractor($html))->extract($rfc->isFisica());
+            $person->setRfc($rfc->getRfc());
+            $person->setIdCif($idCIF);
+            return $person;
         } catch (GuzzleException $exception) {
             throw new \RuntimeException('The request has failed', previous: $exception);
         }

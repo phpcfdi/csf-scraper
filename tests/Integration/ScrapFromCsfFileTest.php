@@ -31,6 +31,8 @@ class ScrapFromCsfFileTest extends TestCase
     {
         $csfScrap = $this->prepareScraper('scrap_moral.html');
         $expectedData = [
+            'rfc' => 'DIM8701081LA',
+            'id_cif' => '12345678',
             'razon_social' => 'Mi razón social',
             'regimen_de_capital' => 'SA DE CV',
             'fecha_constitucion' => DateTimeImmutable::createFromFormat('!d-m-Y', '21-02-2019'),

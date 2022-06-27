@@ -19,6 +19,8 @@ class PersonaJsonSerializeTest extends TestCase
         $json = json_encode($person);
 
         $this->assertSame([
+            'rfc' => '',
+            'id_cif' => '',
             'fecha_inicio_operaciones' => null,
             'situacion_contribuyente' => '',
             'fecha_ultimo_cambio_situacion' => null,
@@ -48,6 +50,8 @@ class PersonaJsonSerializeTest extends TestCase
             'razon_social' => '',
             'regimen_de_capital' => '',
             'fecha_constitucion' => null,
+            'rfc' => '',
+            'id_cif' => '',
             'fecha_inicio_operaciones' => null,
             'situacion_contribuyente' => '',
             'fecha_ultimo_cambio_situacion' => null,
@@ -79,6 +83,8 @@ class PersonaJsonSerializeTest extends TestCase
             'apellido_paterno' => '',
             'apellido_materno' => '',
             'fecha_nacimiento' => null,
+            'rfc' => '',
+            'id_cif' => '',
             'fecha_inicio_operaciones' => null,
             'situacion_contribuyente' => '',
             'fecha_ultimo_cambio_situacion' => null,

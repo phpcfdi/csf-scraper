@@ -33,6 +33,8 @@ class ScrapCsfFromRfcAndCifTest extends TestCase
         $rfc = 'DIM8701081LA';
         $idcif = '1904014102123';
         $expectedData = [
+            'rfc' => 'DIM8701081LA',
+            'id_cif' => '1904014102123',
             'razon_social' => 'Mi razón social',
             'regimen_de_capital' => 'SA DE CV',
             'fecha_constitucion' => DateTimeImmutable::createFromFormat('!d-m-Y', '21-02-2019'),
@@ -70,6 +72,8 @@ class ScrapCsfFromRfcAndCifTest extends TestCase
         $rfc = 'COSC8001137NA';
         $idcif = '1904014102123';
         $expectedData = [
+            'rfc' => 'COSC8001137NA',
+            'id_cif' => '1904014102123',
             'curp' => 'CURP',
             'nombre' => 'JUAN',
             'apellido_paterno' => 'PEREZ',
@@ -109,6 +113,8 @@ class ScrapCsfFromRfcAndCifTest extends TestCase
         $rfc = 'COSC8001137NA';
         $idcif = '1904014102123';
         $expectedData = [
+            'rfc' => 'COSC8001137NA',
+            'id_cif' => '1904014102123',
             'curp' => 'CURP',
             'nombre' => 'JUAN',
             'apellido_paterno' => 'PEREZ',
