@@ -11,7 +11,10 @@ versión, aunque sí su incorporación en la rama principal de trabajo, generalm
 
 ## Listado de cambios
 
-Se agrega a la clase Persona las propiedades `rfc` y `idCif` ya que estas no eran accesibles si se obtenían los datos directamente de un archivo pdf.
+### Versión 0.1.1 2022-06-27
+
+Se agregan los datos de `RFC` y `IDCIF` a la clase base `Persona`.
+No eran accesibles si se obtenían los datos directamente de un archivo PDF.
 
 ### Versión 0.1.0 2022-06-21
 
