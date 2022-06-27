@@ -65,6 +65,8 @@ Ejemplo de salida de `json_encode($person)` para persona moral:
 
 ```json
 {
+  "rfc": "DIM8701081LA",
+  "id_cif": "12345678",
   "razon_social": "Mi razón social",
   "regimen_de_capital": "SA DE CV",
   "fecha_constitucion": {
@@ -112,6 +114,8 @@ Ejemplo de salida de `json_encode($person)` para persona física:
 
 ```json
 {
+  "rfc": "COSC8001137NA",
+  "id_cif": "1904014102123",
   "curp": "CURP",
   "nombre": "JUAN",
   "apellido_paterno": "PEREZ",
