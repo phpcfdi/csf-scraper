@@ -11,8 +11,8 @@ use PhpCfdi\CsfScraper\Exceptions\PdfReader\RfcFromPdfNotFoundException;
 use PhpCfdi\CsfScraper\Interfaces\ScraperInterface;
 use PhpCfdi\CsfScraper\PdfReader\CsfExtractor;
 use PhpCfdi\CsfScraper\PdfReader\PdfToText;
+use PhpCfdi\Rfc\Exceptions\InvalidExpressionToParseException;
 use PhpCfdi\Rfc\Rfc;
-use RuntimeException;
 
 class Scraper implements ScraperInterface
 {
@@ -25,20 +25,17 @@ class Scraper implements ScraperInterface
     }
 
     /**
-     * @throws RuntimeException
+     * @throws Exceptions\CifDownloadException
+     * @throws Exceptions\CifNotFoundException
      */
     public function obtainFromRfcAndCif(Rfc $rfc, string $idCIF): PersonaMoral|PersonaFisica
     {
         $uri = sprintf(self::$url, $idCIF, $rfc->getRfc());
-        try {
-            $html = $this->obtainHtml($uri);
-            $person = (new DataExtractor($html))->extract($rfc->isFisica());
-            $person->setRfc($rfc->getRfc());
-            $person->setIdCif($idCIF);
-            return $person;
-        } catch (GuzzleException $exception) {
-            throw new \RuntimeException('The request has failed', previous: $exception);
-        }
+        $html = $this->obtainHtml($uri);
+        $person = (new DataExtractor($html))->extract($rfc->isFisica());
+        $person->setRfc($rfc->getRfc());
+        $person->setIdCif($idCIF);
+        return $person;
     }
 
     public function obtainFromPdfPath(string $path): PersonaMoral|PersonaFisica
@@ -68,9 +65,16 @@ class Scraper implements ScraperInterface
         return $pdfToText->extract($path);
     }
 
+    /**
+     * @throws Exceptions\CifDownloadException
+     */
     protected function obtainHtml(string $uri): string
     {
-        $request = $this->client->request('GET', $uri);
+        try {
+            $request = $this->client->request('GET', $uri);
+        } catch (GuzzleException $exception) {
+            throw new Exceptions\CifDownloadException($uri, $exception);
+        }
         return (string) $request->getBody();
     }
 }
