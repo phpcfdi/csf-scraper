@@ -59,7 +59,7 @@ final class ShellExec
                 $this->checkString($value, $allowEmpty, "Element $index");
             }
         } catch (Throwable $exception) {
-            throw new InvalidArgumentException($exceptionMessage, 0, $exception);
+            throw new InvalidArgumentException($exceptionMessage, previous: $exception);
         }
     }
 
@@ -71,7 +71,7 @@ final class ShellExec
         if (! $allowEmpty && '' === $value) {
             throw new InvalidArgumentException($exceptionMessagePrefix . ' is empty');
         }
-        if (boolval(preg_match('/[\x00-\x09\x0B\x0C\x0E-\x1F\x7F]/u', $value))) {
+        if (preg_match('/[\x00-\x09\x0B\x0C\x0E-\x1F\x7F]/u', $value)) {
             throw new InvalidArgumentException($exceptionMessagePrefix . ' contains control characters');
         }
     }
