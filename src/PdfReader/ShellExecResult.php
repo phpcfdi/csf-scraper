@@ -9,7 +9,7 @@ namespace PhpCfdi\CsfScraper\PdfReader;
  *
  * @see ShellExec
  *
- * NOTE: Changes will not be considering a bracking compatibility change since this utility is for internal usage only
+ * NOTE: Changes will not be considering a breaking compatibility change since this utility is for internal usage only
  * @internal
  */
 final class ShellExecResult

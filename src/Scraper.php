@@ -39,6 +39,12 @@ class Scraper implements ScraperInterface
     }
 
     /**
+     * @param string $path
+     * @return PersonaMoral|PersonaFisica
+     * @throws Exceptions\CifNotFoundException
+     * @throws Exceptions\PdfReader\CifFromPdfNotFoundException
+     * @throws Exceptions\PdfReader\EmptyPdfContentException
+     * @throws Exceptions\PdfReader\RfcFromPdfNotFoundException
      * @throws InvalidExpressionToParseException
      */
     public function obtainFromPdfPath(string $path): PersonaMoral|PersonaFisica
@@ -60,7 +66,7 @@ class Scraper implements ScraperInterface
     /**
      * @param string $path
      * @return string
-     * @throws \PhpCfdi\CsfScraper\Exceptions\PdfReader\ShellExecException when call to pdftotext fail
+     * @throws Exceptions\PdfReader\ShellExecException when call to pdftotext fail
      */
     protected function pdfToTextContent(string $path): string
     {

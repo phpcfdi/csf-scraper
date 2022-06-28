@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace PhpCfdi\CsfScraper\PdfReader;
 
 use PhpCfdi\CsfScraper\Exceptions\PdfReader\ShellExecException;
-use RuntimeException;
 
 /**
  * Extract the contents of a pdf file using pdftotext (apt-get install poppler-utils)
@@ -14,15 +13,30 @@ final class PdfToText
 {
     private string $pdftotext;
 
+    /**
+     * @throws ShellExecException when pdftotext command path was not found
+     */
     public function __construct(string $pathPdfToText = '')
     {
         if ('' === $pathPdfToText) {
-            $pathPdfToText = trim(strval(shell_exec('which pdftotext')));
-            if ('' === $pathPdfToText) {
-                throw new RuntimeException('pdftotext command was not found');
-            }
+            $pathPdfToText = $this->discoverPathToPdfToText();
         }
         $this->pdftotext = $pathPdfToText;
+    }
+
+    /**
+     * @throws ShellExecException when pdftotext command path was not found
+     */
+    private function discoverPathToPdfToText(): string
+    {
+        $command = ['which', 'pdftotext'];
+        $result = (new ShellExec($command))->run();
+        $pathPdfToText = trim($result->output());
+        if (0 !== $result->exitStatus() || '' === $pathPdfToText) {
+            throw new ShellExecException('pdftotext command path was not found', $command, $result);
+        }
+
+        return $pathPdfToText;
     }
 
     /**
@@ -34,6 +48,7 @@ final class PdfToText
         $command = $this->buildCommand($path);
         $result = (new ShellExec($command))->run();
         if (0 !== $result->exitStatus()) {
+            print_r($result);
             throw new ShellExecException(
                 "Running pdftotext exit with error (exit status: {$result->exitStatus()})",
                 $command,

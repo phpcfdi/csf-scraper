@@ -18,6 +18,9 @@ final class DataExtractor implements DataExtractorInterface
         $this->html = $html;
     }
 
+    /**
+     * @throws CifNotFoundException
+     */
     public function extract(bool $isFisica): PersonaMoral|PersonaFisica
     {
         $html = $this->clearHtml($this->html);

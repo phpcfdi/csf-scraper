@@ -4,10 +4,11 @@ declare(strict_types=1);
 
 namespace PhpCfdi\CsfScraper\Exceptions\PdfReader;
 
+use PhpCfdi\CsfScraper\Exceptions\CsfScraperException;
 use PhpCfdi\CsfScraper\PdfReader\ShellExecResult;
 use RuntimeException;
 
-final class ShellExecException extends RuntimeException
+final class ShellExecException extends RuntimeException implements CsfScraperException
 {
     /** @var string[] */
     private array $command;

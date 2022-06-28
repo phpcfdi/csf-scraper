@@ -6,6 +6,6 @@ namespace PhpCfdi\CsfScraper\Exceptions;
 
 use Exception;
 
-final class CifNotFoundException extends Exception
+final class CifNotFoundException extends Exception implements CsfScraperException
 {
 }

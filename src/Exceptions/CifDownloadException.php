@@ -7,7 +7,7 @@ namespace PhpCfdi\CsfScraper\Exceptions;
 use RuntimeException;
 use Throwable;
 
-final class CifDownloadException extends RuntimeException
+final class CifDownloadException extends RuntimeException implements CsfScraperException
 {
     public function __construct(private string $url, Throwable $previous)
     {
