@@ -38,6 +38,9 @@ class Scraper implements ScraperInterface
         return $person;
     }
 
+    /**
+     * @throws InvalidExpressionToParseException
+     */
     public function obtainFromPdfPath(string $path): PersonaMoral|PersonaFisica
     {
         $contents = $this->pdfToTextContent($path);
