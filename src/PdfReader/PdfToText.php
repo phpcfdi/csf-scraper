@@ -48,7 +48,6 @@ final class PdfToText
         $command = $this->buildCommand($path);
         $result = (new ShellExec($command))->run();
         if (0 !== $result->exitStatus()) {
-            print_r($result);
             throw new ShellExecException(
                 "Running pdftotext exit with error (exit status: {$result->exitStatus()})",
                 $command,
