@@ -20,12 +20,10 @@ use PhpCfdi\Rfc\Rfc;
  */
 class Scraper implements ScraperInterface
 {
-    private ClientInterface $client;
     public static string $url = 'https://siat.sat.gob.mx/app/qr/faces/pages/mobile/validadorqr.jsf?D1=10&D2=1&D3=%s_%s';
 
-    public function __construct(ClientInterface $client)
+    public function __construct(private ClientInterface $client)
     {
-        $this->client = $client;
     }
 
     /**

@@ -10,19 +10,12 @@ use RuntimeException;
 
 final class ShellExecException extends RuntimeException implements CsfScraperException
 {
-    /** @var string[] */
-    private array $command;
-    private ShellExecResult $result;
-
     /**
      * @param string[] $command
      */
-    public function __construct(string $message, array $command, ShellExecResult $result)
+    public function __construct(string $message, private array $command, private ShellExecResult $result)
     {
         parent::__construct($message);
-
-        $this->command = $command;
-        $this->result = $result;
     }
 
     /** @return string[] */
