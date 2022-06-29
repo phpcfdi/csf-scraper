@@ -15,6 +15,9 @@ use PhpCfdi\CsfScraper\PdfReader\PdfToText;
 use PhpCfdi\Rfc\Exceptions\InvalidExpressionToParseException;
 use PhpCfdi\Rfc\Rfc;
 
+/**
+ * Main class to obtain the data from a "Persona Moral" or a "Persona Física" from SAT website
+ */
 class Scraper implements ScraperInterface
 {
     private ClientInterface $client;
@@ -25,6 +28,9 @@ class Scraper implements ScraperInterface
         $this->client = $client;
     }
 
+    /**
+     * Factory method to create a scraper object with configuration that simply works
+     */
     public static function create(): self
     {
         return new self(new Client([
@@ -33,6 +39,8 @@ class Scraper implements ScraperInterface
     }
 
     /**
+     * Obtain a PersonaMoral or PersonaFisica object with the information from SAT website
+     *
      * @throws Exceptions\CifDownloadException
      * @throws Exceptions\CifNotFoundException
      */
@@ -47,6 +55,9 @@ class Scraper implements ScraperInterface
     }
 
     /**
+     * Obtain a PersonaMoral or PersonaFisica object with the information from SAT website
+     * The RFC and CIF is taken from the "Constancia de Situación Fiscal" PDF file
+     *
      * @param string $path
      * @return PersonaMoral|PersonaFisica
      * @throws Exceptions\CifNotFoundException
@@ -72,6 +83,8 @@ class Scraper implements ScraperInterface
     }
 
     /**
+     * Helper method to extract the text information from PDF to plain text
+     *
      * @param string $path
      * @return string
      * @throws Exceptions\PdfReader\ShellExecException when call to pdftotext fail
@@ -83,6 +96,8 @@ class Scraper implements ScraperInterface
     }
 
     /**
+     * Helper method to download the webpage that contains all the "Persona" information from SAT website
+     *
      * @throws Exceptions\CifDownloadException
      */
     protected function obtainHtml(string $uri): string
