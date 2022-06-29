@@ -41,9 +41,7 @@ use PhpCfdi\Rfc\Rfc;
 
 require 'vendor/autoload.php';
 
-$scraper = new Scraper(
-    new Client()
-);
+$scraper = Scraper::create();
 
 $rfc = Rfc::parse('YOUR_RFC');
 

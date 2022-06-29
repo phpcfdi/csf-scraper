@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpCfdi\CsfScraper;
 
+use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use GuzzleHttp\Exception\GuzzleException;
 use PhpCfdi\CsfScraper\Exceptions\PdfReader\CifFromPdfNotFoundException;
@@ -22,6 +23,13 @@ class Scraper implements ScraperInterface
     public function __construct(ClientInterface $client)
     {
         $this->client = $client;
+    }
+
+    public static function create(): self
+    {
+        return new self(new Client([
+            'curl' => [CURLOPT_SSL_CIPHER_LIST => 'DEFAULT@SECLEVEL=1'],
+        ]));
     }
 
     /**

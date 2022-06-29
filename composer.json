@@ -34,6 +34,7 @@
         "php": ">=8.0",
         "ext-mbstring": "*",
         "ext-json": "*",
+        "ext-curl": "*",
         "guzzlehttp/guzzle": "^7.4",
         "phpcfdi/rfc": "^1.1",
         "symfony/css-selector": ">=6.0",
@@ -41,8 +42,7 @@
         "symfony/process": ">=6.0"
     },
     "require-dev": {
-        "ext-curl": "*",
-        "phpunit/phpunit": "^9.5"
+      "phpunit/phpunit": "^9.5"
     },
     "autoload": {
         "psr-4": {
