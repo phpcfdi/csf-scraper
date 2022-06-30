@@ -33,6 +33,10 @@ Pequeñas limpiezas de código y a partes específicas:
 - Se refactoriza el código de la clase interna `CsfExtractor` para mejorar su intención.
 - Se refactoriza el código de la clase `PdfToText` para que use `ShellExec` al buscar por el ejecutable `pdftotext`.
 
+#### Uso de Synfony/Process
+
+Se usa `Symfony/Process` en lugar de la clase interna `ShellExec`.
+
 ### Versión 0.1.1 2022-06-27
 
 Se agregan los datos de `RFC` y `IDCIF` a la clase base `Persona`.

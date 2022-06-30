@@ -85,7 +85,7 @@ class Scraper implements ScraperInterface
      *
      * @param string $path
      * @return string
-     * @throws Exceptions\PdfReader\ShellExecException when call to pdftotext fail
+     * @throws Exceptions\PdfReader\PdfToTextConvertException when call to pdftotext fail
      */
     protected function pdfToTextContent(string $path): string
     {
