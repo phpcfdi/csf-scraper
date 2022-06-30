@@ -6,8 +6,10 @@
 
 ## Wishlist
 
-Separar ShellExec a un paquete de PhpCfdi.
+*Describa aquí en un nivel 3 una tarea deseada.*
 
 ## Hechas
 
-*Una vez realizada la tarea muévala a esta sección.*
+### Separar `ShellExec` a un paquete de PhpCfdi.
+
+En la versión 0.1.2 se removió `ShellExec` y se usa directamente `Symfony/Process`.

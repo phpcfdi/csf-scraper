@@ -24,6 +24,8 @@ Se agrega la excepción `CifDownloadException` que se genera cuando no se pudo d
 
 Se agrega `CsfScraperException` como una interfaz vacía para identificar las excepciones generadas por esta librería.
 
+Se elimina `ShellExecException` y se sustituye por `PdfToTextConvertException`.
+
 Se agregan las anotaciones `@throws` a los métodos para identificar que generan excepciones.
 
 #### Refactorizaciones
