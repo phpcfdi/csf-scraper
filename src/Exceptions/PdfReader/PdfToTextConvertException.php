@@ -42,5 +42,4 @@ final class PdfToTextConvertException extends RuntimeException implements CsfScr
     {
         return $this->error;
     }
-
 }
