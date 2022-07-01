@@ -9,10 +9,10 @@ trait PersonaTrait
     private function setAndGetProperty(string $complementFunction, string $value): mixed
     {
         /** @var callable:void $setMethod */
-        $setMethod = [$this->person, "set{$complementFunction}"];
-        call_user_func($setMethod, ...[$value]);
+        $setMethod = [$this->person, "set$complementFunction"];
+        call_user_func($setMethod, $value);
         /** @var callable:void $getMethod */
-        $getMethod = [$this->person, "get{$complementFunction}"];
+        $getMethod = [$this->person, "get$complementFunction"];
         return call_user_func($getMethod);
     }
 

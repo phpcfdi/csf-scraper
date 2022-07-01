@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace PhpCfdi\CsfScraper;
 
+use DateTimeImmutable;
 use JsonSerializable;
 
 class Regimenes implements JsonSerializable
@@ -31,7 +32,7 @@ class Regimenes implements JsonSerializable
     }
 
     /**
-     * @return array<int, array{regimen: string, regimen_id: string, fecha_alta: ?\DateTimeImmutable}>
+     * @return array<int, array{regimen: string, regimen_id: string, fecha_alta: ?DateTimeImmutable}>
      */
     public function toArray(): array
     {
@@ -42,7 +43,7 @@ class Regimenes implements JsonSerializable
     }
 
     /**
-      * @return array<int, array{regimen: string, regimen_id: string, fecha_alta: ?\DateTimeImmutable}>
+      * @return array<int, array{regimen: string, regimen_id: string, fecha_alta: ?DateTimeImmutable}>
       */
     public function jsonSerialize(): mixed
     {

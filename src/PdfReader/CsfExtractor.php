@@ -17,6 +17,9 @@ final class CsfExtractor
      */
     private array $lines;
 
+    /**
+     * @throws EmptyPdfContentException
+     */
     public function __construct(string $contents)
     {
         if ('' == $contents) {
@@ -27,40 +30,34 @@ final class CsfExtractor
 
     public function getRfc(): ?string
     {
-        $matchesIndex = $this->getMatchesIndex('RFC');
-        return $this->obtainCleanValue($matchesIndex);
+        $matchesText = $this->obtainFirstLineStartWith('RFC:');
+        return $this->obtainCleanValue($matchesText);
     }
 
     public function getCifId(): ?string
     {
-        $matchesIndex = $this->getMatchesIndex('idCIF');
-        return $this->obtainCleanValue($matchesIndex);
+        $matchesText = $this->obtainFirstLineStartWith('idCIF:');
+        return $this->obtainCleanValue($matchesText);
     }
 
-    /**
-     *
-     * @param string[] $matchesIndex
-     */
-    private function obtainCleanValue(array $matchesIndex): ?string
+    private function obtainFirstLineStartWith(string $searchable): string
     {
-        if (0 !== count($matchesIndex)) {
-            $values = explode(':', array_pop($matchesIndex));
-            if (isset($values[1])) {
-                return trim($values[1]);
+        foreach ($this->lines as $line) {
+            if (str_starts_with($line, $searchable)) {
+                return $line;
             }
         }
-        return null;
+
+        return '';
     }
 
-    /**
-     *
-     * @return string[]
-     */
-    private function getMatchesIndex(string $searchable): array
+    private function obtainCleanValue(string $entry): ?string
     {
-        return array_filter($this->lines, function ($haystack) use ($searchable) {
-            $pos = strpos($haystack, $searchable);
-            return is_int($pos);
-        });
+        $values = explode(':', $entry);
+        if (! isset($values[1])) {
+            return null;
+        }
+
+        return trim($values[1]);
     }
 }

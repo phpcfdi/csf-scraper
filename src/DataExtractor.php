@@ -11,13 +11,13 @@ use Symfony\Component\DomCrawler\Crawler;
 
 final class DataExtractor implements DataExtractorInterface
 {
-    private string $html;
-
-    public function __construct(string $html)
+    public function __construct(private string $html)
     {
-        $this->html = $html;
     }
 
+    /**
+     * @throws CifNotFoundException
+     */
     public function extract(bool $isFisica): PersonaMoral|PersonaFisica
     {
         $html = $this->clearHtml($this->html);
@@ -37,12 +37,12 @@ final class DataExtractor implements DataExtractorInterface
             if (0 === $elem->filter('span')->count()) {
                 $property = $person->getKeyNameByIndex($index);
                 if (null !== $property) {
-                    $person->$property = trim($elem->text());
+                    $person->{$property} = trim($elem->text());
                 }
             }
         });
         $regimenes = $this->getRegimenes($crawler);
-        if (count($regimenes) > 0) {
+        if ([] !== $regimenes) {
             $person->addRegimenes(...$regimenes);
         }
         return $person;

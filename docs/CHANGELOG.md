@@ -11,6 +11,34 @@ versión, aunque sí su incorporación en la rama principal de trabajo, generalm
 
 ## Listado de cambios
 
+### Versión 0.1.2 2022-06-28
+
+#### Método fábrica de `Scraper`
+
+Se agrega el método para fabricar estáticamente un objeto `Scraper` con la configuración de `curl` adecuada.
+Lamentablemente, el sitio del SAT utiliza un esquema de seguridad anticuado que requiere configuración especial.
+
+#### Refactorización de excepciones
+
+Se agrega la excepción `CifDownloadException` que se genera cuando no se pudo descargar la página web de datos fiscales.
+
+Se agrega `CsfScraperException` como una interfaz vacía para identificar las excepciones generadas por esta librería.
+
+Se elimina `ShellExecException` y se sustituye por `PdfToTextConvertException`.
+
+Se agregan las anotaciones `@throws` a los métodos para identificar que generan excepciones.
+
+#### Refactorizaciones
+
+Pequeñas limpiezas de código y a partes específicas:
+
+- Se refactoriza el código de la clase interna `CsfExtractor` para mejorar su intención.
+- Se refactoriza el código de la clase `PdfToText` para que use `ShellExec` al buscar por el ejecutable `pdftotext`.
+
+#### Uso de Synfony/Process
+
+Se usa `Symfony/Process` en lugar de la clase interna `ShellExec`.
+
 ### Versión 0.1.1 2022-06-27
 
 Se agregan los datos de `RFC` y `IDCIF` a la clase base `Persona`.

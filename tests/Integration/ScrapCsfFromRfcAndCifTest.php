@@ -1,13 +1,17 @@
 <?php
 
+/** @noinspection PhpUnhandledExceptionInspection */
+
 declare(strict_types=1);
 
 namespace PhpCfdi\CsfScraper\Tests\Integration;
 
 use DateTimeImmutable;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
+use PhpCfdi\CsfScraper\Exceptions\CifDownloadException;
 use PhpCfdi\CsfScraper\Exceptions\CifNotFoundException;
 use PhpCfdi\CsfScraper\Scraper;
 use PhpCfdi\CsfScraper\Tests\TestCase;
@@ -27,6 +31,7 @@ class ScrapCsfFromRfcAndCifTest extends TestCase
         ]);
         return new Scraper($client);
     }
+
     public function test_scrap_from_idcif_and_rfc_by_moral(): void
     {
         $csfScrap = $this->prepareScraper('scrap_moral.html');
@@ -164,6 +169,19 @@ class ScrapCsfFromRfcAndCifTest extends TestCase
         $data = $csfScrap->obtainFromRfcAndCif(Rfc::parse($rfc), $idcif);
 
         $this->assertSame($expectedData, $data);
+    }
+
+    public function test_throw_exception_on_download_error(): void
+    {
+        $client = new Client([
+            'handler' => new MockHandler([$this->createMock(GuzzleException::class)]),
+        ]);
+        $csfScrap = new Scraper($client);
+        $rfc = Rfc::parse('COSC8001137NA');
+        $idcif = '1904014102123';
+
+        $this->expectException(CifDownloadException::class);
+        $csfScrap->obtainFromRfcAndCif($rfc, $idcif);
     }
 
     public function test_send_invalid_rfc(): void
