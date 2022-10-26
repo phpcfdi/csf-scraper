@@ -20,6 +20,7 @@ class PersonaPropertiesTest extends TestCase
         parent::setUp();
         $this->person = new Persona();
     }
+
     /**
      *
      * @return array<int, array<int, string>>
@@ -31,6 +32,7 @@ class PersonaPropertiesTest extends TestCase
             ['FechaUltimoCambioSituacion', '12-01-2018'],
         ];
     }
+
     /**
      *
      * @return array<int, array<int, string>>
@@ -51,6 +53,7 @@ class PersonaPropertiesTest extends TestCase
             ['Al', 'Puebla 1'],
         ];
     }
+
     /**
      * @dataProvider stringPropertiesProvider
      */
@@ -68,6 +71,7 @@ class PersonaPropertiesTest extends TestCase
         $result = $this->setAndGetProperty($complementFunction, $value);
         $this->assertEquals(DateTimeImmutable::createFromFormat('!d-m-Y', $value), $result);
     }
+
     /**
      *
      * test to check if new property not contained in Persona is found is assigned and value can be retrieved

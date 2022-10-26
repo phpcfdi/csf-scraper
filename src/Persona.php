@@ -10,21 +10,37 @@ use JsonSerializable;
 class Persona implements JsonSerializable
 {
     private ?DateTimeImmutable $fechaInicioOperaciones = null;
+
     private string $rfc = '';
+
     private string $idCif = '';
+
     private string $situacionContribuyente = '';
+
     private ?DateTimeImmutable $fechaUltimoCambioSituacion = null;
+
     private string $entidadFederativa = '';
+
     private string $municipioDelegacion = '';
+
     private string $colonia = '';
+
     private string $tipoVialidad = '';
+
     private string $nombreVialidad = '';
+
     private string $numeroExterior = '';
+
     private string $numeroInterior = '';
+
     private string $codigoPostal = '';
+
     private string $correoElectronico = '';
+
     private string $al = '';
+
     private Regimenes $regimenes;
+
     /** @var mixed[] */
     private array $data = [];
 

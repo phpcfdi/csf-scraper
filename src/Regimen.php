@@ -10,8 +10,11 @@ use JsonSerializable;
 class Regimen implements JsonSerializable
 {
     private string $regimen = '';
+
     private string $regimenId = '';
+
     private ?DateTimeImmutable $fechaAlta = null;
+
     /**
      *
      * @var array<int, string[]>

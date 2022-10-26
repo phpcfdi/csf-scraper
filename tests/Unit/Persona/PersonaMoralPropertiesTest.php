@@ -20,6 +20,7 @@ class PersonaMoralPropertiesTest extends TestCase
         parent::setUp();
         $this->person = new PersonaMoral();
     }
+
     /**
      *
      * @return array<int, array<int, string>>
@@ -30,6 +31,7 @@ class PersonaMoralPropertiesTest extends TestCase
             ['fechaConstitucion', '16-05-1996'],
         ];
     }
+
     /**
      *
      * @return array<int, array<int, string>>
@@ -41,6 +43,7 @@ class PersonaMoralPropertiesTest extends TestCase
             ['RegimenDeCapital', 'SA de SV'],
         ];
     }
+
     /**
      * @dataProvider stringPropertiesProvider
      */
