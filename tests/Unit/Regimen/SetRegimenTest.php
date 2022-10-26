@@ -31,6 +31,7 @@ class SetRegimenTest extends TestCase
             ['Sociedades Cooperativas de Producción que optan por diferir sus ingresos', '620'],
             ['Incorporación Fiscal', '621'],
             ['Actividades Agrícolas, Ganaderas, Silvícolas y Pesqueras', '622'],
+            ['Actividades Agrícolas, Ganaderas, Silvícolas y Pesqueras PM', '622'],
             ['Opcional para Grupos de Sociedades', '623'],
             ['Coordinados', '624'],
             ['Régimen de las Actividades Empresariales con ingresos a través de Plataformas Tecnológicas', '625'],
