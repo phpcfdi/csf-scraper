@@ -6,12 +6,12 @@ namespace PhpCfdi\CsfScraper\Tests\Unit\Persona\Traits;
 
 trait PersonaTrait
 {
-    private function setAndGetProperty(string $complementFunction, string $value): mixed
+    private function setAndGetProperty(string $complementFunction, mixed $value): mixed
     {
-        /** @var callable:void $setMethod */
+        /** @var callable $setMethod */
         $setMethod = [$this->person, "set$complementFunction"];
         call_user_func($setMethod, $value);
-        /** @var callable:void $getMethod */
+        /** @var callable $getMethod */
         $getMethod = [$this->person, "get$complementFunction"];
         return call_user_func($getMethod);
     }
