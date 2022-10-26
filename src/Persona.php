@@ -198,9 +198,8 @@ class Persona implements JsonSerializable
     public function __set(string $name, string $value): void
     {
         $method = "set$name";
-        if (method_exists($this, $method)) {
-            /** @var callable:mixed $callable */
-            $callable = [$this, $method];
+        $callable = [$this, $method];
+        if (is_callable($callable)) {
             call_user_func($callable, $value);
         } else {
             $this->data[$name] = $value;
