@@ -146,10 +146,8 @@ class Regimen implements JsonSerializable
         ];
     }
 
-    /**
-     * @return array{regimen: string, regimen_id: string, fecha_alta: ?DateTimeImmutable}
-     */
-    public function jsonSerialize(): mixed
+    /** @return mixed[] */
+    public function jsonSerialize(): array
     {
         return $this->toArray();
     }

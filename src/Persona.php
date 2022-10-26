@@ -224,9 +224,7 @@ class Persona implements JsonSerializable
         unset($this->data[$name]);
     }
 
-    /**
-     * @return array<string, mixed>
-     */
+    /** @return array<string, mixed> */
     public function toArray(): array
     {
         return [
@@ -250,11 +248,8 @@ class Persona implements JsonSerializable
         ];
     }
 
-    /**
-     *
-     * @return array<string, mixed>
-     */
-    public function jsonSerialize(): mixed
+    /** @return mixed[] */
+    public function jsonSerialize(): array
     {
         return $this->toArray();
     }
