@@ -11,6 +11,10 @@ versión, aunque sí su incorporación en la rama principal de trabajo, generalm
 
 ## Listado de cambios
 
+### Versión 0.1.4 2022-10-25
+
+- Se hacen más estrictas las correcciones de los regímenes usando expresiones regulares.
+
 ### Versión 0.1.3 2022-10-25
 
 - El ejemplo del `README.md` mostraba que se obtenían los datos usando el método `$scraper->data()`, sin embargo este método ya no existe más y el método usado es: `$scraper->obtainFromRfcAndCif()`.

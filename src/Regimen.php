@@ -113,7 +113,8 @@ class Regimen implements JsonSerializable
     public function setRegimen(string $regimen): void
     {
         $this->regimen = $regimen;
-        $regimenAsText = trim(str_replace(['Régimen de las', 'Régimen de los', 'Régimen de', 'Régimen', 'PM'], '', $regimen));
+        /** @var string $regimenAsText PHPStan: It is impossible here to return NULL*/
+        $regimenAsText = preg_replace(['/^Régimen( de las| de los| de|) /u', '/ PM$/'], '', $regimen);
         $this->regimenId = $this->searchRegimenIdByText($regimenAsText);
     }
 
