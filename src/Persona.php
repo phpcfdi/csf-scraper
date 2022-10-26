@@ -53,7 +53,7 @@ class Persona implements JsonSerializable
         return $this->situacionContribuyente;
     }
 
-    public function getfechaUltimoCambioSituacion(): ?DateTimeImmutable
+    public function getFechaUltimoCambioSituacion(): ?DateTimeImmutable
     {
         return $this->fechaUltimoCambioSituacion;
     }
@@ -134,7 +134,7 @@ class Persona implements JsonSerializable
         $this->situacionContribuyente = $situacionContribuyente;
     }
 
-    public function setfechaUltimoCambioSituacion(string $fechaUltimoCambioSituacion): void
+    public function setFechaUltimoCambioSituacion(string $fechaUltimoCambioSituacion): void
     {
         $date = DateTimeImmutable::createFromFormat('!d-m-Y', $fechaUltimoCambioSituacion);
         $this->fechaUltimoCambioSituacion = false !== $date ? $date : null;
@@ -234,7 +234,7 @@ class Persona implements JsonSerializable
             'id_cif' => $this->getIdCif(),
             'fecha_inicio_operaciones' => $this->getFechaInicioOperaciones(),
             'situacion_contribuyente' => $this->getSituacionContribuyente(),
-            'fecha_ultimo_cambio_situacion' => $this->getfechaUltimoCambioSituacion(),
+            'fecha_ultimo_cambio_situacion' => $this->getFechaUltimoCambioSituacion(),
             'entidad_federativa' => $this->getEntidadFederativa(),
             'municipio_delegacion' => $this->getMunicipioDelegacion(),
             'colonia' => $this->getColonia(),
