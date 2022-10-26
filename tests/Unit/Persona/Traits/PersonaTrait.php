@@ -8,12 +8,8 @@ trait PersonaTrait
 {
     private function setAndGetProperty(string $complementFunction, mixed $value): mixed
     {
-        /** @var callable $setMethod */
-        $setMethod = [$this->person, "set$complementFunction"];
-        call_user_func($setMethod, $value);
-        /** @var callable $getMethod */
-        $getMethod = [$this->person, "get$complementFunction"];
-        return call_user_func($getMethod);
+        $this->person->{$complementFunction} = $value;
+        return $this->person->{$complementFunction};
     }
 
     /**
@@ -24,7 +20,7 @@ trait PersonaTrait
     public function test_assign_dynamic_property(): void
     {
         /** @phpstan-ignore-next-line */
-        $this->person->dynamic = 'dynamic';
-        $this->assertSame('dynamic', $this->person->dynamic);
+        $this->person->{'dynamic'} = 'dynamic';
+        $this->assertSame('dynamic', $this->person->{'dynamic'});
     }
 }

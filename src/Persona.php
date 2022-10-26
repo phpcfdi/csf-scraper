@@ -25,7 +25,7 @@ class Persona implements JsonSerializable
     private string $correoElectronico = '';
     private string $al = '';
     private Regimenes $regimenes;
-    /** @var string[] */
+    /** @var mixed[] */
     private array $data = [];
 
     public function __construct()
@@ -195,7 +195,7 @@ class Persona implements JsonSerializable
         $this->regimenes->addRegimen(...$regimenes);
     }
 
-    public function __set(string $name, string $value): void
+    public function __set(string $name, mixed $value): void
     {
         $method = "set$name";
         $callable = [$this, $method];
@@ -208,10 +208,12 @@ class Persona implements JsonSerializable
 
     public function __get(string $name): mixed
     {
-        if (! array_key_exists($name, $this->data)) {
-            return null;
+        $method = "get$name";
+        $callable = [$this, $method];
+        if (is_callable($callable)) {
+            return call_user_func($callable);
         }
-        return $this->data[$name];
+        return $this->data[$name] ?? null;
     }
 
     public function __isset(string $name): bool
