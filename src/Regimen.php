@@ -117,7 +117,7 @@ class Regimen implements JsonSerializable
     {
         $this->regimen = $regimen;
         /** @var string $regimenAsText PHPStan: It is impossible here to return NULL*/
-        $regimenAsText = preg_replace(['/^Régimen( de las| de los| de|) /u', '/ PM$/'], '', $regimen);
+        $regimenAsText = preg_replace(['/^Régimen( de las| de los| de|) /u', '/ PM$/', '/\.$/'], '', $regimen);
         $this->regimenId = $this->searchRegimenIdByText($regimenAsText);
     }
 

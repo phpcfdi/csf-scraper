@@ -13,6 +13,11 @@ versión, aunque sí su incorporación en la rama principal de trabajo, generalm
 
 ### Versión 0.1.5 2022-10-28
 
+#### Regímenes que terminan en punto `.`
+
+Se elimina de regímenes el punto final, que viene en algunos regímenes como
+*"Régimen de las Actividades Empresariales con ingresos a través de Plataformas Tecnológicas."*.
+
 #### Propiedades mágicas en `Persona`
 
 El método *setter* mágico permite establecer cualquier tipo de datos en `$data`.

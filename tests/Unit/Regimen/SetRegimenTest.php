@@ -35,13 +35,12 @@ class SetRegimenTest extends TestCase
             ['Opcional para Grupos de Sociedades', '623'],
             ['Coordinados', '624'],
             ['Régimen de las Actividades Empresariales con ingresos a través de Plataformas Tecnológicas', '625'],
+            ['Régimen de las Actividades Empresariales con ingresos a través de Plataformas Tecnológicas.', '625'],
             ['Régimen Simplificado de Confianza', '626'],
         ];
     }
 
-    /**
-     * @dataProvider regimenesProvider
-     */
+    /** @dataProvider regimenesProvider */
     public function test_check_regimenes_are_well_assigned(string $regimenText, string $regimenIdExpected): void
     {
         $regimen = new Regimen();
