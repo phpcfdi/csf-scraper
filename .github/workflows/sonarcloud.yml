@@ -26,7 +26,7 @@ jobs:
       - name: Install poppler-utils
         run: |
           sudo apt-get update -y -qq
-          sudo apt install poppler-utils
+          sudo apt-get install -y poppler-utils
       - name: Get composer cache directory
         id: composer-cache
         run: echo "::set-output name=dir::$(composer config cache-files-dir)"

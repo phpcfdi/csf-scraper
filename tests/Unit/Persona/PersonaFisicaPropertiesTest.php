@@ -31,6 +31,7 @@ class PersonaFisicaPropertiesTest extends TestCase
             ['FechaNacimiento', '16-05-1996'],
         ];
     }
+
     /**
      *
      * @return array<int, array<int, string>>
@@ -44,6 +45,7 @@ class PersonaFisicaPropertiesTest extends TestCase
             ['ApellidoMaterno', 'RODRIGUEZ'],
         ];
     }
+
     /**
      * @dataProvider stringPropertiesProvider
      */

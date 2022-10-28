@@ -10,22 +10,38 @@ use JsonSerializable;
 class Persona implements JsonSerializable
 {
     private ?DateTimeImmutable $fechaInicioOperaciones = null;
+
     private string $rfc = '';
+
     private string $idCif = '';
+
     private string $situacionContribuyente = '';
+
     private ?DateTimeImmutable $fechaUltimoCambioSituacion = null;
+
     private string $entidadFederativa = '';
+
     private string $municipioDelegacion = '';
+
     private string $colonia = '';
+
     private string $tipoVialidad = '';
+
     private string $nombreVialidad = '';
+
     private string $numeroExterior = '';
+
     private string $numeroInterior = '';
+
     private string $codigoPostal = '';
+
     private string $correoElectronico = '';
+
     private string $al = '';
+
     private Regimenes $regimenes;
-    /** @var string[] */
+
+    /** @var mixed[] */
     private array $data = [];
 
     public function __construct()
@@ -53,7 +69,7 @@ class Persona implements JsonSerializable
         return $this->situacionContribuyente;
     }
 
-    public function getfechaUltimoCambioSituacion(): ?DateTimeImmutable
+    public function getFechaUltimoCambioSituacion(): ?DateTimeImmutable
     {
         return $this->fechaUltimoCambioSituacion;
     }
@@ -134,7 +150,7 @@ class Persona implements JsonSerializable
         $this->situacionContribuyente = $situacionContribuyente;
     }
 
-    public function setfechaUltimoCambioSituacion(string $fechaUltimoCambioSituacion): void
+    public function setFechaUltimoCambioSituacion(string $fechaUltimoCambioSituacion): void
     {
         $date = DateTimeImmutable::createFromFormat('!d-m-Y', $fechaUltimoCambioSituacion);
         $this->fechaUltimoCambioSituacion = false !== $date ? $date : null;
@@ -195,12 +211,11 @@ class Persona implements JsonSerializable
         $this->regimenes->addRegimen(...$regimenes);
     }
 
-    public function __set(string $name, string $value): void
+    public function __set(string $name, mixed $value): void
     {
         $method = "set$name";
-        if (method_exists($this, $method)) {
-            /** @var callable:mixed $callable */
-            $callable = [$this, $method];
+        $callable = [$this, $method];
+        if (is_callable($callable)) {
             call_user_func($callable, $value);
         } else {
             $this->data[$name] = $value;
@@ -209,15 +224,17 @@ class Persona implements JsonSerializable
 
     public function __get(string $name): mixed
     {
-        if (! array_key_exists($name, $this->data)) {
-            return null;
+        $method = "get$name";
+        $callable = [$this, $method];
+        if (is_callable($callable)) {
+            return call_user_func($callable);
         }
-        return $this->data[$name];
+        return $this->data[$name] ?? null;
     }
 
     public function __isset(string $name): bool
     {
-        return isset($this->data[$name]);
+        return null !== $this->__get($name);
     }
 
     public function __unset(string $name): void
@@ -225,9 +242,7 @@ class Persona implements JsonSerializable
         unset($this->data[$name]);
     }
 
-    /**
-     * @return array<string, mixed>
-     */
+    /** @return array<string, mixed> */
     public function toArray(): array
     {
         return [
@@ -235,7 +250,7 @@ class Persona implements JsonSerializable
             'id_cif' => $this->getIdCif(),
             'fecha_inicio_operaciones' => $this->getFechaInicioOperaciones(),
             'situacion_contribuyente' => $this->getSituacionContribuyente(),
-            'fecha_ultimo_cambio_situacion' => $this->getfechaUltimoCambioSituacion(),
+            'fecha_ultimo_cambio_situacion' => $this->getFechaUltimoCambioSituacion(),
             'entidad_federativa' => $this->getEntidadFederativa(),
             'municipio_delegacion' => $this->getMunicipioDelegacion(),
             'colonia' => $this->getColonia(),
@@ -251,11 +266,8 @@ class Persona implements JsonSerializable
         ];
     }
 
-    /**
-     *
-     * @return array<string, mixed>
-     */
-    public function jsonSerialize(): mixed
+    /** @return mixed[] */
+    public function jsonSerialize(): array
     {
         return $this->toArray();
     }

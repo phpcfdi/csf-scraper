@@ -20,6 +20,7 @@ class PersonaPropertiesTest extends TestCase
         parent::setUp();
         $this->person = new Persona();
     }
+
     /**
      *
      * @return array<int, array<int, string>>
@@ -31,6 +32,7 @@ class PersonaPropertiesTest extends TestCase
             ['FechaUltimoCambioSituacion', '12-01-2018'],
         ];
     }
+
     /**
      *
      * @return array<int, array<int, string>>
@@ -51,6 +53,7 @@ class PersonaPropertiesTest extends TestCase
             ['Al', 'Puebla 1'],
         ];
     }
+
     /**
      * @dataProvider stringPropertiesProvider
      */
@@ -68,6 +71,7 @@ class PersonaPropertiesTest extends TestCase
         $result = $this->setAndGetProperty($complementFunction, $value);
         $this->assertEquals(DateTimeImmutable::createFromFormat('!d-m-Y', $value), $result);
     }
+
     /**
      *
      * test to check if new property not contained in Persona is found is assigned and value can be retrieved
@@ -75,29 +79,29 @@ class PersonaPropertiesTest extends TestCase
      * */
     public function test_assign_dynamic_property(): void
     {
+        $dynamicValue = 'foo';
         /** @phpstan-ignore-next-line */
-        $this->person->dynamic = 'dynamic';
-        $this->assertSame('dynamic', $this->person->dynamic);
+        $this->person->{'dynamic'} = $dynamicValue;
+        $this->assertSame($dynamicValue, $this->person->{'dynamic'});
     }
 
     public function test_isset_property_method(): void
     {
         /** @phpstan-ignore-next-line */
-        $this->person->dynamic = 'dynamic';
+        $this->person->{'dynamic'} = 'foo';
 
         // check if isset
-        $this->assertTrue(isset($this->person->dynamic));
-        $this->assertFalse(isset($this->person->dynamic2));
+        $this->assertTrue(isset($this->person->{'dynamic'}));
+        $this->assertFalse(isset($this->person->{'dynamic2'}));
     }
 
     public function test_unset_method(): void
     {
         /** @phpstan-ignore-next-line */
-        $this->person->dynamic = 'dynamic';
+        $this->person->{'dynamic'} = 'foo';
+        $this->assertTrue(isset($this->person->{'dynamic'}));
 
-        $this->assertTrue(isset($this->person->dynamic));
-
-        unset($this->person->dynamic);
-        $this->assertFalse(isset($this->person->dynamic));
+        unset($this->person->{'dynamic'});
+        $this->assertFalse(isset($this->person->{'dynamic'}));
     }
 }

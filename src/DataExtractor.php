@@ -62,7 +62,6 @@ final class DataExtractor implements DataExtractorInterface
     {
         $tbodies = $crawler->filter('tbody[class="ui-datatable-data ui-widget-content"]');
         $valuesCount = 0;
-        /** @var Regimen[]*/
         $regimenes = [];
         $tbodies->each(function (Crawler $elem, int $index) use (&$valuesCount, &$regimenes): void {
             if (4 === $index) {

@@ -9,9 +9,13 @@ use DateTimeImmutable;
 class PersonaFisica extends Persona
 {
     private string $curp = '';
+
     private string $nombre = '';
+
     private string $apellidoPaterno = '';
+
     private string $apellidoMaterno = '';
+
     private ?DateTimeImmutable $fechaNacimiento = null;
 
     public function getCurp(): string

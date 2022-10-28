@@ -9,7 +9,9 @@ use DateTimeImmutable;
 class PersonaMoral extends Persona
 {
     private string $razonSocial = '';
+
     private string $regimenDeCapital = '';
+
     private ?DateTimeImmutable $fechaConstitucion = null;
 
     public function getRazonSocial(): string

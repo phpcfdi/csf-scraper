@@ -10,8 +10,11 @@ use JsonSerializable;
 class Regimen implements JsonSerializable
 {
     private string $regimen = '';
+
     private string $regimenId = '';
+
     private ?DateTimeImmutable $fechaAlta = null;
+
     /**
      *
      * @var array<int, string[]>
@@ -114,7 +117,7 @@ class Regimen implements JsonSerializable
     {
         $this->regimen = $regimen;
         /** @var string $regimenAsText PHPStan: It is impossible here to return NULL*/
-        $regimenAsText = preg_replace(['/^Régimen( de las| de los| de|) /u', '/ PM$/'], '', $regimen);
+        $regimenAsText = preg_replace(['/^Régimen( de las| de los| de|) /u', '/ PM$/', '/\.$/'], '', $regimen);
         $this->regimenId = $this->searchRegimenIdByText($regimenAsText);
     }
 
@@ -146,10 +149,8 @@ class Regimen implements JsonSerializable
         ];
     }
 
-    /**
-     * @return array{regimen: string, regimen_id: string, fecha_alta: ?DateTimeImmutable}
-     */
-    public function jsonSerialize(): mixed
+    /** @return mixed[] */
+    public function jsonSerialize(): array
     {
         return $this->toArray();
     }

@@ -11,9 +11,42 @@ versión, aunque sí su incorporación en la rama principal de trabajo, generalm
 
 ## Listado de cambios
 
+### Versión 0.1.5 2022-10-28
+
+#### Regímenes que terminan en punto `.`
+
+Se elimina de regímenes el punto final, que viene en algunos regímenes como
+*"Régimen de las Actividades Empresariales con ingresos a través de Plataformas Tecnológicas."*.
+
+#### Propiedades mágicas en `Persona`
+
+El método *setter* mágico permite establecer cualquier tipo de datos en `$data`.
+El método *getter* mágico solo permitía devolver cadenas de caracteres.
+Se cambió este comportamiento para devolver cualquier tipo de datos.
+
+El método *setter* mágico daba prioridad al método compuesto `set<Propiedad>()` (si existía).
+El método *getter* solo devolvía datos del almacén local `$data`.
+Se cambió este comportamiento para también darle prioridad al método `get<Propiedad>()` (si existe).
+
+El método *isset* mágico cambia la comprobación a verificar que el resultado del método mágico *getter* no devuelva nulo.
+De esta forma se incluye la comprobación para propiedades del objeto.
+
+#### Otros cambios de mantenimiento
+
+- En los flujos de integración continua:
+  - Se agrega la versión de PHP 8.2 a la matriz del trabajo para pruebas.
+  - Se corrige la instalación de `poppler-utils`, se quedaba colgado en `nektos/act`.
+- Se modifican y simplifican varias anotaciones de *PHPDoc*.
+- Se corrige el nombre del método `setfechaUltimoCambioSituacion` a `setFechaUltimoCambioSituacion`.
+- Se actualiza el archivo de configuración de `php-cs-fixer`:
+  - Cambiar la regla `no_trailing_comma_in_singleline_array` a `no_trailing_comma_in_singleline`.
+  - Se actualizan las reglas a PHP 8.0.
+  - Se activan las reglas `class_attributes_separation`, `trailing_comma_in_multiline` y `ordered_imports`.
+
 ### Versión 0.1.4 2022-10-25
 
 - Se hacen más estrictas las correcciones de los regímenes usando expresiones regulares.
+- Se agregan pruebas para el método `Regimen::setFechaAlta`.
 
 ### Versión 0.1.3 2022-10-25
 

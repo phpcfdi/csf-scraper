@@ -35,13 +35,12 @@ class SetRegimenTest extends TestCase
             ['Opcional para Grupos de Sociedades', '623'],
             ['Coordinados', '624'],
             ['Régimen de las Actividades Empresariales con ingresos a través de Plataformas Tecnológicas', '625'],
+            ['Régimen de las Actividades Empresariales con ingresos a través de Plataformas Tecnológicas.', '625'],
             ['Régimen Simplificado de Confianza', '626'],
         ];
     }
 
-    /**
-     * @dataProvider regimenesProvider
-     */
+    /** @dataProvider regimenesProvider */
     public function test_check_regimenes_are_well_assigned(string $regimenText, string $regimenIdExpected): void
     {
         $regimen = new Regimen();
@@ -64,5 +63,48 @@ class SetRegimenTest extends TestCase
         $regimen->setRegimen('regimen no incluido');
 
         $this->assertSame('', $regimen->getRegimenId());
+    }
+
+    public function test_fecha_alta_with_valid_value(): void
+    {
+        $input = '01-02-2001';
+        $regimen = new Regimen();
+        $regimen->setFechaAlta($input);
+        $fechaAlta = $regimen->getFechaAlta();
+        if (null === $fechaAlta) {
+            $this->fail("Fecha alta $input was not interpreted");
+        }
+        $this->assertSame(1, (int) $fechaAlta->format('d'));
+        $this->assertSame(2, (int) $fechaAlta->format('m'));
+        $this->assertSame(2001, (int) $fechaAlta->format('Y'));
+        $this->assertSame(0, (int) $fechaAlta->format('H'));
+        $this->assertSame(0, (int) $fechaAlta->format('i'));
+        $this->assertSame(0, (int) $fechaAlta->format('s'));
+    }
+
+    public function test_fecha_alta_with_empty_value(): void
+    {
+        $input = '';
+        $regimen = new Regimen();
+        $regimen->setFechaAlta($input);
+        $this->assertNull($regimen->getFechaAlta());
+    }
+
+    /** @return array<string, array{string}> */
+    public function provider_fecha_alta_with_invalid_value(): array
+    {
+        return [
+            'empty' => [''],
+            'incorrect format' => ['2022-12-31'],
+            'incomplete' => ['1-1'],
+        ];
+    }
+
+    /** @dataProvider  provider_fecha_alta_with_invalid_value */
+    public function test_fecha_alta_with_invalid_value(string $input): void
+    {
+        $regimen = new Regimen();
+        $regimen->setFechaAlta($input);
+        $this->assertNull($regimen->getFechaAlta());
     }
 }
