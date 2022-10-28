@@ -218,7 +218,7 @@ class Persona implements JsonSerializable
 
     public function __isset(string $name): bool
     {
-        return isset($this->data[$name]);
+        return null !== $this->__get($name);
     }
 
     public function __unset(string $name): void
