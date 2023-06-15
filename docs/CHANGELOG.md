@@ -13,6 +13,7 @@ versión, aunque sí su incorporación en la rama principal de trabajo, generalm
 
 - Se actualiza el año de licencia.
 - Se actualiza la insignia de construcción en el archivo `README.md`.
+- Se actualiza el archivo de configuración de SonarCloud para excluir correctamente los archivos en `tests/_files`.
 
 ## Listado de cambios
 
