@@ -12,6 +12,7 @@ versión, aunque sí su incorporación en la rama principal de trabajo, generalm
 ### Mantenimiento 2023-06-15
 
 - Se actualiza el año de licencia.
+- Se actualiza la insignia de construcción en el archivo `README.md`.
 
 ## Listado de cambios
 
