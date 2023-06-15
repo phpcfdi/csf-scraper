@@ -22,6 +22,9 @@ versión, aunque sí su incorporación en la rama principal de trabajo, generalm
   - No se instala `composer` cuando no es necesario.
   - Se sustituye la directiva `::set-output` con `$GITHUB_OUTPUT`.
 - Se actualizan las herramientas de desarrollo.
+- En las pruebas:
+  - Se crean mejores casos para el manejo de excepciones provenientes de la lectura de un archivo PDF.
+  - Se consigue el 100% de cobertura de código.
 
 ## Listado de cambios
 
