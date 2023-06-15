@@ -19,6 +19,7 @@ versión, aunque sí su incorporación en la rama principal de trabajo, generalm
   - Se permite ejecutarlos a petición.
   - Los trabajos se ejecutan en PHP 8.0.
   - No se instala `composer` cuando no es necesario.
+  - Se sustituye la directiva `::set-output` con `$GITHUB_OUTPUT`.
 - Se actualizan las herramientas de desarrollo.
 
 ## Listado de cambios
