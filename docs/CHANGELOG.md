@@ -11,6 +11,7 @@ versión, aunque sí su incorporación en la rama principal de trabajo, generalm
 
 ### Mantenimiento 2023-06-15
 
+- Se corrige el nombre del método `PdfToTextConvertException::getOutput`, antes `getGetOutput`.
 - Se actualiza el año de licencia.
 - Se corrige la liga del proyecto en el archivo `CONTRIBUTING.md`.
 - Se actualiza la insignia de construcción en el archivo `README.md`.

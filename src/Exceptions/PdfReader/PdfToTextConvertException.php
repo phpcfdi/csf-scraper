@@ -33,7 +33,7 @@ final class PdfToTextConvertException extends RuntimeException implements CsfScr
         return $this->exitCode;
     }
 
-    public function getGetOutput(): string
+    public function getOutput(): string
     {
         return $this->output;
     }
