@@ -9,7 +9,7 @@ namespace PhpCfdi\CsfScraper\Tests\Unit;
 use GuzzleHttp\Client;
 use PhpCfdi\CsfScraper\Scraper;
 use PhpCfdi\CsfScraper\Tests\TestCase;
-use ReflectionObject;
+use ReflectionProperty;
 
 final class ScraperTest extends TestCase
 {
@@ -19,9 +19,10 @@ final class ScraperTest extends TestCase
          * Problem: The scraper does not have a method to get the client, obtained by reflection
          */
         $scraper = Scraper::create();
-        $reflection = new ReflectionObject($scraper);
+        $property = new ReflectionProperty(Scraper::class, 'client');
+        $property->setAccessible(true);
         /** @var Client $client */
-        $client = $reflection->getProperty('client')->getValue($scraper);
+        $client = $property->getValue($scraper);
         $this->assertInstanceOf(Client::class, $client);
 
         /**
