@@ -180,7 +180,7 @@ sin temor a romper tu aplicación.
 
 ## Contribuciones
 
-Las contribuciones con bienvenidas. Por favor lee [CONTRIBUTING][] para más detalles
+Las contribuciones son bienvenidas. Por favor lee [CONTRIBUTING][] para más detalles
 y recuerda revisar el archivo de tareas pendientes [TODO][] y el archivo [CHANGELOG][].
 
 ## Copyright and License
@@ -209,7 +209,7 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [badge-discord]: https://img.shields.io/discord/459860554090283019?logo=discord
 [badge-release]: https://img.shields.io/github/release/phpcfdi/csf-scraper.svg?logo=git
 [badge-license]: https://img.shields.io/github/license/phpcfdi/csf-scraper.svg?logo=open-source-initiative
-[badge-build]: https://img.shields.io/github/workflow/status/phpcfdi/csf-scraper/build/main?logo=github-actions
+[badge-build]: https://img.shields.io/github/actions/workflow/status/phpcfdi/csf-scraper/build.yml?branch=main&logo=github-actions
 [badge-reliability]: https://sonarcloud.io/api/project_badges/measure?project=phpcfdi_csf-scraper&metric=reliability_rating
 [badge-maintainability]: https://sonarcloud.io/api/project_badges/measure?project=phpcfdi_csf-scraper&metric=sqale_rating
 [badge-coverage]: https://img.shields.io/sonar/coverage/phpcfdi_csf-scraper/main?logo=sonarcloud&server=https%3A%2F%2Fsonarcloud.io

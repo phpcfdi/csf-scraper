@@ -46,6 +46,7 @@ class SetRegimenTest extends TestCase
         $regimen = new Regimen();
         $regimen->setRegimen($regimenText);
 
+        $this->assertSame($regimenText, $regimen->getRegimen());
         $this->assertSame($regimenIdExpected, $regimen->getRegimenId());
     }
 

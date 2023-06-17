@@ -26,6 +26,11 @@ class Scraper implements ScraperInterface
     {
     }
 
+    public function getClient(): ClientInterface
+    {
+        return $this->client;
+    }
+
     /**
      * Factory method to create a scraper object with configuration that simply works
      */

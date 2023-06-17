@@ -11,6 +11,24 @@ versión, aunque sí su incorporación en la rama principal de trabajo, generalm
 
 ## Listado de cambios
 
+### Versión 0.1.6 2023-06-17
+
+- Se agrega el método `Scraper::getClient()` para obtener el cliente con el que fue construido el objeto.
+- Se corrige el nombre del método `PdfToTextConvertException::getOutput`, antes `getGetOutput`.
+- Se actualiza el año de licencia.
+- Se corrige la liga del proyecto en el archivo `CONTRIBUTING.md`.
+- Se actualiza la insignia de construcción en el archivo `README.md`.
+- Se actualiza el archivo de configuración de SonarCloud para excluir correctamente los archivos en `tests/_files`.
+- Para los flujos de trabajo:
+  - Se permite ejecutarlos a petición.
+  - Los trabajos se ejecutan en PHP 8.0.
+  - No se instala `composer` cuando no es necesario.
+  - Se sustituye la directiva `::set-output` con `$GITHUB_OUTPUT`.
+- Se actualizan las herramientas de desarrollo.
+- En las pruebas:
+  - Se crean mejores casos para el manejo de excepciones provenientes de la lectura de un archivo PDF.
+  - Se consigue el 100% de cobertura de código.
+
 ### Versión 0.1.5 2022-10-28
 
 #### Regímenes que terminan en punto `.`

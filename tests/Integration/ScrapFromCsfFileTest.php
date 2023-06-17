@@ -8,6 +8,8 @@ use DateTimeImmutable;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
+use PhpCfdi\CsfScraper\Exceptions\CifDownloadException;
+use PhpCfdi\CsfScraper\Exceptions\PdfReader\CifFromPdfNotFoundException;
 use PhpCfdi\CsfScraper\Exceptions\PdfReader\RfcFromPdfNotFoundException;
 use PhpCfdi\CsfScraper\Scraper;
 use PhpCfdi\CsfScraper\Tests\Integration\Helpers\ScraperHelper;
@@ -67,12 +69,36 @@ class ScrapFromCsfFileTest extends TestCase
     /**
      * @requires OSFAMILY Linux
      */
-    public function test_scrap_from_bad_pdf(): void
+    public function test_obtain_from_pdf_with_invalid_data(): void
+    {
+        $csfScrap = new Scraper(new Client());
+
+        $this->expectException(CifDownloadException::class);
+
+        $csfScrap->obtainFromPdfPath($this->filePath('csf-correct-but-invalid.pdf'));
+    }
+
+    /**
+     * @requires OSFAMILY Linux
+     */
+    public function test_obtain_from_pdf_without_rfc(): void
     {
         $csfScrap = new Scraper(new Client());
 
         $this->expectException(RfcFromPdfNotFoundException::class);
 
-        $csfScrap->obtainFromPdfPath($this->filePath('hello-world.pdf'))->toArray();
+        $csfScrap->obtainFromPdfPath($this->filePath('csf-without-rfc.pdf'));
+    }
+
+    /**
+     * @requires OSFAMILY Linux
+     */
+    public function test_obtain_from_pdf_without_cif(): void
+    {
+        $csfScrap = new Scraper(new Client());
+
+        $this->expectException(CifFromPdfNotFoundException::class);
+
+        $csfScrap->obtainFromPdfPath($this->filePath('csf-without-cif.pdf'));
     }
 }
