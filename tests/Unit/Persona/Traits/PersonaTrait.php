@@ -41,4 +41,20 @@ trait PersonaTrait
         $this->person->{'dynamic'} = 'dynamic';
         $this->assertSame('dynamic', $this->person->{'dynamic'});
     }
+
+    public function test_allows_more_than_one_regimen(): void
+    {
+        $first = new Regimen();
+        $first->setRegimen('Simplificado de confianza');
+        $second = new Regimen();
+        $second->setRegimen('Demás ingresos');
+
+        $person = $this->person;
+        $person->addRegimenes($first, $second);
+
+        $this->assertSame(
+            [$first, $second],
+            $person->getRegimenes()->getRegimenes(),
+        );
+    }
 }
