@@ -9,8 +9,11 @@ Usamos [Versionado Semántico 2.0.0](SEMVER.md) por lo que puedes usar esta libr
 Pueden aparecer cambios no liberados que se integran a la rama principal, pero no ameritan una nueva liberación de
 versión, aunque sí su incorporación en la rama principal de trabajo, generalmente se tratan de cambios en el desarrollo.
 
-### Mantenimiento 2023-06-15
+## Listado de cambios
 
+### Versión 0.1.6 2023-06-17
+
+- Se agrega el método `Scraper::getClient()` para obtener el cliente con el que fue construido el objeto.
 - Se corrige el nombre del método `PdfToTextConvertException::getOutput`, antes `getGetOutput`.
 - Se actualiza el año de licencia.
 - Se corrige la liga del proyecto en el archivo `CONTRIBUTING.md`.
@@ -25,8 +28,6 @@ versión, aunque sí su incorporación en la rama principal de trabajo, generalm
 - En las pruebas:
   - Se crean mejores casos para el manejo de excepciones provenientes de la lectura de un archivo PDF.
   - Se consigue el 100% de cobertura de código.
-
-## Listado de cambios
 
 ### Versión 0.1.5 2022-10-28
 
