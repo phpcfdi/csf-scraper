@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace PhpCfdi\CsfScraper\Tests\Unit\Persona\Traits;
 
+use PhpCfdi\CsfScraper\Regimen;
+
 trait PersonaTrait
 {
     private function setAndGetProperty(string $complementFunction, mixed $value): mixed
@@ -22,5 +24,21 @@ trait PersonaTrait
         /** @phpstan-ignore-next-line */
         $this->person->{'dynamic'} = 'dynamic';
         $this->assertSame('dynamic', $this->person->{'dynamic'});
+    }
+
+    public function test_allows_more_than_one_regimen(): void
+    {
+        $first = new Regimen();
+        $first->setRegimen('Simplificado de confianza');
+        $second = new Regimen();
+        $second->setRegimen('Demás ingresos');
+
+        $person = $this->person;
+        $person->addRegimenes($first, $second);
+
+        $this->assertSame(
+            [$first, $second],
+            $person->getRegimenes()->getRegimenes(),
+        );
     }
 }
