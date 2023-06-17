@@ -14,6 +14,7 @@ versión, aunque sí su incorporación en la rama principal de trabajo, generalm
 Sí, el mismo día de un *release*.
 
 - Se agrega un último test para alcanzar el 100% de cobertura de código.
+- Se corrige en este archivo, que "los flujos de trabajo corren en PHP 8.2", decía "PHP 8.0". 
 
 ## Listado de cambios
 
@@ -35,7 +36,7 @@ Sí, el mismo día de un *release*.
 - Se actualiza el archivo de configuración de SonarCloud para excluir correctamente los archivos en `tests/_files`.
 - Para los flujos de trabajo:
   - Se permite ejecutarlos a petición.
-  - Los trabajos se ejecutan en PHP 8.0.
+  - Los trabajos se ejecutan en PHP 8.2.
   - No se instala `composer` cuando no es necesario.
   - Se sustituye la directiva `::set-output` con `$GITHUB_OUTPUT`.
 - Se actualizan las herramientas de desarrollo.
