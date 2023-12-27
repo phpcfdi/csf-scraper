@@ -18,7 +18,7 @@ final class DataExtractor implements DataExtractorInterface
     /**
      * @throws CifNotFoundException
      */
-    public function extract(bool $isFisica): PersonaMoral|PersonaFisica
+    public function extract2(bool $isFisica): PersonaMoral|PersonaFisica
     {
         $html = $this->clearHtml($this->html);
         $person = $isFisica ? new PersonaFisica() : new PersonaMoral();
@@ -46,6 +46,50 @@ final class DataExtractor implements DataExtractorInterface
             $person->addRegimenes(...$regimenes);
         }
         return $person;
+    }
+
+    /**
+     * @throws CifNotFoundException
+     */
+    public function extract(bool $isFisica): PersonaMoral|PersonaFisica
+    {
+        $html = $this->clearHtml($this->html);
+        $person = $isFisica ? new PersonaFisica() : new PersonaMoral();
+
+        $crawler = new Crawler($html);
+        $errorElement = $crawler->filter('span[class=ui-messages-info-detail]');
+        if (1 === $errorElement->count()) {
+            throw new CifNotFoundException('Failed to found CIF info.');
+        }
+
+        $titles = $person->getTdTitlesTextToSearch();
+        foreach ($titles as $property => $text) {
+            $person->{$property} = $this->getValueByTdTitleText($crawler, $text);
+        }
+        $regimenes = $this->getRegimenes($crawler);
+        if ([] !== $regimenes) {
+            $person->addRegimenes(...$regimenes);
+        }
+
+        return $person;
+    }
+
+    private function getValueByTdTitleText(Crawler $crawler, string $valueToSearch): string
+    {
+        $element = $crawler->filterXPath("//td[@role='gridcell']/span[contains(normalize-space(.), '{$valueToSearch}')]");
+        $node = $element->getNode(0);
+        if (null === $node) {
+            return '';
+        }
+        return trim(str_replace($valueToSearch, ' ', $this->normalizeWhiteSpaces($node->parentNode?->parentNode?->textContent ?? '')));
+    }
+
+    private function normalizeWhiteSpaces(string $str): string
+    {
+        $str = trim($str);
+        $str = str_replace("\r", "\n", $str);
+        $str = preg_replace(['/\n+/', '/[ \t]+/'], [' ', ' '], $str);
+        return $str ?? '';
     }
 
     private function clearHtml(string $html): string

@@ -68,6 +68,33 @@ class PersonaMoral extends Persona
         };
     }
 
+    /**
+     *
+     * @return array<string, string>
+     */
+    public function getTdTitlesTextToSearch(): array
+    {
+        return [
+            'RazonSocial' => 'Denominación o Razón Social:',
+            'RegimenDeCapital' => 'Régimen de capital:',
+            'FechaConstitucion' => 'Fecha de constitución:',
+            'FechaInicioOperaciones' => 'Fecha de Inicio de operaciones:',
+            'SituacionContribuyente' => 'Situación del contribuyente:',
+            'FechaUltimoCambioSituacion' => 'Fecha del último cambio de situación:',
+            'EntidadFederativa' => 'Entidad Federativa:',
+            'MunicipioDelegacion' => 'Municipio o delegación:',
+            'Colonia' => 'Colonia:',
+            'Localidad' => 'Localidad:',
+            'TipoVialidad' => 'Tipo de vialidad:',
+            'NombreVialidad' => 'Nombre de la vialidad:',
+            'NumeroExterior' => 'Número exterior:',
+            'NumeroInterior' => 'Número interior:',
+            'CodigoPostal' => 'CP:',
+            'CorreoElectronico' => 'Correo electrónico:',
+            'Al' => 'AL:',
+        ];
+    }
+
     public function toArray(): array
     {
         $array = parent::toArray();

@@ -63,7 +63,9 @@ class ScrapCsfFromRfcAndCifTest extends TestCase
                     'regimen_id' => '601',
                 ],
             ],
-            'extra_data' => [],
+            'extra_data' => [
+                'Localidad' => '',
+            ],
         ];
 
         $data = $csfScrap->obtainFromRfcAndCif(Rfc::parse($rfc), $idcif)->toArray();
@@ -104,7 +106,9 @@ class ScrapCsfFromRfcAndCifTest extends TestCase
                     'regimen_id' => '621',
                 ],
             ],
-            'extra_data' => [],
+            'extra_data' => [
+                'Localidad' => '',
+            ],
         ];
 
         $data = $csfScrap->obtainFromRfcAndCif(Rfc::parse($rfc), $idcif)->toArray();
@@ -150,7 +154,9 @@ class ScrapCsfFromRfcAndCifTest extends TestCase
                     'regimen_id' => '626',
                 ],
             ],
-            'extra_data' => [],
+            'extra_data' => [
+                'Localidad' => '',
+            ],
         ];
 
         $data = $csfScrap->obtainFromRfcAndCif(Rfc::parse($rfc), $idcif)->toArray();
