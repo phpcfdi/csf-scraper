@@ -69,31 +69,6 @@ class PersonaFisica extends Persona
         $this->fechaNacimiento = false !== $date ? $date : null;
     }
 
-    public function getKeyNameByIndex(int $index): ?string
-    {
-        return match ($index) {
-            2 => 'Curp',
-            4 => 'Nombre',
-            6 => 'ApellidoPaterno',
-            8 => 'ApellidoMaterno',
-            10 => 'FechaNacimiento',
-            12 => 'FechaInicioOperaciones',
-            14 => 'SituacionContribuyente',
-            16 => 'FechaUltimoCambioSituacion',
-            21 => 'EntidadFederativa',
-            23 => 'MunicipioDelegacion',
-            25 => 'Colonia',
-            27 => 'TipoVialidad',
-            29 => 'NombreVialidad',
-            31 => 'NumeroExterior',
-            33 => 'NumeroInterior',
-            35 => 'CodigoPostal',
-            37 => 'CorreoElectronico',
-            39 => 'Al',
-            default => null
-        };
-    }
-
     /**
      *
      * @return array<string, string>

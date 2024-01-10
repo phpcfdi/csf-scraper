@@ -18,39 +18,6 @@ final class DataExtractor implements DataExtractorInterface
     /**
      * @throws CifNotFoundException
      */
-    public function extract2(bool $isFisica): PersonaMoral|PersonaFisica
-    {
-        $html = $this->clearHtml($this->html);
-        $person = $isFisica ? new PersonaFisica() : new PersonaMoral();
-
-        $crawler = new Crawler($html);
-        $errorElement = $crawler->filter('span[class=ui-messages-info-detail]');
-        if (1 === $errorElement->count()) {
-            throw new CifNotFoundException('Failed to found CIF info.');
-        }
-        $elements = $crawler->filter('td[role="gridcell"]');
-
-        $elements->each(function (Crawler $elem, int $index) use ($person): void {
-            if ($index >= 40) {
-                return;
-            }
-            if (0 === $elem->filter('span')->count()) {
-                $property = $person->getKeyNameByIndex($index);
-                if (null !== $property) {
-                    $person->{$property} = trim($elem->text());
-                }
-            }
-        });
-        $regimenes = $this->getRegimenes($crawler);
-        if ([] !== $regimenes) {
-            $person->addRegimenes(...$regimenes);
-        }
-        return $person;
-    }
-
-    /**
-     * @throws CifNotFoundException
-     */
     public function extract(bool $isFisica): PersonaMoral|PersonaFisica
     {
         $html = $this->clearHtml($this->html);
@@ -86,10 +53,7 @@ final class DataExtractor implements DataExtractorInterface
 
     private function normalizeWhiteSpaces(string $str): string
     {
-        $str = trim($str);
-        $str = str_replace("\r", "\n", $str);
-        $str = preg_replace(['/\n+/', '/[ \t]+/'], [' ', ' '], $str);
-        return $str ?? '';
+        return (string) preg_replace('/\s+/', ' ', trim($str));
     }
 
     private function clearHtml(string $html): string

@@ -45,29 +45,6 @@ class PersonaMoral extends Persona
         $this->fechaConstitucion = false !== $date ? $date : null;
     }
 
-    public function getKeyNameByIndex(int $index): ?string
-    {
-        return match ($index) {
-            2 => 'RazonSocial',
-            4 => 'RegimenDeCapital',
-            6 => 'FechaConstitucion',
-            8 => 'FechaInicioOperaciones',
-            10 => 'SituacionContribuyente',
-            12 => 'FechaUltimoCambioSituacion',
-            17 => 'EntidadFederativa',
-            19 => 'MunicipioDelegacion',
-            21 => 'Colonia',
-            23 => 'TipoVialidad',
-            25 => 'NombreVialidad',
-            27 => 'NumeroExterior',
-            29 => 'NumeroInterior',
-            31 => 'CodigoPostal',
-            33 => 'CorreoElectronico',
-            35 => 'Al',
-            default => null
-        };
-    }
-
     /**
      *
      * @return array<string, string>
