@@ -28,24 +28,32 @@ final class DataExtractor implements DataExtractorInterface
         if (1 === $errorElement->count()) {
             throw new CifNotFoundException('Failed to found CIF info.');
         }
-        $elements = $crawler->filter('td[role="gridcell"]');
 
-        $elements->each(function (Crawler $elem, int $index) use ($person): void {
-            if ($index >= 40) {
-                return;
-            }
-            if (0 === $elem->filter('span')->count()) {
-                $property = $person->getKeyNameByIndex($index);
-                if (null !== $property) {
-                    $person->{$property} = trim($elem->text());
-                }
-            }
-        });
+        $titles = $person->getTdTitlesTextToSearch();
+        foreach ($titles as $property => $text) {
+            $person->{$property} = $this->getValueByTdTitleText($crawler, $text);
+        }
         $regimenes = $this->getRegimenes($crawler);
         if ([] !== $regimenes) {
             $person->addRegimenes(...$regimenes);
         }
+
         return $person;
+    }
+
+    private function getValueByTdTitleText(Crawler $crawler, string $valueToSearch): string
+    {
+        $element = $crawler->filterXPath("//td[@role='gridcell']/span[contains(normalize-space(.), '{$valueToSearch}')]");
+        $node = $element->getNode(0);
+        if (null === $node) {
+            return '';
+        }
+        return trim(str_replace($valueToSearch, ' ', $this->normalizeWhiteSpaces($node->parentNode?->parentNode?->textContent ?? '')));
+    }
+
+    private function normalizeWhiteSpaces(string $str): string
+    {
+        return (string) preg_replace('/\s+/', ' ', trim($str));
     }
 
     private function clearHtml(string $html): string

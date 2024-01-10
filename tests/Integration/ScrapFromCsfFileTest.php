@@ -58,7 +58,9 @@ class ScrapFromCsfFileTest extends TestCase
                     'fecha_alta' => DateTimeImmutable::createFromFormat('!d-m-Y', '21-02-2019'),
                 ],
             ],
-            'extra_data' => [],
+            'extra_data' => [
+                'Localidad' => '',
+            ],
         ];
 
         $data = $csfScrap->obtainFromPdfPath('my-path')->toArray();

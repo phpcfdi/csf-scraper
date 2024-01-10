@@ -5,20 +5,20 @@ declare(strict_types=1);
 namespace PhpCfdi\CsfScraper\Tests\Unit\Persona;
 
 use DateTimeImmutable;
-use PhpCfdi\CsfScraper\Persona;
+use PhpCfdi\CsfScraper\PersonaMoral;
 use PhpCfdi\CsfScraper\Tests\TestCase;
 use PhpCfdi\CsfScraper\Tests\Unit\Persona\Traits\PersonaTrait;
 
-class PersonaPropertiesTest extends TestCase
+class CommonPersonaPropertiesTest extends TestCase
 {
     use PersonaTrait;
 
-    private Persona $person;
+    private PersonaMoral $person;
 
     public function setUp(): void
     {
         parent::setUp();
-        $this->person = new Persona();
+        $this->person = new PersonaMoral();
     }
 
     /**

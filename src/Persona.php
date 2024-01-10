@@ -7,7 +7,7 @@ namespace PhpCfdi\CsfScraper;
 use DateTimeImmutable;
 use JsonSerializable;
 
-class Persona implements JsonSerializable
+abstract class Persona implements JsonSerializable
 {
     private ?DateTimeImmutable $fechaInicioOperaciones = null;
 
@@ -210,6 +210,12 @@ class Persona implements JsonSerializable
     {
         $this->regimenes->addRegimen(...$regimenes);
     }
+
+    /**
+     * The values must be a simple text to search using xpath as in contains(normalize-space(.), {value})'
+     * @return array<string, string>
+     */
+    abstract public function getTdTitlesTextToSearch(): array;
 
     public function __set(string $name, mixed $value): void
     {

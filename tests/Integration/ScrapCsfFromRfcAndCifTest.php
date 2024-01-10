@@ -63,7 +63,9 @@ class ScrapCsfFromRfcAndCifTest extends TestCase
                     'regimen_id' => '601',
                 ],
             ],
-            'extra_data' => [],
+            'extra_data' => [
+                'Localidad' => '',
+            ],
         ];
 
         $data = $csfScrap->obtainFromRfcAndCif(Rfc::parse($rfc), $idcif)->toArray();
@@ -104,7 +106,9 @@ class ScrapCsfFromRfcAndCifTest extends TestCase
                     'regimen_id' => '621',
                 ],
             ],
-            'extra_data' => [],
+            'extra_data' => [
+                'Localidad' => '',
+            ],
         ];
 
         $data = $csfScrap->obtainFromRfcAndCif(Rfc::parse($rfc), $idcif)->toArray();
@@ -150,7 +154,50 @@ class ScrapCsfFromRfcAndCifTest extends TestCase
                     'regimen_id' => '626',
                 ],
             ],
-            'extra_data' => [],
+            'extra_data' => [
+                'Localidad' => '',
+            ],
+        ];
+
+        $data = $csfScrap->obtainFromRfcAndCif(Rfc::parse($rfc), $idcif)->toArray();
+
+        $this->assertEquals($expectedData, $data);
+    }
+
+    public function test_scrap_from_idcif_and_rfc_localidad_instead_of_colonia(): void
+    {
+        $csfScrap = $this->prepareScraper('scrap_moral_without_colonia.html');
+        $rfc = 'DIM8701081LA';
+        $idcif = '1904014102123';
+        $expectedData = [
+            'rfc' => 'DIM8701081LA',
+            'id_cif' => '1904014102123',
+            'razon_social' => 'MI RAZON',
+            'regimen_de_capital' => 'SA DE CV',
+            'fecha_constitucion' => DateTimeImmutable::createFromFormat('!d-m-Y', '29-12-1997'),
+            'fecha_inicio_operaciones' => DateTimeImmutable::createFromFormat('!d-m-Y', '16-01-1999'),
+            'situacion_contribuyente' => 'ACTIVO',
+            'fecha_ultimo_cambio_situacion' => DateTimeImmutable::createFromFormat('!d-m-Y', '16-01-1999'),
+            'entidad_federativa' => 'CHIAPAS',
+            'municipio_delegacion' => 'Mi Municipio',
+            'colonia' => '',
+            'tipo_vialidad' => 'CALLE',
+            'nombre_vialidad' => 'CONOCIDO',
+            'numero_exterior' => 'SIN NUMERO',
+            'numero_interior' => 'SIN NUMERO',
+            'codigo_postal' => '72030',
+            'correo_electronico' => 'email@example.com',
+            'al' => 'CHIAPAS 1',
+            'regimenes' => [
+                [
+                    'regimen' => 'Régimen General de Ley Personas Morales',
+                    'fecha_alta' => DateTimeImmutable::createFromFormat('!d-m-Y', '31-03-2001'),
+                    'regimen_id' => '601',
+                ],
+            ],
+            'extra_data' => [
+                'Localidad' => '30210010',
+            ],
         ];
 
         $data = $csfScrap->obtainFromRfcAndCif(Rfc::parse($rfc), $idcif)->toArray();

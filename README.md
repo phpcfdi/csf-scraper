@@ -48,7 +48,7 @@ $rfc = Rfc::parse('YOUR_RFC');
 $person = $scraper->obtainFromRfcAndCif(rfc: $rfc, idCIF: 'ID_CIF');
 
 // También puedes obtener los datos de la persona directamente del archivo local PDF
-// (Ten en cuenta que esta funcionalidad requiere de tener instalado popper-utils en tu servidor).
+// (Ten en cuenta que esta funcionalidad requiere de tener instalado poppler-utils en tu servidor).
 $person = $scraper->obtainFromPdfPath('LOCAl_PDF_FILE_PATH');
 
 // puedes acceder a los datos de la persona (moral o física) usando los métodos incluidos:

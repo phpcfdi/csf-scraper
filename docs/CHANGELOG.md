@@ -11,6 +11,14 @@ versión, aunque sí su incorporación en la rama principal de trabajo, generalm
 
 ## Listado de cambios
 
+### Versión 0.1.7 2024-01-10
+
+- Se arregla el problema para CSF que traen localidad en lugar de colonia. Agradecimientos a @luffynando, @blacktrue y @eclipxe13 por sus aportes.
+- Se actualiza la licencia. Feliz año 2024.
+- Se arreglan algunos typos en el README.md
+- Se actualizan las herramientas de desarrollo.
+- Se consigue el 100% de cobertura de código.
+
 ### Versión 0.1.6 2023-06-17
 
 - Se agrega el método `Scraper::getClient()` para obtener el cliente con el que fue construido el objeto.
