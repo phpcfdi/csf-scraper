@@ -77,12 +77,12 @@ jobs:
         run: phpstan analyse --no-progress --verbose
 
   tests:
-    name: PHP ${{ matrix.php-versions }} on ${{ matrix.operating-systems }}
+    name: PHP ${{ matrix.php-version }} on ${{ matrix.operating-systems }}
     runs-on: ${{ matrix.operating-systems }}
     strategy:
       matrix:
         operating-systems: ["windows-latest", "ubuntu-latest"]
-        php-versions: ['8.0', '8.1', '8.2']
+        php-version: ['8.0', '8.1', '8.2']
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -90,7 +90,7 @@ jobs:
         if: matrix.operating-systems == 'ubuntu-latest'
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php-versions }}
+          php-version: ${{ matrix.php-version }}
           coverage: none
           tools: composer:v2
         env:
@@ -99,7 +99,7 @@ jobs:
         if: matrix.operating-systems == 'windows-latest'
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php-versions }}
+          php-version: ${{ matrix.php-version }}
           coverage: none
           tools: composer:v2
         env:
