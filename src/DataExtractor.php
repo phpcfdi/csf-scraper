@@ -48,7 +48,7 @@ final class DataExtractor implements DataExtractorInterface
         if (null === $node) {
             return '';
         }
-        return trim(str_replace($valueToSearch, ' ', $this->normalizeWhiteSpaces($node->parentNode?->parentNode?->textContent ?? '')));
+        return trim(str_replace($valueToSearch, ' ', $this->normalizeWhiteSpaces($node->parentNode->parentNode->textContent ?? '')));
     }
 
     private function normalizeWhiteSpaces(string $str): string

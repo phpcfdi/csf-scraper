@@ -13,8 +13,7 @@ class RegimenJsonSerializeTest extends TestCase
     {
         $regimen = new Regimen();
 
-        /** @var string $json */
-        $json = json_encode($regimen);
+        $json = (string) json_encode($regimen);
 
         $this->assertSame([
             'regimen' => '',

@@ -14,8 +14,7 @@ class PersonaJsonSerializeTest extends TestCase
     {
         $person = new PersonaMoral();
 
-        /** @var string $json */
-        $json = json_encode($person);
+        $json = (string) json_encode($person);
 
         $this->assertSame([
             'razon_social' => '',
@@ -45,8 +44,7 @@ class PersonaJsonSerializeTest extends TestCase
     {
         $person = new PersonaFisica();
 
-        /** @var string $json */
-        $json = json_encode($person);
+        $json = (string) json_encode($person);
 
         $this->assertSame([
             'curp' => '',
