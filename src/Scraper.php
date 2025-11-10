@@ -64,9 +64,9 @@ class Scraper implements ScraperInterface
      * @param string $path
      * @return PersonaMoral|PersonaFisica
      * @throws Exceptions\CifNotFoundException
-     * @throws Exceptions\PdfReader\CifFromPdfNotFoundException
+     * @throws CifFromPdfNotFoundException
      * @throws Exceptions\PdfReader\EmptyPdfContentException
-     * @throws Exceptions\PdfReader\RfcFromPdfNotFoundException
+     * @throws RfcFromPdfNotFoundException
      * @throws InvalidExpressionToParseException
      */
     public function obtainFromPdfPath(string $path): PersonaMoral|PersonaFisica
