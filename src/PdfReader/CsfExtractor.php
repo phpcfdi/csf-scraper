@@ -10,12 +10,12 @@ use PhpCfdi\CsfScraper\Exceptions\PdfReader\EmptyPdfContentException;
  *
  * @internal
  */
-final class CsfExtractor
+final readonly class CsfExtractor
 {
     /**
      * @var string[]
      */
-    private readonly array $lines;
+    private array $lines;
 
     /**
      * @throws EmptyPdfContentException

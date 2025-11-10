@@ -27,7 +27,7 @@ final class ScraperTest extends TestCase
          */
         $this->assertSame(
             [CURLOPT_SSL_CIPHER_LIST => 'DEFAULT@SECLEVEL=1'],
-            $client->getConfig('curl')
+            $client->getConfig('curl'),
         );
     }
 }

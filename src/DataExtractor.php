@@ -9,9 +9,9 @@ use PhpCfdi\CsfScraper\Interfaces\DataExtractorInterface;
 use RuntimeException;
 use Symfony\Component\DomCrawler\Crawler;
 
-final class DataExtractor implements DataExtractorInterface
+final readonly class DataExtractor implements DataExtractorInterface
 {
-    public function __construct(private readonly string $html)
+    public function __construct(private string $html)
     {
     }
 

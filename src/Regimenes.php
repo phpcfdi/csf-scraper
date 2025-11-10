@@ -31,7 +31,7 @@ class Regimenes implements JsonSerializable
     {
         return array_map(
             fn (Regimen $regimen): array => $regimen->toArray(),
-            $this->regimenes
+            $this->regimenes,
         );
     }
 

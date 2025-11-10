@@ -10,9 +10,9 @@ use Symfony\Component\Process\Process;
 /**
  * Extract the contents of a pdf file using pdftotext (apt-get install poppler-utils)
  */
-final class PdfToText
+final readonly class PdfToText
 {
-    private readonly string $pdftotext;
+    private string $pdftotext;
 
     public function __construct(string $pathPdfToText = '')
     {
@@ -37,7 +37,7 @@ final class PdfToText
                 $command,
                 $exitCode,
                 $process->getOutput(),
-                $process->getErrorOutput()
+                $process->getErrorOutput(),
             );
         }
         return $process->getOutput();
