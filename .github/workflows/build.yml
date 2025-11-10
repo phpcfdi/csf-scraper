@@ -103,17 +103,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Setup PHP on Linux
-        if: matrix.operating-systems == 'ubuntu-latest'
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: ${{ matrix.php-version }}
-          coverage: none
-          tools: composer:v2
-        env:
-          fail-fast: true
-      - name: Setup PHP on Windows
-        if: matrix.operating-systems == 'windows-latest'
+      - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ matrix.php-version }}
