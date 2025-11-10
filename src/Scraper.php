@@ -49,7 +49,7 @@ class Scraper implements ScraperInterface
      */
     public function obtainFromRfcAndCif(Rfc $rfc, string $idCIF): PersonaMoral|PersonaFisica
     {
-        $uri = sprintf(self::$url, $idCIF, $rfc->getRfc());
+        $uri = sprintf(static::$url, $idCIF, $rfc->getRfc());
         $html = $this->obtainHtml($uri);
         $person = (new DataExtractor($html))->extract($rfc->isFisica());
         $person->setRfc($rfc->getRfc());
