@@ -15,10 +15,7 @@ class Regimen implements JsonSerializable
 
     private ?DateTimeImmutable $fechaAlta = null;
 
-    /**
-     *
-     * @var array<int, string[]>
-     */
+    /** @var list<string[]> */
     private array $regimenes = [
         [
             'id' => '601',
@@ -137,9 +134,7 @@ class Regimen implements JsonSerializable
         return '';
     }
 
-    /**
-     * @return array{regimen: string, regimen_id: string, fecha_alta: ?DateTimeImmutable}
-     */
+    /** @return array{regimen: string, regimen_id: string, fecha_alta: ?DateTimeImmutable} */
     public function toArray(): array
     {
         return [

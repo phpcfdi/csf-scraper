@@ -212,7 +212,7 @@ abstract class Persona implements JsonSerializable
     }
 
     /**
-     * The values must be a simple text to search using xpath as in contains(normalize-space(.), {value})'
+     * The values must be a simple text to search using xpath as in 'contains(normalize-space(.), {value})'
      * @return array<string, string>
      */
     abstract public function getTdTitlesTextToSearch(): array;

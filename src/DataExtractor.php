@@ -43,7 +43,7 @@ final readonly class DataExtractor implements DataExtractorInterface
 
     private function getValueByTdTitleText(Crawler $crawler, string $valueToSearch): string
     {
-        $element = $crawler->filterXPath("//td[@role='gridcell']/span[contains(normalize-space(.), '{$valueToSearch}')]");
+        $element = $crawler->filterXPath("//td[@role='gridcell']/span[contains(normalize-space(.), '$valueToSearch')]");
         $node = $element->getNode(0);
         if (null === $node) {
             return '';

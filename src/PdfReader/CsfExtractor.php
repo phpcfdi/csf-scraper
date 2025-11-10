@@ -6,15 +6,10 @@ namespace PhpCfdi\CsfScraper\PdfReader;
 
 use PhpCfdi\CsfScraper\Exceptions\PdfReader\EmptyPdfContentException;
 
-/**
- *
- * @internal
- */
+/** @internal */
 final readonly class CsfExtractor
 {
-    /**
-     * @var string[]
-     */
+    /** @var list<string> */
     private array $lines;
 
     /**
