@@ -9,7 +9,7 @@ use Throwable;
 
 final class CifDownloadException extends RuntimeException implements CsfScraperException
 {
-    public function __construct(private string $url, Throwable $previous)
+    public function __construct(private readonly string $url, Throwable $previous)
     {
         parent::__construct('The request has failed', previous: $previous);
     }

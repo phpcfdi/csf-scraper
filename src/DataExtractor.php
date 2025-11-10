@@ -11,7 +11,7 @@ use Symfony\Component\DomCrawler\Crawler;
 
 final class DataExtractor implements DataExtractorInterface
 {
-    public function __construct(private string $html)
+    public function __construct(private readonly string $html)
     {
     }
 

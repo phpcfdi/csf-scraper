@@ -12,7 +12,7 @@ use Symfony\Component\Process\Process;
  */
 final class PdfToText
 {
-    private string $pdftotext;
+    private readonly string $pdftotext;
 
     public function __construct(string $pathPdfToText = '')
     {

@@ -15,14 +15,14 @@ final class CsfExtractor
     /**
      * @var string[]
      */
-    private array $lines;
+    private readonly array $lines;
 
     /**
      * @throws EmptyPdfContentException
      */
     public function __construct(string $contents)
     {
-        if ('' == $contents) {
+        if ('' === $contents) {
             throw new EmptyPdfContentException('Cannot read pdf contents.');
         }
         $this->lines = explode("\n", $contents);

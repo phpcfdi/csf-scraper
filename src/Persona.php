@@ -39,7 +39,7 @@ abstract class Persona implements JsonSerializable
 
     private string $al = '';
 
-    private Regimenes $regimenes;
+    private readonly Regimenes $regimenes;
 
     /** @var mixed[] */
     private array $data = [];

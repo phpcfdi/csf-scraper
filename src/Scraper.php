@@ -22,7 +22,7 @@ class Scraper implements ScraperInterface
 {
     public static string $url = 'https://siat.sat.gob.mx/app/qr/faces/pages/mobile/validadorqr.jsf?D1=10&D2=1&D3=%s_%s';
 
-    public function __construct(private ClientInterface $client)
+    public function __construct(private readonly ClientInterface $client)
     {
     }
 
@@ -61,8 +61,6 @@ class Scraper implements ScraperInterface
      * Obtain a PersonaMoral or PersonaFisica object with the information from SAT website
      * The RFC and CIF is taken from the "Constancia de Situación Fiscal" PDF file
      *
-     * @param string $path
-     * @return PersonaMoral|PersonaFisica
      * @throws Exceptions\CifNotFoundException
      * @throws CifFromPdfNotFoundException
      * @throws Exceptions\PdfReader\EmptyPdfContentException
@@ -88,8 +86,6 @@ class Scraper implements ScraperInterface
     /**
      * Helper method to extract the text information from PDF to plain text
      *
-     * @param string $path
-     * @return string
      * @throws Exceptions\PdfReader\PdfToTextConvertException when call to pdftotext fail
      */
     protected function pdfToTextContent(string $path): string
