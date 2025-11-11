@@ -123,11 +123,11 @@ jobs:
         run: phpstan analyse --no-progress --verbose
 
   tests:
-    name: PHP ${{ matrix.php-version }} on ${{ matrix.operating-systems }}
-    runs-on: ${{ matrix.operating-systems }}
+    name: PHP ${{ matrix.php-version }} on ${{ matrix.operating-system }}
+    runs-on: ${{ matrix.operating-system }}
     strategy:
       matrix:
-        operating-systems: ["windows-latest", "ubuntu-latest"]
+        operating-system: ["windows-latest", "ubuntu-latest"]
         php-version: ['8.2', '8.3', '8.4']
     steps:
       - name: Checkout
@@ -141,7 +141,7 @@ jobs:
         env:
           fail-fast: true
       - name: Install poppler-utils
-        if: matrix.operating-systems == 'ubuntu-latest'
+        if: matrix.operating-system == 'ubuntu-latest'
         run: |
           sudo apt-get update -y -qq
           sudo apt-get install -y poppler-utils
