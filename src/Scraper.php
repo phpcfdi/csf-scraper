@@ -102,10 +102,10 @@ class Scraper implements ScraperInterface
     protected function obtainHtml(string $uri): string
     {
         try {
-            $request = $this->client->request('GET', $uri);
+            $response = $this->client->request('GET', $uri);
         } catch (ClientExceptionInterface $exception) {
             throw new Exceptions\CifDownloadException($uri, $exception);
         }
-        return (string) $request->getBody();
+        return (string) $response->getBody();
     }
 }
