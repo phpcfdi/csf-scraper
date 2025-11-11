@@ -6,7 +6,6 @@ namespace PhpCfdi\CsfScraper;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
-use GuzzleHttp\Exception\GuzzleException;
 use PhpCfdi\CsfScraper\Exceptions\PdfReader\CifFromPdfNotFoundException;
 use PhpCfdi\CsfScraper\Exceptions\PdfReader\RfcFromPdfNotFoundException;
 use PhpCfdi\CsfScraper\Interfaces\ScraperInterface;
@@ -14,6 +13,7 @@ use PhpCfdi\CsfScraper\PdfReader\CsfExtractor;
 use PhpCfdi\CsfScraper\PdfReader\PdfToText;
 use PhpCfdi\Rfc\Exceptions\InvalidExpressionToParseException;
 use PhpCfdi\Rfc\Rfc;
+use Psr\Http\Client\ClientExceptionInterface;
 
 /**
  * Main class to obtain the data from a "Persona Moral" or a "Persona Física" from SAT website
@@ -103,7 +103,7 @@ class Scraper implements ScraperInterface
     {
         try {
             $request = $this->client->request('GET', $uri);
-        } catch (GuzzleException $exception) {
+        } catch (ClientExceptionInterface $exception) {
             throw new Exceptions\CifDownloadException($uri, $exception);
         }
         return (string) $request->getBody();

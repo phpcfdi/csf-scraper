@@ -34,6 +34,7 @@
         "ext-mbstring": "*",
         "guzzlehttp/guzzle": "^7.4",
         "phpcfdi/rfc": "^1.1",
+        "psr/http-client": "^1.0",
         "symfony/css-selector": "^7.0",
         "symfony/dom-crawler": "^7.0",
         "symfony/process": "^7.0"

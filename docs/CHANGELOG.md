@@ -16,6 +16,9 @@ versión, aunque sí su incorporación en la rama principal de trabajo, generalm
 - Se asegura la compatibilidad con PHP 8.3 y PHP 8.4.
 - Se elimina la compatibilidad con PHP 8.0 y PHP 8.1.
 - Se actualiza el año de la licencia a 2025.
+- No se estaban capturando correctamente las extensiones al intentar descargar la información de identificación fiscal,
+  se estaba atrapando la excepción `GuzzleHttp\Exception\GuzzleException` en lugar de la excepción estándar
+  `Psr\Http\Client\ClientExceptionInterface`.
 
 Cambios al entorno de desarrollo:
 
