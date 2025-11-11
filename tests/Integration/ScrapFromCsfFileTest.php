@@ -71,7 +71,7 @@ class ScrapFromCsfFileTest extends TestCase
 
     public function test_obtain_from_pdf_with_invalid_data(): void
     {
-        $csfScrap = new Scraper(new Client());
+        $csfScrap = Scraper::create();
 
         $this->expectException(CifDownloadException::class);
 
@@ -81,7 +81,7 @@ class ScrapFromCsfFileTest extends TestCase
     #[RequiresOperatingSystem('Linux')]
     public function test_obtain_from_pdf_without_rfc(): void
     {
-        $csfScrap = new Scraper(new Client());
+        $csfScrap = Scraper::create();
 
         $this->expectException(RfcFromPdfNotFoundException::class);
 
@@ -91,7 +91,7 @@ class ScrapFromCsfFileTest extends TestCase
     #[RequiresOperatingSystem('Linux')]
     public function test_obtain_from_pdf_without_cif(): void
     {
-        $csfScrap = new Scraper(new Client());
+        $csfScrap = Scraper::create();
 
         $this->expectException(CifFromPdfNotFoundException::class);
 
