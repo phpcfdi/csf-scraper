@@ -6,23 +6,16 @@ namespace PhpCfdi\CsfScraper\PdfReader;
 
 use PhpCfdi\CsfScraper\Exceptions\PdfReader\EmptyPdfContentException;
 
-/**
- *
- * @internal
- */
-final class CsfExtractor
+/** @internal */
+final readonly class CsfExtractor
 {
-    /**
-     * @var string[]
-     */
+    /** @var list<string> */
     private array $lines;
 
-    /**
-     * @throws EmptyPdfContentException
-     */
+    /** @throws EmptyPdfContentException */
     public function __construct(string $contents)
     {
-        if ('' == $contents) {
+        if ('' === $contents) {
             throw new EmptyPdfContentException('Cannot read pdf contents.');
         }
         $this->lines = explode("\n", $contents);

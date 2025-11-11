@@ -13,6 +13,7 @@ final class CifDownloadExceptionTest extends TestCase
 {
     public function test_implements_library_exception_type(): void
     {
+        /** @phpstan-ignore function.alreadyNarrowedType */
         $this->assertTrue(is_a(CifDownloadException::class, CsfScraperException::class, true));
     }
 

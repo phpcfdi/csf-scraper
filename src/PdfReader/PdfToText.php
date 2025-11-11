@@ -10,7 +10,7 @@ use Symfony\Component\Process\Process;
 /**
  * Extract the contents of a pdf file using pdftotext (apt-get install poppler-utils)
  */
-final class PdfToText
+final readonly class PdfToText
 {
     private string $pdftotext;
 
@@ -37,15 +37,13 @@ final class PdfToText
                 $command,
                 $exitCode,
                 $process->getOutput(),
-                $process->getErrorOutput()
+                $process->getErrorOutput(),
             );
         }
         return $process->getOutput();
     }
 
-    /**
-     * @return string[]
-     */
+    /** @return list<string> */
     public function buildCommand(string $pdfFile): array
     {
         return [$this->pdftotext, '-eol', 'unix', '-raw', '-q', $pdfFile, '-'];

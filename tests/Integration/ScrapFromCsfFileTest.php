@@ -9,11 +9,13 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 use PhpCfdi\CsfScraper\Exceptions\CifDownloadException;
+use PhpCfdi\CsfScraper\Exceptions\CifNotFoundException;
 use PhpCfdi\CsfScraper\Exceptions\PdfReader\CifFromPdfNotFoundException;
 use PhpCfdi\CsfScraper\Exceptions\PdfReader\RfcFromPdfNotFoundException;
 use PhpCfdi\CsfScraper\Scraper;
 use PhpCfdi\CsfScraper\Tests\Integration\Helpers\ScraperHelper;
 use PhpCfdi\CsfScraper\Tests\TestCase;
+use PHPUnit\Framework\Attributes\RequiresOperatingSystem;
 
 class ScrapFromCsfFileTest extends TestCase
 {
@@ -68,36 +70,43 @@ class ScrapFromCsfFileTest extends TestCase
         $this->assertEquals($expectedData, $data);
     }
 
-    /**
-     * @requires OSFAMILY Linux
-     */
+    public function test_obtain_from_pdf_with_invalid_url(): void
+    {
+        $previousUrl = Scraper::$url;
+        Scraper::$url = str_replace('siat.sat.gob.mx', 'sat.gob.mx', $previousUrl);
+
+        try {
+            $csfScrap = Scraper::create();
+            $this->expectException(CifDownloadException::class);
+            $csfScrap->obtainFromPdfPath($this->filePath('csf-correct-but-invalid.pdf'));
+        } finally {
+            Scraper::$url = $previousUrl;
+        }
+    }
+
     public function test_obtain_from_pdf_with_invalid_data(): void
     {
-        $csfScrap = new Scraper(new Client());
+        $csfScrap = Scraper::create();
 
-        $this->expectException(CifDownloadException::class);
+        $this->expectException(CifNotFoundException::class);
 
         $csfScrap->obtainFromPdfPath($this->filePath('csf-correct-but-invalid.pdf'));
     }
 
-    /**
-     * @requires OSFAMILY Linux
-     */
+    #[RequiresOperatingSystem('Linux')]
     public function test_obtain_from_pdf_without_rfc(): void
     {
-        $csfScrap = new Scraper(new Client());
+        $csfScrap = Scraper::create();
 
         $this->expectException(RfcFromPdfNotFoundException::class);
 
         $csfScrap->obtainFromPdfPath($this->filePath('csf-without-rfc.pdf'));
     }
 
-    /**
-     * @requires OSFAMILY Linux
-     */
+    #[RequiresOperatingSystem('Linux')]
     public function test_obtain_from_pdf_without_cif(): void
     {
-        $csfScrap = new Scraper(new Client());
+        $csfScrap = Scraper::create();
 
         $this->expectException(CifFromPdfNotFoundException::class);
 

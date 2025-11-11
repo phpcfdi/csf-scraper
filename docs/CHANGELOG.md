@@ -11,6 +11,36 @@ versión, aunque sí su incorporación en la rama principal de trabajo, generalm
 
 ## Listado de cambios
 
+### Versión 0.2.0 2025-11-10
+
+- Se asegura la compatibilidad con PHP 8.3 y PHP 8.4.
+- Se elimina la compatibilidad con PHP 8.0 y PHP 8.1.
+- Se actualiza el año de la licencia a 2025.
+- No se estaban capturando correctamente las extensiones al intentar descargar la información de identificación fiscal,
+  se estaba atrapando la excepción `GuzzleHttp\Exception\GuzzleException` en lugar de la excepción estándar
+  `Psr\Http\Client\ClientExceptionInterface`.
+
+Cambios al entorno de desarrollo:
+
+- Se corrige la integración con SonarQube Cloud.
+- Se actualiza a PHPUnit 11.5.
+- Se actualizan las configuraciones de estándar de código para `phpcs` y `php-cs-fixer`.
+- Se agrega `composer-normalize` a las herramientas de desarrollo.
+- En los flujos de trabajo:
+  - Se ejecutan los trabajos en PHP 8.4.
+  - Se agrega PHP 8.3 y PHP 8.4 a la matriz de pruebas.
+  - Se agrega el trabajo `composer-normalize`.
+  - Se ejecutan las acciones en la versión 4.
+  - Se usa la variable `php-version` en singular en la matriz de pruebas.
+  - Se usa la variable `operating-system` en singular en la matriz de pruebas.
+  - Se usa una única configuración para Linux o Windows al configurar PHP.
+- Se actualizan las herramientas de desarrollo.
+
+#### Mantenimiento 2023-06-17
+
+- Se agrega un último test para alcanzar el 100% de cobertura de código.
+- Se corrige en este archivo, que "los flujos de trabajo corren en PHP 8.2", decía "PHP 8.0".
+
 ### Versión 0.1.7 2024-01-10
 
 - Se arregla el problema para CSF que traen localidad en lugar de colonia. Agradecimientos a @luffynando, @blacktrue y @eclipxe13 por sus aportes.
@@ -29,7 +59,7 @@ versión, aunque sí su incorporación en la rama principal de trabajo, generalm
 - Se actualiza el archivo de configuración de SonarCloud para excluir correctamente los archivos en `tests/_files`.
 - Para los flujos de trabajo:
   - Se permite ejecutarlos a petición.
-  - Los trabajos se ejecutan en PHP 8.0.
+  - Los trabajos se ejecutan en PHP 8.2.
   - No se instala `composer` cuando no es necesario.
   - Se sustituye la directiva `::set-output` con `$GITHUB_OUTPUT`.
 - Se actualizan las herramientas de desarrollo.

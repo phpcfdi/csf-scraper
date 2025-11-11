@@ -10,10 +10,7 @@ use PhpCfdi\Rfc\Rfc;
 
 interface ScraperInterface
 {
-    /**
-     * Obtain a PersonaMoral or PersonaFisica object with the information from SAT website
-     *
-     */
+    /** Obtain a PersonaMoral or PersonaFisica object with the information from SAT website */
     public function obtainFromRfcAndCif(Rfc $rfc, string $idCIF): PersonaMoral|PersonaFisica;
 
     /**

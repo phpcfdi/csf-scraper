@@ -12,6 +12,7 @@ final class CifNotFoundExceptionTest extends TestCase
 {
     public function test_implements_library_exception_type(): void
     {
+        /** @phpstan-ignore function.alreadyNarrowedType */
         $this->assertTrue(is_a(CifNotFoundException::class, CsfScraperException::class, true));
     }
 }

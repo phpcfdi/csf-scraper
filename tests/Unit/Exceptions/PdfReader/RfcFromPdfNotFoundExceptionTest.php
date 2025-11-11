@@ -12,6 +12,7 @@ final class RfcFromPdfNotFoundExceptionTest extends TestCase
 {
     public function test_implements_library_exception_type(): void
     {
+        /** @phpstan-ignore function.alreadyNarrowedType */
         $this->assertTrue(is_a(RfcFromPdfNotFoundException::class, CsfScraperException::class, true));
     }
 }

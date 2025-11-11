@@ -6,13 +6,12 @@ namespace PhpCfdi\CsfScraper\Tests\Unit\PdfReader\PdfToText;
 
 use PhpCfdi\CsfScraper\PdfReader\PdfToText;
 use PhpCfdi\CsfScraper\Tests\TestCase;
+use PHPUnit\Framework\Attributes\RequiresOperatingSystem;
 use RuntimeException;
 
 class PdfToTextConstructorTest extends TestCase
 {
-    /**
-     * @requires OSFAMILY Linux
-     */
+    #[RequiresOperatingSystem('Linux')]
     public function test_pdftotext_is_installed_default_path(): void
     {
         $csfExtractor = new PdfToText();

@@ -212,6 +212,6 @@ and licensed for use under the MIT License (MIT). Please see [LICENSE][] for mor
 [badge-build]: https://img.shields.io/github/actions/workflow/status/phpcfdi/csf-scraper/build.yml?branch=main&logo=github-actions
 [badge-reliability]: https://sonarcloud.io/api/project_badges/measure?project=phpcfdi_csf-scraper&metric=reliability_rating
 [badge-maintainability]: https://sonarcloud.io/api/project_badges/measure?project=phpcfdi_csf-scraper&metric=sqale_rating
-[badge-coverage]: https://img.shields.io/sonar/coverage/phpcfdi_csf-scraper/main?logo=sonarcloud&server=https%3A%2F%2Fsonarcloud.io
-[badge-violations]: https://img.shields.io/sonar/violations/phpcfdi_csf-scraper/main?format=long&logo=sonarcloud&server=https%3A%2F%2Fsonarcloud.io
+[badge-coverage]: https://img.shields.io/sonar/coverage/phpcfdi_csf-scraper/main?logo=sonarqubecloud&server=https%3A%2F%2Fsonarcloud.io
+[badge-violations]: https://img.shields.io/sonar/violations/phpcfdi_csf-scraper/main?format=long&logo=sonarqubecloud&server=https%3A%2F%2Fsonarcloud.io
 [badge-downloads]: https://img.shields.io/packagist/dt/phpcfdi/csf-scraper.svg?logo=packagist

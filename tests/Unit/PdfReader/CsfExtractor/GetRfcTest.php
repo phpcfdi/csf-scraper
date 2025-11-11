@@ -7,6 +7,7 @@ namespace PhpCfdi\CsfScraper\Tests\Unit\PdfReader\CsfExtractor;
 use PhpCfdi\CsfScraper\Exceptions\PdfReader\EmptyPdfContentException;
 use PhpCfdi\CsfScraper\PdfReader\CsfExtractor;
 use PhpCfdi\CsfScraper\Tests\TestCase;
+use PHPUnit\Framework\Attributes\RequiresOperatingSystem;
 
 class GetRfcTest extends TestCase
 {
@@ -23,9 +24,7 @@ class GetRfcTest extends TestCase
         $this->assertNull($rfc);
     }
 
-    /**
-     * @requires OSFAMILY Linux
-     */
+    #[RequiresOperatingSystem('Linux')]
     public function test_cannot_read_content(): void
     {
         $this->expectException(EmptyPdfContentException::class);

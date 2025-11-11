@@ -8,6 +8,7 @@ use DateTimeImmutable;
 use PhpCfdi\CsfScraper\PersonaMoral;
 use PhpCfdi\CsfScraper\Tests\TestCase;
 use PhpCfdi\CsfScraper\Tests\Unit\Persona\Traits\PersonaTrait;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class CommonPersonaPropertiesTest extends TestCase
 {
@@ -21,11 +22,8 @@ class CommonPersonaPropertiesTest extends TestCase
         $this->person = new PersonaMoral();
     }
 
-    /**
-     *
-     * @return array<int, array<int, string>>
-     */
-    public function datePropertiesProvider(): array
+    /** @return array<int, array<int, string>> */
+    public static function datePropertiesProvider(): array
     {
         return [
             ['FechaInicioOperaciones', '12-01-2017'],
@@ -33,11 +31,8 @@ class CommonPersonaPropertiesTest extends TestCase
         ];
     }
 
-    /**
-     *
-     * @return array<int, array<int, string>>
-     */
-    public function stringPropertiesProvider(): array
+    /** @return array<int, array<int, string>> */
+    public static function stringPropertiesProvider(): array
     {
         return [
             ['SituacionContribuyente', 'ACTIVO'],
@@ -54,18 +49,14 @@ class CommonPersonaPropertiesTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider stringPropertiesProvider
-     */
+    #[DataProvider('stringPropertiesProvider')]
     public function test_set_and_get_string_properties(string $complementFunction, string $value): void
     {
         $result = $this->setAndGetProperty($complementFunction, $value);
         $this->assertSame($value, $result);
     }
 
-    /**
-     * @dataProvider datePropertiesProvider
-     */
+    #[DataProvider('datePropertiesProvider')]
     public function test_set_and_get_date_properties(string $complementFunction, string $value): void
     {
         $result = $this->setAndGetProperty($complementFunction, $value);
@@ -73,7 +64,6 @@ class CommonPersonaPropertiesTest extends TestCase
     }
 
     /**
-     *
      * test to check if new property not contained in Persona is found is assigned and value can be retrieved
      * its goal is not to be used but to prevent unexpected exceptions
      * */

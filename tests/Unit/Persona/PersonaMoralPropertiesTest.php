@@ -8,6 +8,7 @@ use DateTimeImmutable;
 use PhpCfdi\CsfScraper\PersonaMoral;
 use PhpCfdi\CsfScraper\Tests\TestCase;
 use PhpCfdi\CsfScraper\Tests\Unit\Persona\Traits\PersonaTrait;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class PersonaMoralPropertiesTest extends TestCase
 {
@@ -21,22 +22,16 @@ class PersonaMoralPropertiesTest extends TestCase
         $this->person = new PersonaMoral();
     }
 
-    /**
-     *
-     * @return array<int, array<int, string>>
-     */
-    public function datePropertiesProvider(): array
+    /** @return array<int, array<int, string>> */
+    public static function datePropertiesProvider(): array
     {
         return [
             ['fechaConstitucion', '16-05-1996'],
         ];
     }
 
-    /**
-     *
-     * @return array<int, array<int, string>>
-     */
-    public function stringPropertiesProvider(): array
+    /** @return array<int, array<int, string>> */
+    public static function stringPropertiesProvider(): array
     {
         return [
             ['RazonSocial', 'MI TIENDITA'],
@@ -44,18 +39,14 @@ class PersonaMoralPropertiesTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider stringPropertiesProvider
-     */
+    #[DataProvider('stringPropertiesProvider')]
     public function test_set_and_get_string_properties(string $complementFunction, string $value): void
     {
         $result = $this->setAndGetProperty($complementFunction, $value);
         $this->assertSame($value, $result);
     }
 
-    /**
-     * @dataProvider datePropertiesProvider
-     */
+    #[DataProvider('datePropertiesProvider')]
     public function test_set_and_get_date_properties(string $complementFunction, string $value): void
     {
         $result = $this->setAndGetProperty($complementFunction, $value);

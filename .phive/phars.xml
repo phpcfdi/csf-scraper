@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phive xmlns="https://phar.io/phive">
-  <phar name="phpstan" version="^1.10.55" installed="1.10.55" location="./tools/phpstan" copy="false"/>
-  <phar name="phpcs" version="^3.7.2" installed="3.8.0" location="./tools/phpcs" copy="false"/>
-  <phar name="phpcbf" version="^3.7.2" installed="3.8.0" location="./tools/phpcbf" copy="false"/>
-  <phar name="php-cs-fixer" version="^3.46.0" installed="3.46.0" location="./tools/php-cs-fixer" copy="false"/>
-  <phar name="composer-require-checker" version="^4.6.0" installed="4.8.0" location="./tools/composer-require-checker" copy="false"/>
+  <phar name="composer-normalize" version="^2.48.2" installed="2.48.2" location="./tools/composer-normalize" copy="false"/>
+  <phar name="php-cs-fixer" version="^3.89.2" installed="3.89.2" location="./tools/php-cs-fixer" copy="false"/>
+  <phar name="phpcs" version="^3.13.5" installed="3.13.5" location="./tools/phpcs" copy="false"/>
+  <phar name="phpcbf" version="^3.13.5" installed="3.13.5" location="./tools/phpcbf" copy="false"/>
+  <phar name="phpstan" version="^2.1.31" installed="2.1.31" location="./tools/phpstan" copy="false"/>
+  <phar name="composer-require-checker" version="^4.18.0" installed="4.18.0" location="./tools/composer-require-checker" copy="false"/>
 </phive>

@@ -9,15 +9,13 @@ use RuntimeException;
 
 final class PdfToTextConvertException extends RuntimeException implements CsfScraperException
 {
-    /**
-     * @param string[] $command
-     */
+    /** @param string[] $command */
     public function __construct(
         string $message,
-        private array $command,
-        private int $exitCode,
-        private string $output,
-        private string $error,
+        private readonly array $command,
+        private readonly int $exitCode,
+        private readonly string $output,
+        private readonly string $error,
     ) {
         parent::__construct($message);
     }

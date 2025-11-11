@@ -31,10 +31,9 @@ trait PersonaTrait
     }
 
     /**
-    *
-    * test to check if new property not contained in Persona is found is assigned and value can be retrieved
-    * its goal is not to be used but to prevent unexpected exceptions
-    * */
+     * test to check if new property not contained in Persona is found is assigned and value can be retrieved
+     * its goal is not to be used but to prevent unexpected exceptions
+     */
     public function test_assign_dynamic_property(): void
     {
         /** @phpstan-ignore-next-line */

@@ -9,15 +9,13 @@ use PhpCfdi\CsfScraper\Interfaces\DataExtractorInterface;
 use RuntimeException;
 use Symfony\Component\DomCrawler\Crawler;
 
-final class DataExtractor implements DataExtractorInterface
+final readonly class DataExtractor implements DataExtractorInterface
 {
     public function __construct(private string $html)
     {
     }
 
-    /**
-     * @throws CifNotFoundException
-     */
+    /** @throws CifNotFoundException */
     public function extract(bool $isFisica): PersonaMoral|PersonaFisica
     {
         $html = $this->clearHtml($this->html);
@@ -43,12 +41,12 @@ final class DataExtractor implements DataExtractorInterface
 
     private function getValueByTdTitleText(Crawler $crawler, string $valueToSearch): string
     {
-        $element = $crawler->filterXPath("//td[@role='gridcell']/span[contains(normalize-space(.), '{$valueToSearch}')]");
+        $element = $crawler->filterXPath("//td[@role='gridcell']/span[contains(normalize-space(.), '$valueToSearch')]");
         $node = $element->getNode(0);
         if (null === $node) {
             return '';
         }
-        return trim(str_replace($valueToSearch, ' ', $this->normalizeWhiteSpaces($node->parentNode?->parentNode?->textContent ?? '')));
+        return trim(str_replace($valueToSearch, ' ', $this->normalizeWhiteSpaces($node->parentNode->parentNode->textContent ?? '')));
     }
 
     private function normalizeWhiteSpaces(string $str): string
@@ -62,7 +60,6 @@ final class DataExtractor implements DataExtractorInterface
     }
 
     /**
-     *
      * @return Regimen[]
      * @throws RuntimeException
      */

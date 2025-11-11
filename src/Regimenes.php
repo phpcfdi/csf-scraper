@@ -9,15 +9,10 @@ use JsonSerializable;
 
 class Regimenes implements JsonSerializable
 {
-    /**
-     * @var Regimen[]
-     */
+    /** @var list<Regimen> */
     private array $regimenes = [];
 
-    /**
-     *
-     * @return Regimen[]
-     */
+    /** @return list<Regimen> */
     public function getRegimenes(): array
     {
         return $this->regimenes;
@@ -31,14 +26,12 @@ class Regimenes implements JsonSerializable
         }
     }
 
-    /**
-     * @return array<int, array{regimen: string, regimen_id: string, fecha_alta: ?DateTimeImmutable}>
-     */
+    /** @return list<array{regimen: string, regimen_id: string, fecha_alta: ?DateTimeImmutable}> */
     public function toArray(): array
     {
         return array_map(
             fn (Regimen $regimen): array => $regimen->toArray(),
-            $this->regimenes
+            $this->regimenes,
         );
     }
 
