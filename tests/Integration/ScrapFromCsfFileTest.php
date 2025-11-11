@@ -14,6 +14,7 @@ use PhpCfdi\CsfScraper\Exceptions\PdfReader\RfcFromPdfNotFoundException;
 use PhpCfdi\CsfScraper\Scraper;
 use PhpCfdi\CsfScraper\Tests\Integration\Helpers\ScraperHelper;
 use PhpCfdi\CsfScraper\Tests\TestCase;
+use PHPUnit\Framework\Attributes\RequiresOperatingSystem;
 
 class ScrapFromCsfFileTest extends TestCase
 {
@@ -68,9 +69,6 @@ class ScrapFromCsfFileTest extends TestCase
         $this->assertEquals($expectedData, $data);
     }
 
-    /**
-     * @requires OSFAMILY Linux
-     */
     public function test_obtain_from_pdf_with_invalid_data(): void
     {
         $csfScrap = new Scraper(new Client());
@@ -80,9 +78,7 @@ class ScrapFromCsfFileTest extends TestCase
         $csfScrap->obtainFromPdfPath($this->filePath('csf-correct-but-invalid.pdf'));
     }
 
-    /**
-     * @requires OSFAMILY Linux
-     */
+    #[RequiresOperatingSystem('Linux')]
     public function test_obtain_from_pdf_without_rfc(): void
     {
         $csfScrap = new Scraper(new Client());
@@ -92,9 +88,7 @@ class ScrapFromCsfFileTest extends TestCase
         $csfScrap->obtainFromPdfPath($this->filePath('csf-without-rfc.pdf'));
     }
 
-    /**
-     * @requires OSFAMILY Linux
-     */
+    #[RequiresOperatingSystem('Linux')]
     public function test_obtain_from_pdf_without_cif(): void
     {
         $csfScrap = new Scraper(new Client());

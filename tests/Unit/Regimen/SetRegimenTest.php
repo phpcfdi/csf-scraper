@@ -6,6 +6,7 @@ namespace PhpCfdi\CsfScraper\Tests\Unit\Regimen;
 
 use PhpCfdi\CsfScraper\Regimen;
 use PhpCfdi\CsfScraper\Tests\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class SetRegimenTest extends TestCase
 {
@@ -13,7 +14,7 @@ class SetRegimenTest extends TestCase
      *
      * @return array<int, array<int, string>>
      */
-    public function regimenesProvider(): array
+    static public function regimenesProvider(): array
     {
         return [
             ['General de Ley Personas Morales', '601'],
@@ -40,7 +41,7 @@ class SetRegimenTest extends TestCase
         ];
     }
 
-    /** @dataProvider regimenesProvider */
+    #[DataProvider('regimenesProvider')]
     public function test_check_regimenes_are_well_assigned(string $regimenText, string $regimenIdExpected): void
     {
         $regimen = new Regimen();
@@ -92,7 +93,7 @@ class SetRegimenTest extends TestCase
     }
 
     /** @return array<string, array{string}> */
-    public function provider_fecha_alta_with_invalid_value(): array
+    static public function provider_fecha_alta_with_invalid_value(): array
     {
         return [
             'empty' => [''],
@@ -101,7 +102,7 @@ class SetRegimenTest extends TestCase
         ];
     }
 
-    /** @dataProvider  provider_fecha_alta_with_invalid_value */
+    #[DataProvider('provider_fecha_alta_with_invalid_value')]
     public function test_fecha_alta_with_invalid_value(string $input): void
     {
         $regimen = new Regimen();
