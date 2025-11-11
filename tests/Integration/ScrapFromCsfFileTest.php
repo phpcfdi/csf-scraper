@@ -9,6 +9,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Psr7\Response;
 use PhpCfdi\CsfScraper\Exceptions\CifDownloadException;
+use PhpCfdi\CsfScraper\Exceptions\CifNotFoundException;
 use PhpCfdi\CsfScraper\Exceptions\PdfReader\CifFromPdfNotFoundException;
 use PhpCfdi\CsfScraper\Exceptions\PdfReader\RfcFromPdfNotFoundException;
 use PhpCfdi\CsfScraper\Scraper;
@@ -73,7 +74,7 @@ class ScrapFromCsfFileTest extends TestCase
     {
         $csfScrap = Scraper::create();
 
-        $this->expectException(CifDownloadException::class);
+        $this->expectException(CifNotFoundException::class);
 
         $csfScrap->obtainFromPdfPath($this->filePath('csf-correct-but-invalid.pdf'));
     }
