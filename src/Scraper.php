@@ -61,6 +61,7 @@ class Scraper implements ScraperInterface
      * Obtain a PersonaMoral or PersonaFisica object with the information from SAT website
      * The RFC and CIF is taken from the "Constancia de Situación Fiscal" PDF file
      *
+     * @throws Exceptions\CifDownloadException
      * @throws Exceptions\CifNotFoundException
      * @throws CifFromPdfNotFoundException
      * @throws Exceptions\PdfReader\EmptyPdfContentException

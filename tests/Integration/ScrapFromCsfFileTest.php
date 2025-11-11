@@ -70,6 +70,20 @@ class ScrapFromCsfFileTest extends TestCase
         $this->assertEquals($expectedData, $data);
     }
 
+    public function test_obtain_from_pdf_with_invalid_url(): void
+    {
+        $previousUrl = Scraper::$url;
+        Scraper::$url = str_replace('siat.sat.gob.mx', 'sat.gob.mx', $previousUrl);
+
+        try {
+            $csfScrap = Scraper::create();
+            $this->expectException(CifDownloadException::class);
+            $csfScrap->obtainFromPdfPath($this->filePath('csf-correct-but-invalid.pdf'));
+        } finally {
+            Scraper::$url = $previousUrl;
+        }
+    }
+
     public function test_obtain_from_pdf_with_invalid_data(): void
     {
         $csfScrap = Scraper::create();
