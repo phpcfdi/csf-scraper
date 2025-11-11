@@ -22,11 +22,8 @@ class PersonaMoralPropertiesTest extends TestCase
         $this->person = new PersonaMoral();
     }
 
-    /**
-     *
-     * @return array<int, array<int, string>>
-     */
-    static public function datePropertiesProvider(): array
+    /** @return array<int, array<int, string>> */
+    public static function datePropertiesProvider(): array
     {
         return [
             ['fechaConstitucion', '16-05-1996'],
@@ -34,7 +31,7 @@ class PersonaMoralPropertiesTest extends TestCase
     }
 
     /** @return array<int, array<int, string>> */
-    static public function stringPropertiesProvider(): array
+    public static function stringPropertiesProvider(): array
     {
         return [
             ['RazonSocial', 'MI TIENDITA'],

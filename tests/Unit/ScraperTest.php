@@ -14,9 +14,6 @@ final class ScraperTest extends TestCase
 {
     public function test_create_with_specific_openssl_cipher_list(): void
     {
-        /**
-         * Problem: The scraper does not have a method to get the client, obtained by reflection
-         */
         $scraper = Scraper::create();
         $client = $scraper->getClient();
         $this->assertInstanceOf(Client::class, $client);

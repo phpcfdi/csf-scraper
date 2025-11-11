@@ -15,9 +15,7 @@ final readonly class DataExtractor implements DataExtractorInterface
     {
     }
 
-    /**
-     * @throws CifNotFoundException
-     */
+    /** @throws CifNotFoundException */
     public function extract(bool $isFisica): PersonaMoral|PersonaFisica
     {
         $html = $this->clearHtml($this->html);
@@ -62,7 +60,6 @@ final readonly class DataExtractor implements DataExtractorInterface
     }
 
     /**
-     *
      * @return Regimen[]
      * @throws RuntimeException
      */

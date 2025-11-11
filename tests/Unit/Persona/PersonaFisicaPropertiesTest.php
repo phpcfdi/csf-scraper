@@ -22,11 +22,8 @@ class PersonaFisicaPropertiesTest extends TestCase
         $this->person = new PersonaFisica();
     }
 
-    /**
-     *
-     * @return array<int, array<int, string>>
-     */
-    static public function datePropertiesProvider(): array
+    /** @return array<int, array<int, string>> */
+    public static function datePropertiesProvider(): array
     {
         return [
             ['FechaNacimiento', '16-05-1996'],
@@ -34,7 +31,7 @@ class PersonaFisicaPropertiesTest extends TestCase
     }
 
     /** @return array<int, array<int, string>> */
-    static public function stringPropertiesProvider(): array
+    public static function stringPropertiesProvider(): array
     {
         return [
             ['Curp', 'MI CURP'],

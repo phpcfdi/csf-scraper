@@ -45,10 +45,7 @@ class PersonaMoral extends Persona
         $this->fechaConstitucion = false !== $date ? $date : null;
     }
 
-    /**
-     *
-     * @return array<string, string>
-     */
+    /** @return array<string, string> */
     public function getTdTitlesTextToSearch(): array
     {
         return [

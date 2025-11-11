@@ -10,11 +10,8 @@ use PHPUnit\Framework\Attributes\DataProvider;
 
 class SetRegimenTest extends TestCase
 {
-    /**
-     *
-     * @return array<int, array<int, string>>
-     */
-    static public function regimenesProvider(): array
+    /** @return array<int, array<int, string>> */
+    public static function regimenesProvider(): array
     {
         return [
             ['General de Ley Personas Morales', '601'],
@@ -93,7 +90,7 @@ class SetRegimenTest extends TestCase
     }
 
     /** @return array<string, array{string}> */
-    static public function provider_fecha_alta_with_invalid_value(): array
+    public static function provider_fecha_alta_with_invalid_value(): array
     {
         return [
             'empty' => [''],

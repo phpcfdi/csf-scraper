@@ -78,7 +78,7 @@
         ],
         "dev:test": [
             "@dev:check-style",
-            "@php vendor/bin/phpunit --testdox --verbose --stop-on-failure",
+            "@php vendor/bin/phpunit --testdox --stop-on-failure",
             "@php tools/phpstan analyse --no-interaction --no-progress",
             "@php tools/composer-require-checker"
         ]

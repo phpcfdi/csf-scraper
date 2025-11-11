@@ -69,10 +69,7 @@ class PersonaFisica extends Persona
         $this->fechaNacimiento = false !== $date ? $date : null;
     }
 
-    /**
-     *
-     * @return array<string, string>
-     */
+    /** @return array<string, string> */
     public function getTdTitlesTextToSearch(): array
     {
         return [

@@ -22,11 +22,8 @@ class CommonPersonaPropertiesTest extends TestCase
         $this->person = new PersonaMoral();
     }
 
-    /**
-     *
-     * @return array<int, array<int, string>>
-     */
-    static public function datePropertiesProvider(): array
+    /** @return array<int, array<int, string>> */
+    public static function datePropertiesProvider(): array
     {
         return [
             ['FechaInicioOperaciones', '12-01-2017'],
@@ -35,7 +32,7 @@ class CommonPersonaPropertiesTest extends TestCase
     }
 
     /** @return array<int, array<int, string>> */
-    static public function stringPropertiesProvider(): array
+    public static function stringPropertiesProvider(): array
     {
         return [
             ['SituacionContribuyente', 'ACTIVO'],
@@ -67,7 +64,6 @@ class CommonPersonaPropertiesTest extends TestCase
     }
 
     /**
-     *
      * test to check if new property not contained in Persona is found is assigned and value can be retrieved
      * its goal is not to be used but to prevent unexpected exceptions
      * */

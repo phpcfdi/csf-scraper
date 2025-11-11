@@ -12,9 +12,7 @@ final readonly class CsfExtractor
     /** @var list<string> */
     private array $lines;
 
-    /**
-     * @throws EmptyPdfContentException
-     */
+    /** @throws EmptyPdfContentException */
     public function __construct(string $contents)
     {
         if ('' === $contents) {
