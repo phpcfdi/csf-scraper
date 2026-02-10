@@ -34,10 +34,11 @@ class Scraper implements ScraperInterface
     /**
      * Factory method to create a scraper object with configuration that simply works
      */
-    public static function create(): self
+    public static function create(float $timeout = 10.0): self
     {
         return new self(new Client([
             'curl' => [CURLOPT_SSL_CIPHER_LIST => 'DEFAULT@SECLEVEL=1'],
+            'timeout' => $timeout,
         ]));
     }
 

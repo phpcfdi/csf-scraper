@@ -90,5 +90,8 @@
         "dev:coverage": "DEV: run phpunit with xdebug and storage coverage in build/coverage/html/",
         "dev:fix-style": "DEV: fix code style errors using composer-normalize, php-cs-fixer and phpcbf",
         "dev:test": "DEV: run @dev:check-style, phpunit and phpstan"
-    }
+    },
+    "bin": [
+        "bin/csf-scraper"
+    ]
 }

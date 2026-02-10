@@ -46,6 +46,6 @@ final readonly class PdfToText
     /** @return list<string> */
     public function buildCommand(string $pdfFile): array
     {
-        return [$this->pdftotext, '-eol', 'unix', '-raw', '-q', $pdfFile, '-'];
+        return [$this->pdftotext, '-eol', 'unix', '-nopgbrk', '-raw', '-q', $pdfFile, '-'];
     }
 }

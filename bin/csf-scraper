@@ -1,0 +1,121 @@
+#!/usr/bin/env php
+<?php
+
+declare(strict_types=1);
+
+require __DIR__ . '/../vendor/autoload.php';
+
+use PhpCfdi\CsfScraper\Scraper;
+use PhpCfdi\Rfc\Rfc;
+
+function showUsage(): void
+{
+    $binary = basename($_SERVER['PHP_SELF']);
+
+    echo "Uso: $binary <comando> [argumentos]" . PHP_EOL;
+    echo PHP_EOL;
+    echo 'Comandos:' . PHP_EOL;
+    echo '  obtain <id-cif> <rfc>     - Obtener datos por ID CIF y RFC' . PHP_EOL;
+    echo '  obtain <archivo|url|->    - Obtener datos desde un archivo PDF local, URL o stdin con "-"' . PHP_EOL;
+    echo '  schema                    - Muestra el esquema JSON de la salida' . PHP_EOL;
+    echo '  help                      - Muestra este mensaje de ayuda' . PHP_EOL;
+    echo PHP_EOL;
+    echo 'Opciones:' . PHP_EOL;
+    echo '  --timeout <segundos>      - Tiempo máximo de espera para peticiones HTTP (default: 10)' . PHP_EOL;
+    echo PHP_EOL;
+    echo 'Ejemplos:' . PHP_EOL;
+    echo "  $binary obtain 14111045399 UNA2907227Y5 --timeout 20" . PHP_EOL;
+    echo "  $binary obtain ./constancia.pdf" . PHP_EOL;
+    echo "  $binary obtain https://siafweb.ib.unam.mx/CSF.pdf" . PHP_EOL;
+    echo "  cat ./constancia.pdf | $binary obtain -" . PHP_EOL;
+    echo "  $binary schema" . PHP_EOL;
+}
+
+$timeout = 10.0;
+$clean_argv = [];
+for ($i = 0; $i < $argc; $i++) {
+    if ('--timeout' === $argv[$i] && isset($argv[$i + 1])) {
+        $timeout = (float) $argv[$i + 1];
+        $i++;
+        continue;
+    }
+    $clean_argv[] = $argv[$i];
+}
+$argv = $clean_argv;
+$argc = count($argv);
+
+foreach ($argv as $arg) {
+    if (in_array($arg, ['-h', '--help', 'help'])) {
+        showUsage();
+        exit(0);
+    }
+}
+
+if ($argc < 2) {
+    showUsage();
+    exit(0);
+}
+
+$command = $argv[1];
+
+// Manejo de comandos explícitos
+if ('schema' === $command || '--json-schema' === $command) {
+    echo file_get_contents(__DIR__ . '/../docs/schemas/csf.schema.json');
+    exit(0);
+}
+
+$scraper = Scraper::create($timeout);
+
+try {
+    if ('obtain' === $command) {
+        if (3 === $argc) {
+            // Un solo argumento después de obtain: asumimos ruta/url/stdin
+            $person = obtainFromSource($argv[2], $scraper);
+        } elseif (4 === $argc) {
+            // Dos argumentos después de obtain: asumimos id-cif y rfc
+            $idCif = $argv[2];
+            $rfcValue = $argv[3];
+            $person = $scraper->obtainFromRfcAndCif(Rfc::parse($rfcValue), $idCif);
+        } else {
+            throw new Exception('El comando obtain requiere [id-cif rfc] o [archivo|url|-]');
+        }
+    } else {
+        throw new Exception("Comando '$command' no reconocido. Usa help para ver la lista de comandos.");
+    }
+
+    echo json_encode($person, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE) . PHP_EOL;
+} catch (Exception $e) {
+    fwrite(STDERR, 'Error: ' . $e->getMessage() . PHP_EOL);
+    exit(1);
+}
+
+function obtainFromSource(string $input, Scraper $scraper): PhpCfdi\CsfScraper\PersonaMoral|PhpCfdi\CsfScraper\PersonaFisica
+{
+    $isUrl = filter_var($input, FILTER_VALIDATE_URL);
+    $isStdin = '-' === $input;
+    $tempFile = null;
+
+    try {
+        if ($isUrl || $isStdin) {
+            $tempFile = tempnam(sys_get_temp_dir(), 'csf_');
+            $content = $isStdin ? file_get_contents('php://stdin') : file_get_contents($input);
+            if (false === $content || '' === $content) {
+                $source = $isStdin ? 'stdin' : "la URL: $input";
+                throw new Exception("No se pudo obtener el contenido desde $source");
+            }
+            file_put_contents($tempFile, $content);
+            $path = $tempFile;
+        } else {
+            $path = $input;
+            if (! file_exists($path)) {
+                throw new Exception("El archivo no existe en la ruta: $path");
+            }
+        }
+
+        return $scraper->obtainFromPdfPath($path);
+    } finally {
+        if ($tempFile && file_exists($tempFile)) {
+            unlink($tempFile);
+        }
+    }
+}

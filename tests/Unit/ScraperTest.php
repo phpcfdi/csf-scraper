@@ -26,5 +26,14 @@ final class ScraperTest extends TestCase
             [CURLOPT_SSL_CIPHER_LIST => 'DEFAULT@SECLEVEL=1'],
             $client->getConfig('curl'),
         );
+        $this->assertSame(10.0, $client->getConfig('timeout'));
+    }
+
+    public function test_create_with_timeout(): void
+    {
+        $scraper = Scraper::create(5.0);
+        $client = $scraper->getClient();
+
+        $this->assertSame(5.0, $client->getConfig('timeout'));
     }
 }

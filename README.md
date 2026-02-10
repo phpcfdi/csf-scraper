@@ -163,6 +163,66 @@ Ejemplo de salida de `json_encode($person)` para persona física:
 }
 ```
 
+### Uso con Docker
+
+Esta librería incluye un `Dockerfile` optimizado que funciona como una herramienta de línea de comandos (CLI). La imagen devuelve el resultado en formato **JSON** a través de la salida estándar (stdout), facilitando su integración con otras herramientas como `jq`.
+
+#### Construir la imagen
+
+```bash
+docker build -t csf-scraper:latest .
+```
+
+#### Ejecutar extracción
+
+Puedes pasar una ruta local, una URL pública o directamente el ID CIF y RFC:
+
+**Mediante ID CIF y RFC (Flujo principal):**
+
+```shell
+docker run --rm phpcfdi/csf-scraper obtain 19040141021 DIM8701081LA
+```
+
+**Desde un archivo local:**
+
+```shell
+docker run --rm -v $(pwd)/mi-archivo.pdf:/csf.pdf phpcfdi/csf-scraper obtain /csf.pdf
+```
+
+**Desde una URL:**
+
+```shell
+docker run --rm phpcfdi/csf-scraper obtain https://dominio.com/archivo.pdf
+```
+
+**Obtener el esquema JSON de salida:**
+
+```shell
+docker run --rm phpcfdi/csf-scraper schema
+```
+
+**Desde la entrada estándar (stdin):**
+
+```shell
+cat mi-archivo.pdf | docker run --rm -i phpcfdi/csf-scraper obtain -
+```
+
+**Ver ayuda:**
+
+```shell
+docker run --rm phpcfdi/csf-scraper help
+```
+
+### Opciones Globales
+
+* `--timeout <segundos>`: Configura el tiempo máximo de espera para las peticiones HTTP al SAT (por defecto: 10 segundos).
+
+Ejemplo con timeout personalizado:
+
+```shell
+docker run --rm phpcfdi/csf-scraper obtain 14111045399 UNA2907227Y5 --timeout 20
+```
+
 ## Soporte
 
 Puedes obtener soporte abriendo un ticket en Github.
