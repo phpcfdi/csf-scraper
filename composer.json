@@ -89,6 +89,6 @@
         "dev:check-style": "DEV: search for code style errors using composer-normalize, php-cs-fixer and phpcs",
         "dev:coverage": "DEV: run phpunit with xdebug and storage coverage in build/coverage/html/",
         "dev:fix-style": "DEV: fix code style errors using composer-normalize, php-cs-fixer and phpcbf",
-        "dev:test": "DEV: run @dev:check-style, phpunit and phpstan"
+        "dev:test": "DEV: run @dev:check-style, phpunit, phpstan and composer-require-checker"
     }
 }
