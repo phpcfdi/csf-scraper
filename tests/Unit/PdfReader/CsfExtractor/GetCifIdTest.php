@@ -15,6 +15,12 @@ class GetCifIdTest extends TestCase
         $this->assertSame('12345678', $csfExtractor->getCifId());
     }
 
+    public function test_obtains_cif_from_content_with_page_breaks(): void
+    {
+        $csfExtractor = new CsfExtractor($this->fileContents('csf-content-form-feed.txt'));
+        $this->assertSame('12345678', $csfExtractor->getCifId());
+    }
+
     public function test_bad_content_returns_empty_rfc(): void
     {
         $csfExtractor = new CsfExtractor($this->fileContents('csf-bad-content.txt'));

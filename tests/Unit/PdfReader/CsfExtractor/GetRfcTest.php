@@ -17,6 +17,12 @@ class GetRfcTest extends TestCase
         $this->assertSame('DIM8701081LA', $csfExtractor->getRfc());
     }
 
+    public function test_obtains_rfc_from_content_with_page_breaks(): void
+    {
+        $csfExtractor = new CsfExtractor($this->fileContents('csf-content-form-feed.txt'));
+        $this->assertSame('DIM8701081LA', $csfExtractor->getRfc());
+    }
+
     public function test_bad_content_returns_empty_rfc(): void
     {
         $csfExtractor = new CsfExtractor($this->fileContents('csf-bad-content.txt'));
