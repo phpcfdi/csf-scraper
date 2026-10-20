@@ -11,6 +11,15 @@ versión, aunque sí su incorporación en la rama principal de trabajo, generalm
 
 ## Listado de cambios
 
+### Versión 0.2.1 2026-10-20
+
+- Se agrega compatibilidad con Symfony 8 (`symfony/css-selector`, `symfony/dom-crawler` y `symfony/process`).
+- Se agrega compatibilidad con Guzzle 8, se mantiene la compatibilidad con Guzzle 7.
+- Se actualiza la dependencia mínima de `phpcfdi/rfc` a la versión 1.2.
+- Se corrige la lectura del RFC y del idCIF desde el PDF de la Constancia de Situación Fiscal cuando `pdftotext`
+  agrega el separador de página (`\f`) pegado al texto (encontrado en la versión de poppler-utils 26.10.0 para Mac).
+- Se actualiza el año de la licencia a 2026.
+
 ### Versión 0.2.0 2025-11-10
 
 - Se asegura la compatibilidad con PHP 8.3 y PHP 8.4.
