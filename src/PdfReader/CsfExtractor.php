@@ -18,7 +18,7 @@ final readonly class CsfExtractor
         if ('' === $contents) {
             throw new EmptyPdfContentException('Cannot read pdf contents.');
         }
-        $this->lines = explode("\n", $contents);
+        $this->lines = preg_split('/[\n\f]/', $contents) ?: [];
     }
 
     public function getRfc(): ?string

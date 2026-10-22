@@ -32,12 +32,12 @@
         "ext-curl": "*",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "guzzlehttp/guzzle": "^7.4",
-        "phpcfdi/rfc": "^1.1",
+        "guzzlehttp/guzzle": "^7.4 || ^8.3",
+        "phpcfdi/rfc": "^1.2",
         "psr/http-client": "^1.0",
-        "symfony/css-selector": "^7.0",
-        "symfony/dom-crawler": "^7.0",
-        "symfony/process": "^7.0"
+        "symfony/css-selector": "^7.0 || ^8.0",
+        "symfony/dom-crawler": "^7.0 || ^8.0",
+        "symfony/process": "^7.0 || ^8.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^11.5"
@@ -89,6 +89,6 @@
         "dev:check-style": "DEV: search for code style errors using composer-normalize, php-cs-fixer and phpcs",
         "dev:coverage": "DEV: run phpunit with xdebug and storage coverage in build/coverage/html/",
         "dev:fix-style": "DEV: fix code style errors using composer-normalize, php-cs-fixer and phpcbf",
-        "dev:test": "DEV: run @dev:check-style, phpunit and phpstan"
+        "dev:test": "DEV: run @dev:check-style, phpunit, phpstan and composer-require-checker"
     }
 }
